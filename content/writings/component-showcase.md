@@ -56,9 +56,17 @@ Text above the breaker.
 
 Text below the breaker.
 
+## Figure (image with caption / credit)
+
+{{< figure src="/img/things/ab.jpg" alt="Bayesian A/B calculator output" caption="Posterior distribution after 10 000 exposures per arm." credit="Example credit" crediturl="https://example.com" >}}
+
+Figure with caption only (no credit):
+
+{{< figure src="/img/things/csvpeek.jpg" alt="csvpeek terminal output" caption="Column profile for a 2 GB CSV — one pass, no memory pressure." >}}
+
 ## Video
 
-{{< video src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Example video" >}}
+{{< video src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Example video" caption="Rick Astley — *Never Gonna Give You Up* (1987). A reliable embed test." >}}
 
 ## Twitter / X
 

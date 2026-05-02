@@ -1,5 +1,30 @@
 {{- $item := .item -}}
-{{ if $item.Params.image }}
+{{- $kind := .kind | default "" -}}
+{{- $isModal := and (eq $kind "thing") $item.Params.link -}}
+
+{{ if $isModal }}
+<div class="card{{ if not $item.Params.image }} no-image{{ end }}"
+     role="button" tabindex="0"
+     data-modal-title="{{ $item.Title }}"
+     data-modal-body="{{ or $item.Params.tagline ($item.Summary | plainify | truncate 400) }}"
+     data-modal-link="{{ $item.Params.link }}"
+     {{ with $item.Params.image }}data-modal-image="{{ . | absURL }}"{{ end }}>
+  {{ if $item.Params.image }}
+  <div class="card-image" style="background-image: url('{{ $item.Params.image | relURL }}');"></div>
+  {{ end }}
+  <div class="card-body">
+    <div class="card-title">{{ $item.Title }}</div>
+    <div class="card-excerpt">
+      {{- or $item.Params.tagline ($item.Summary | plainify | truncate 240) -}}
+    </div>
+    {{ if not $item.Date.IsZero }}
+    <div class="card-meta">
+      <time datetime="{{ $item.Date.Format "2006-01-02" }}">{{ $item.Date.Format "Jan 2, 2006" }}</time>
+    </div>
+    {{ end }}
+  </div>
+</div>
+{{ else if $item.Params.image }}
 <a class="card" href="{{ $item.RelPermalink }}">
   <div class="card-image" style="background-image: url('{{ $item.Params.image | relURL }}');"></div>
   <div class="card-body">

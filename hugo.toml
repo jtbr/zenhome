@@ -1,4 +1,8 @@
 baseURL = "https://example.com/"  # TODO: update to your domain
+# relativeURLs lets the built site open directly via file:// without a server.
+# This breaks if the site is ever served from a subdirectory (e.g. example.com/blog/).
+# Safe for Cloudflare Pages deployments at an apex/subdomain root.
+relativeURLs = true
 languageCode = "en-us"
 title = "TODO Your Name"
 enableRobotsTXT = true
@@ -14,6 +18,17 @@ enableGitInfo = false
   description = "TODO: 1-2 sentence professional description for SEO and OG tags."
   cloudflare_analytics_token = ""  # paste token from Cloudflare Web Analytics dashboard
 
+  # Font families loaded from Google Fonts. Change the name AND update the
+  # corresponding *_weights value to match what that font supports on Google Fonts.
+  # See: https://fonts.google.com — use the "CSS2 API" weight spec shown there.
+  [params.fonts]
+    display         = "Cormorant Garamond"
+    display_weights = "ital,wght@0,500;0,700;1,500"
+    body            = "Raleway"
+    body_weights    = "wght@300;400;600;700"
+    mono            = "JetBrains Mono"
+    mono_weights    = "wght@400;600"
+
   [params.author]
     name         = "TODO Your Name"
     email        = "TODO you@example.com"
@@ -23,9 +38,9 @@ enableGitInfo = false
 
   # Flip a section to true to show it in navigation and enable its listing page.
   [params.sections]
-    writings = false
-    things   = false
-    notes    = false
+    writings = true
+    things   = true
+    notes    = true
 
   # giscus comments. Set enabled = true and fill in IDs from https://giscus.app
   [params.comments]

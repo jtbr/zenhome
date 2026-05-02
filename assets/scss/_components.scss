@@ -43,7 +43,8 @@ hr.breaker {
 .video-embed {
   position: relative;
   padding-bottom: 56.25%; /* 16:9 */
-  margin: 1.75rem 0;
+  /* margin handled by the wrapping .video-figure when a caption is present */
+  margin: 0;
 
   iframe {
     position: absolute;
@@ -57,6 +58,89 @@ hr.breaker {
 
 /* ── Twitter / X embed ───────────────────────────────────────────── */
 .tweet-embed { margin: 1.75rem 0; }
+
+/* ── Post navigation (prev / next) ──────────────────────────────── */
+.post-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.9rem;
+  color: var(--muted);
+
+  a { color: var(--muted); }
+  a:hover { color: var(--fg); }
+
+  .post-nav-next { text-align: right; }
+}
+
+/* ── Things modal ────────────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1.5rem;
+
+  &[aria-hidden="true"] { display: none; }
+}
+
+.modal-box {
+  background: var(--card-bg);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--fg);
+  border-radius: 8px;
+  max-width: 480px;
+  width: 100%;
+  padding: 1.75rem;
+  position: relative;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+
+  .modal-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.4rem;
+    line-height: 1;
+    color: var(--muted);
+    cursor: pointer;
+    padding: 0 0.2rem;
+
+    &:hover { color: var(--fg); }
+  }
+
+  .modal-image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 1.25rem;
+    display: block;
+  }
+
+  .modal-title {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 2rem 0.75rem 0;
+  }
+
+  .modal-body {
+    color: var(--muted);
+    font-size: 0.97rem;
+    line-height: 1.6;
+    margin-bottom: 1.4rem;
+    white-space: pre-line;
+  }
+}
 
 /* ── giscus comments ─────────────────────────────────────────────── */
 .giscus-wrapper {

@@ -20,7 +20,7 @@
   margin: 0;
   padding: 1rem 1.25rem;
   overflow-x: auto;
-  font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+  font-family: var(--font-mono);
   font-size: 0.89rem;
   line-height: 1.55;
   color: var(--code-fg);

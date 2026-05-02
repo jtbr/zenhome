@@ -4,10 +4,23 @@
 
 {{ partial "seo.html" . }}
 
+{{- $df := .Site.Params.fonts.display | default "Cormorant Garamond" -}}
+{{- $dw := .Site.Params.fonts.display_weights | default "ital,wght@0,500;0,700;1,500" -}}
+{{- $bf := .Site.Params.fonts.body | default "Raleway" -}}
+{{- $bw := .Site.Params.fonts.body_weights | default "wght@300;400;600;700" -}}
+{{- $mf := .Site.Params.fonts.mono | default "JetBrains Mono" -}}
+{{- $mw := .Site.Params.fonts.mono_weights | default "wght@400;600" -}}
+{{- $gfontsUrl := printf "https://fonts.googleapis.com/css2?family=%s:%s&family=%s:%s&family=%s:%s&display=swap" ($df | replaceRE " " "+") $dw ($bf | replaceRE " " "+") $bw ($mf | replaceRE " " "+") $mw | safeURL -}}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Raleway:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="{{ $gfontsUrl }}">
+<style>
+  :root {
+    --font-display: "{{ $df }}", Georgia, 'Times New Roman', serif;
+    --font-body:    "{{ $bf }}", -apple-system, system-ui, sans-serif;
+    --font-mono:    "{{ $mf }}", 'SF Mono', Menlo, Consolas, monospace;
+  }
+</style>
 
 <link rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"
@@ -16,7 +29,11 @@
 {{ $css := resources.Get "scss/main.scss" | toCSS (dict "outputStyle" "compressed") | fingerprint }}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
 
-<link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{ .Site.BaseURL }}index.xml">
+{{- if .OutputFormats.Get "RSS" }}
+<link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{ (.OutputFormats.Get "RSS").Permalink }}">
+{{- else if eq .Section "writings" }}
+<link rel="alternate" type="application/rss+xml" title="Writings — {{ .Site.Title }}" href="{{ "/writings/index.xml" | absURL }}">
+{{- end }}
 
 <script>
   /* Apply saved theme before first paint to avoid flash. */

@@ -14,4 +14,19 @@
 {{ if and .Site.Params.comments.enabled .Params.comments }}
   {{ partial "giscus.html" . }}
 {{ end }}
+
+{{ $prev := .PrevInSection }}
+{{ $next := .NextInSection }}
+{{ if or $prev $next }}
+<nav class="post-nav" aria-label="Post navigation">
+  {{ with $next }}
+    <a class="post-nav-prev" href="{{ .RelPermalink }}">← {{ .Title }}</a>
+  {{ else }}
+    <span></span>
+  {{ end }}
+  {{ with $prev }}
+    <a class="post-nav-next" href="{{ .RelPermalink }}">{{ .Title }} →</a>
+  {{ end }}
+</nav>
+{{ end }}
 {{ end }}

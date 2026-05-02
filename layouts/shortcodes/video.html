@@ -1,4 +1,10 @@
-<div class="video-embed">
-  <iframe src="{{ .Get "src" }}" allowfullscreen loading="lazy"
-          title="{{ .Get "title" | default "Video" }}"></iframe>
-</div>
+{{- $caption := .Get "caption" | default "" -}}
+<figure class="video-figure">
+  <div class="video-embed">
+    <iframe src="{{ .Get "src" }}" allowfullscreen loading="lazy"
+            title="{{ .Get "title" | default "Video" }}"></iframe>
+  </div>
+  {{- with $caption }}
+  <figcaption><span class="fig-caption">{{ . | markdownify }}</span></figcaption>
+  {{- end }}
+</figure>
