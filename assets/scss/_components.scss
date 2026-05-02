@@ -1,0 +1,66 @@
+/* ── Side-by-side ────────────────────────────────────────────────── */
+.side-by-side {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin: 1.75rem 0;
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Evidence (foregrounded quotation) ──────────────────────────── */
+.evidence {
+  border-left: 3px solid var(--fg);
+  background: var(--code-bg);
+  padding: 1rem 1.4rem;
+  border-radius: 0 6px 6px 0;
+  margin: 1.75rem 0;
+  font-style: italic;
+  font-size: 1.04rem;
+  line-height: 1.65;
+
+  p:last-child { margin-bottom: 0; }
+}
+
+/* ── Section breaker ─────────────────────────────────────────────── */
+hr.breaker {
+  border: none;
+  text-align: center;
+  margin: 3.25rem 0;
+  height: auto;
+
+  &::before {
+    content: "· · ·";
+    color: var(--muted);
+    font-size: 1.25rem;
+    letter-spacing: 0.75rem;
+  }
+}
+
+/* ── Responsive video embed ──────────────────────────────────────── */
+.video-embed {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  margin: 1.75rem 0;
+
+  iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    border-radius: 6px;
+  }
+}
+
+/* ── Twitter / X embed ───────────────────────────────────────────── */
+.tweet-embed { margin: 1.75rem 0; }
+
+/* ── giscus comments ─────────────────────────────────────────────── */
+.giscus-wrapper {
+  margin-top: 3.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule);
+}

@@ -1,0 +1,31 @@
+{{- $item := .item -}}
+{{ if $item.Params.image }}
+<a class="card" href="{{ $item.RelPermalink }}">
+  <div class="card-image" style="background-image: url('{{ $item.Params.image | relURL }}');"></div>
+  <div class="card-body">
+    <div class="card-title">{{ $item.Title }}</div>
+    <div class="card-excerpt">
+      {{- or $item.Params.tagline ($item.Summary | plainify | truncate 180) -}}
+    </div>
+    {{ if not $item.Date.IsZero }}
+    <div class="card-meta">
+      <time datetime="{{ $item.Date.Format "2006-01-02" }}">{{ $item.Date.Format "Jan 2, 2006" }}</time>
+    </div>
+    {{ end }}
+  </div>
+</a>
+{{ else }}
+<a class="card no-image" href="{{ $item.RelPermalink }}">
+  <div class="card-body">
+    <div class="card-title">{{ $item.Title }}</div>
+    <div class="card-excerpt">
+      {{- or $item.Params.tagline ($item.Summary | plainify | truncate 240) -}}
+    </div>
+    {{ if not $item.Date.IsZero }}
+    <div class="card-meta">
+      <time datetime="{{ $item.Date.Format "2006-01-02" }}">{{ $item.Date.Format "Jan 2, 2006" }}</time>
+    </div>
+    {{ end }}
+  </div>
+</a>
+{{ end }}

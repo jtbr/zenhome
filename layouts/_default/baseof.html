@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="{{ .Site.LanguageCode | default "en" }}" data-theme="light">
+<head>
+  {{ partial "head.html" . }}
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  {{ partial "header.html" . }}
+  <main id="main" class="container">
+    {{ block "main" . }}{{ end }}
+  </main>
+  {{ partial "footer.html" . }}
+
+  {{ $dm := resources.Get "js/darkmode.js" | minify | fingerprint }}
+  <script src="{{ $dm.RelPermalink }}" integrity="{{ $dm.Data.Integrity }}" defer></script>
+
+  {{ if .Params.math }}{{ partial "math.html" . }}{{ end }}
+
+  {{ with .Site.Params.cloudflare_analytics_token }}
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon='{"token": "{{ . }}"}'></script>
+  {{ end }}
+</body>
+</html>

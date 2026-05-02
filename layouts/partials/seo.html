@@ -1,0 +1,23 @@
+<meta name="description" content="{{ .Description | default .Site.Params.description }}">
+<meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} — {{ .Site.Title }}{{ end }}">
+<meta property="og:description" content="{{ .Description | default .Site.Params.description }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+{{ with .Params.image }}<meta property="og:image" content="{{ . | absURL }}">{{ end }}
+<meta name="twitter:card" content="summary{{ with .Params.image }}_large_image{{ end }}">
+<meta name="twitter:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ end }}">
+<meta name="twitter:description" content="{{ .Description | default .Site.Params.description }}">
+
+{{ if .IsHome }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "{{ .Site.Params.author.name }}",
+  "email": "{{ .Site.Params.author.email }}",
+  "url": "{{ .Site.BaseURL | strings.TrimSuffix "/" }}",
+  "jobTitle": "{{ .Site.Params.tagline }}",
+  "sameAs": [{{ range $i, $s := .Site.Data.socials }}{{ if $i }},{{ end }}"{{ $s.url }}"{{ end }}]
+}
+</script>
+{{ end }}

@@ -1,0 +1,15 @@
+# Social links rendered in the footer.
+# Icon names are Font Awesome brand icons (fab fa-<icon>).
+- name: GitHub
+  icon: github
+  url: "https://github.com/TODO"
+- name: LinkedIn
+  icon: linkedin
+  url: "https://www.linkedin.com/in/TODO"
+- name: Twitter
+  icon: x-twitter
+  url: "https://twitter.com/TODO"
+# Uncomment as needed:
+# - { name: Reddit,   icon: reddit,   url: "https://www.reddit.com/user/TODO" }
+# - { name: Medium,   icon: medium,   url: "https://medium.com/@TODO" }
+# - { name: Mastodon, icon: mastodon, url: "https://mastodon.social/@TODO" }

@@ -1,0 +1,13 @@
+{{ define "main" }}
+<article class="thing">
+  <header class="post-header">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.tagline }}<p class="lead">{{ . }}</p>{{ end }}
+    {{ with .Params.link }}
+      <p><a href="{{ . }}" class="btn btn-sm btn-outline-secondary" rel="noopener">View →</a></p>
+    {{ end }}
+  </header>
+
+  {{ .Content }}
+</article>
+{{ end }}

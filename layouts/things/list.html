@@ -1,0 +1,19 @@
+{{ define "main" }}
+<header class="section-header">
+  <h1>Useful Things</h1>
+  <p class="lead">{{ .Description | default "Tools, snippets, and projects that might be useful to others." }}</p>
+</header>
+
+{{ $pages := where .Site.RegularPages "Section" "things" }}
+{{ if eq (len $pages) 0 }}
+  <p class="post-meta">Useful things will appear here. Coming soon.</p>
+{{ else }}
+  <div class="card-grid">
+    {{ range $pages }}
+      {{ partial "card.html" (dict "item" . "kind" "thing") }}
+    {{ end }}
+  </div>
+{{ end }}
+
+{{ .Content }}
+{{ end }}

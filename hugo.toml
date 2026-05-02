@@ -1,0 +1,65 @@
+baseURL = "https://example.com/"  # TODO: update to your domain
+languageCode = "en-us"
+title = "TODO Your Name"
+enableRobotsTXT = true
+enableGitInfo = false
+
+[permalinks]
+  writings = "/writings/:slug/"
+  things   = "/things/:slug/"
+  notes    = "/notes/:slug/"
+
+[params]
+  tagline     = "TODO: short tagline (e.g., ML/AI Consultant)"
+  description = "TODO: 1-2 sentence professional description for SEO and OG tags."
+  cloudflare_analytics_token = ""  # paste token from Cloudflare Web Analytics dashboard
+
+  [params.author]
+    name         = "TODO Your Name"
+    email        = "TODO you@example.com"
+    bio          = "TODO: 2-3 sentence synopsis of what you do."
+    background   = "TODO: 1-2 sentence background (degree, languages, experience)."
+    availability = "Available for ML/AI freelance and consulting engagements."
+
+  # Flip a section to true to show it in navigation and enable its listing page.
+  [params.sections]
+    writings = false
+    things   = false
+    notes    = false
+
+  # giscus comments. Set enabled = true and fill in IDs from https://giscus.app
+  [params.comments]
+    enabled          = false
+    repo             = "TODO/comments-repo"
+    repoId           = "TODO"
+    category         = "General"
+    categoryId       = "TODO"
+    mapping          = "pathname"
+    reactions_enabled = "1"
+    emit_metadata    = "0"
+    input_position   = "bottom"
+    theme            = "preferred_color_scheme"
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true
+
+  # Pass-through keeps $...$, $$...$$, \(...\), \[...\] intact so KaTeX can render them.
+  [markup.goldmark.extensions.passthrough]
+    enable = true
+    [markup.goldmark.extensions.passthrough.delimiters]
+      block  = [["\\[", "\\]"], ["$$", "$$"]]
+      inline = [["\\(", "\\)"], ["$", "$"]]
+
+  [markup.highlight]
+    noClasses = false   # use CSS classes; colors live in assets/scss/_code.scss
+    lineNos   = false
+    codeFences = true
+
+[outputs]
+  home    = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]
+  page    = ["HTML"]
+
+[taxonomies]
+  tag = "tags"

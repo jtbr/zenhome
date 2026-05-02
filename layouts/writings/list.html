@@ -1,0 +1,19 @@
+{{ define "main" }}
+<header class="section-header">
+  <h1>Writings</h1>
+  <p class="lead">{{ .Description | default "Long-form posts on ML, software, and the spaces in between." }}</p>
+</header>
+
+{{ $pages := where .Site.RegularPages "Section" "writings" }}
+{{ if eq (len $pages) 0 }}
+  <p class="post-meta">Long-form posts will appear here. Coming soon.</p>
+{{ else }}
+  <div class="card-grid">
+    {{ range $pages }}
+      {{ partial "card.html" (dict "item" . "kind" "post") }}
+    {{ end }}
+  </div>
+{{ end }}
+
+{{ .Content }}
+{{ end }}
