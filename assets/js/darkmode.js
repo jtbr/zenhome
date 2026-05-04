@@ -21,6 +21,8 @@
       icon.classList.toggle('fa-moon', t === 'light');
       icon.classList.toggle('fa-sun',  t === 'dark');
     }
+    btn.title = t === 'light' ? 'dark mode' : 'light mode';
+    btn.setAttribute('aria-label', t === 'light' ? 'Switch to dark mode' : 'Switch to light mode');
     rerenderTweets(t);
   }
 

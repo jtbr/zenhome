@@ -1,6 +1,6 @@
 <header class="site-header">
   <nav class="container d-flex justify-content-between align-items-center py-3">
-    <a class="brand" href="{{ "/" | relURL }}">{{ .Site.Params.author.name | default .Site.Title }}</a>
+    <a class="brand" href="{{ "/" | relURL }}">{{ .Site.Params.header_title | default .Site.Params.author.name | default .Site.Title }}</a>
     <ul class="nav-links list-unstyled d-flex m-0 align-items-center">
       {{ if .Site.Params.sections.writings }}
         <li><a href="{{ "/writings/" | relURL }}">Writings</a></li>

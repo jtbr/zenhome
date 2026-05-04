@@ -108,13 +108,27 @@ a.btn { border-bottom: none; }
 
   .socials {
     gap: 1.25rem;
+    flex-wrap: wrap;
 
     a {
       color: var(--muted);
-      font-size: 1.1rem;
-    }
+      display: inline-flex;
+      align-items: center;
 
-    a:hover { color: var(--fg); }
+      i {
+        font-size: 1rem;
+        opacity: 0;
+        margin-left: 0.35em;
+        transition: opacity 0.2s ease;
+      }
+
+      span { white-space: nowrap; text-transform: lowercase; }
+
+      &:hover {
+        color: var(--fg);
+        i { opacity: 1; }
+      }
+    }
   }
 }
 

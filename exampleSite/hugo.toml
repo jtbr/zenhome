@@ -24,6 +24,15 @@ enableGitInfo = false
   description = "TODO: 1-2 sentence professional description for SEO and OG tags."
   cloudflare_analytics_token = ""  # paste token from Cloudflare Web Analytics dashboard
 
+  # Optional: override the name shown in the nav bar and on the homepage h1.
+  # Both default to params.author.name when not set.
+  header_title = ""   # e.g. a short monogram
+  home_title   = ""   # e.g. "Firstname M.I. Lastname" for a longer display name
+
+  # Optional copyright or other notice shown at the bottom-left of the footer.
+  # When absent the social links are centered instead.
+  copyright = ""  # e.g. "© 2026 Your Name"
+
   # Font families loaded from Google Fonts. Change the name AND update the
   # corresponding *_weights value to match what that font supports on Google Fonts.
   # See: https://fonts.google.com — use the "CSS2 API" weight spec shown there.
