@@ -3,6 +3,12 @@ baseURL = "https://example.com/"  # TODO: update to your domain
 # This breaks if the site is ever served from a subdirectory (e.g. example.com/blog/).
 # Safe for Cloudflare Pages deployments at an apex/subdomain root.
 relativeURLs = true
+
+# Theme — "homepage" must match the directory name of the cloned theme repo.
+# To develop the theme locally, run from this directory:
+#   hugo server --themesDir ../..
+theme    = "homepage"
+themesDir = "../.."
 languageCode = "en-us"
 title = "TODO Your Name"
 enableRobotsTXT = true
@@ -22,12 +28,15 @@ enableGitInfo = false
   # corresponding *_weights value to match what that font supports on Google Fonts.
   # See: https://fonts.google.com — use the "CSS2 API" weight spec shown there.
   [params.fonts]
-    display         = "Cormorant Garamond"
-    display_weights = "ital,wght@0,500;0,700;1,500"
-    body            = "Raleway"
-    body_weights    = "wght@300;400;600;700"
-    mono            = "JetBrains Mono"
-    mono_weights    = "wght@400;600"
+    display          = "Cormorant Garamond"
+    display_weights  = "ital,wght@0,500;0,700;1,500"
+    display_fallback = "Georgia, 'Times New Roman', serif"
+    body             = "Raleway"
+    body_weights     = "wght@300;400;600;700"
+    body_fallback    = "-apple-system, system-ui, sans-serif"
+    mono             = "JetBrains Mono"
+    mono_weights     = "wght@400;600"
+    mono_fallback    = "'SF Mono', Menlo, Consolas, monospace"
 
   [params.author]
     name         = "TODO Your Name"

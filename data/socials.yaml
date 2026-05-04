@@ -1,15 +1,22 @@
-# Social links rendered in the footer.
-# Icon names are Font Awesome brand icons (fab fa-<icon>).
+# Default social links — override by providing data/socials.yaml in your site.
+# icon: Font Awesome brand icon name (without the "fa-" prefix).
 - name: GitHub
   icon: github
-  url: "https://github.com/TODO"
+  url:  "https://github.com/yourusername"
 - name: LinkedIn
   icon: linkedin
-  url: "https://www.linkedin.com/in/TODO"
+  url:  "https://www.linkedin.com/in/yourusername"
 - name: Twitter
   icon: x-twitter
-  url: "https://twitter.com/TODO"
+  url:  "https://twitter.com/yourusername"
+- name: Reddit
+  icon: reddit
+  url:  "https://www.reddit.com/user/yourusername"
 # Uncomment as needed:
-# - { name: Reddit,   icon: reddit,   url: "https://www.reddit.com/user/TODO" }
-# - { name: Medium,   icon: medium,   url: "https://medium.com/@TODO" }
-# - { name: Mastodon, icon: mastodon, url: "https://mastodon.social/@TODO" }
+# - { name: Bluesky,   icon: bluesky,    url: "https://bsky.app/profile/yourusername" }
+# - { name: Mastodon,  icon: mastodon,   url: "https://mastodon.social/@yourusername" }
+# - { name: Instagram, icon: instagram,  url: "https://instagram.com/yourusername" }
+# - { name: Facebook,  icon: facebook,   url: "https://facebook.com/yourusername" }
+# - { name: Snapchat,  icon: snapchat,   url: "https://snapchat.com/add/yourusername" }
+# - { name: Medium,    icon: medium,     url: "https://medium.com/@yourusername" }
+# - { name: YouTube,   icon: youtube,    url: "https://youtube.com/@yourusername" }

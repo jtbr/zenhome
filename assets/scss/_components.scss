@@ -25,17 +25,16 @@
 }
 
 /* ── Section breaker ─────────────────────────────────────────────── */
-hr.breaker {
-  border: none;
+.breaker {
   text-align: center;
-  margin: 3.25rem 0;
-  height: auto;
+  margin: 3.5rem 0;
+  user-select: none;
 
   &::before {
-    content: "· · ·";
+    content: "✦  ✦  ✦";
     color: var(--muted);
-    font-size: 1.25rem;
-    letter-spacing: 0.75rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.5rem;
   }
 }
 
@@ -58,6 +57,43 @@ hr.breaker {
 
 /* ── Twitter / X embed ───────────────────────────────────────────── */
 .tweet-embed { margin: 1.75rem 0; }
+
+/* ── GitHub Gist embed ───────────────────────────────────────────── */
+.gist-embed {
+  margin: 1.75rem 0;
+
+  /* Optional height cap — set via the height shortcode param, e.g. height="300px" */
+  .gist-data {
+    max-height: var(--gist-height, none);
+    overflow-y: auto;
+  }
+}
+
+/* Border + rounded corners to match code blocks and cards. */
+.gist .gist-file {
+  border:        1px solid var(--rule) !important;
+  border-radius: 7px                   !important;
+  overflow:      hidden                !important;
+}
+
+/* Dark mode overrides for gist — needs !important because GitHub's injected
+   stylesheet loads after ours and wins at equal specificity. */
+[data-theme="dark"] .gist {
+  .gist-file,
+  .gist-data,
+  .gist-meta     { background-color: var(--code-bg)  !important;
+                   border-color:     var(--rule)      !important; }
+
+  .blob-num      { background-color: var(--code-bg)  !important;
+                   color:            var(--muted)     !important;
+                   border-color:     var(--rule)      !important; }
+
+  .blob-code     { background-color: var(--code-bg)  !important;
+                   color:            var(--code-fg)   !important; }
+
+  .gist-meta     { color: var(--muted) !important;
+    a            { color: var(--muted) !important; } }
+}
 
 /* ── Post navigation (prev / next) ──────────────────────────────── */
 .post-nav {

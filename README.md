@@ -1,145 +1,245 @@
-# Personal site
+# homepage
 
-Hugo site, deployed to Cloudflare Pages. Source is private; only the built `public/` is served.
+A minimal Hugo theme for a personal professional site. Landing page, writings, useful things, and notes. Dark mode, KaTeX math, giscus comments, configurable fonts, RSS.
+
+## Repository layout
+
+```
+homepage/                   ← theme repo (this repo)
+  layouts/                  Hugo templates
+  assets/scss/              SCSS (compiled via Hugo Pipes — requires extended binary)
+  assets/js/                Vanilla JS (dark mode toggle)
+  archetypes/               Content templates for hugo new
+  data/socials.yaml         Default social links (override in your site)
+  theme.toml                Theme metadata
+  exampleSite/              Complete working demo — also the development harness
+    hugo.toml               Site config (theme = "homepage", themesDir = "../..")
+    content/                Sample posts, things, and notes
+    static/                 Sample images
+    data/socials.yaml       Overrides the theme default
+```
+
+The theme and the demo site are developed together in one repo. To preview the demo:
+
+```bash
+cd exampleSite
+hugo server --themesDir ../.. -D
+```
+
+`-D` includes draft posts. Visit http://localhost:1313. Changes to theme files hot-reload.
+
+## Using this theme in your own site
+
+### 1. Add the theme as a git submodule
+
+```bash
+# From your site's root
+git submodule add https://github.com/yourusername/homepage themes/homepage
+git submodule update --init
+```
+
+### 2. Configure hugo.toml
+
+```toml
+theme = "homepage"
+```
+
+Everything else is the same as `exampleSite/hugo.toml` — copy it and fill in your values.
+
+### 3. Override socials
+
+Copy `themes/homepage/data/socials.yaml` to `data/socials.yaml` in your site and edit. Your copy takes precedence. Any [Font Awesome brand icon](https://fontawesome.com/search?o=r&m=free&f=brands) works — set `icon` to the name without the `fa-` prefix (e.g. `instagram`, `snapchat`, `facebook`).
+
+### 4. Update the theme later
+
+```bash
+git submodule update --remote
+```
+
+### Cloudflare Pages — submodule note
+
+In the Cloudflare Pages build settings, enable **"Clone submodules"** (under Build → Advanced). Otherwise the theme directory will be empty at build time.
+
+---
 
 ## Requirements
 
-Hugo **extended** (required for SCSS via Hugo Pipes):
+Hugo **extended** is required for SCSS compilation via Hugo Pipes:
 
 ```bash
 # macOS
 brew install hugo
 
-# Linux — snap ships extended by default
-sudo snap install hugo
+# Linux
+sudo snap install hugo   # snap ships extended by default
 
-# Or download the hugo_extended_* binary from:
-# https://github.com/gohugoio/hugo/releases
+# Or download hugo_extended_* from https://github.com/gohugoio/hugo/releases
 ```
 
-Verify you have the right build:
+Verify:
 
 ```bash
 hugo version   # must say "extended"
 ```
 
-## Local preview
-
-```bash
-hugo server -D
-```
-
-`-D` shows draft posts. Visit http://localhost:1313. Changes hot-reload.
-
-For a production-like build (no drafts, minified):
-
-```bash
-hugo --minify
-# output is in public/
-```
+---
 
 ## Configuration
 
-Edit `hugo.toml`. Minimum things to fill in before launch:
+All settings live in `hugo.toml`. Minimum to fill in before launch:
 
-- `baseURL` — your domain
-- `title` — your name
-- `params.tagline`, `.description`
-- `params.author.*` — name, email, bio, background, availability
-- `data/socials.yaml` — GitHub, LinkedIn, Twitter, etc. handles
+| Key | Description |
+|---|---|
+| `baseURL` | Your domain (`https://yourdomain.com/`) |
+| `title` | Your name |
+| `params.tagline` | One-line professional tagline |
+| `params.description` | 1–2 sentences for SEO / OG tags |
+| `params.author.name` | Displayed on landing page and header |
+| `params.author.email` | Contact address |
+| `params.author.bio` | 2–3 sentence synopsis |
+| `params.author.background` | 1–2 sentence background |
+| `params.author.availability` | Short availability statement |
 
-## Adding content
+### Enabling sections
 
-```bash
-# New writing (long-form post)
-hugo new content writings/your-slug.md
-
-# New "useful thing" (project/tool card)
-hugo new content things/your-slug.md
-
-# New note (short snippet)
-hugo new content notes/2026-05-01-your-note.md
-```
-
-All new content is created as a draft (`draft: true`). Remove or set `draft: false` to publish.
-
-### Enabling a section
-
-In `hugo.toml`, flip the relevant flag under `[params.sections]`:
+Sections are hidden by default. Flip the relevant flag when you have content:
 
 ```toml
 [params.sections]
-  writings = true   # shows "Writings" in the nav
+  writings = true   # shows "Writings" in nav, enables /writings/
   things   = false
   notes    = false
 ```
 
+### Fonts
+
+Change the Google Fonts loaded and used sitewide:
+
+```toml
+[params.fonts]
+  display          = "Cormorant Garamond"           # headings + landing name
+  display_weights  = "ital,wght@0,500;0,700;1,500"
+  display_fallback = "Georgia, 'Times New Roman', serif"
+  body             = "Raleway"                      # body text + nav
+  body_weights     = "wght@300;400;600;700"
+  body_fallback    = "-apple-system, system-ui, sans-serif"
+  mono             = "JetBrains Mono"               # code blocks
+  mono_weights     = "wght@400;600"
+  mono_fallback    = "'SF Mono', Menlo, Consolas, monospace"
+```
+
+`*_weights` is the Google Fonts CSS2 API weight spec — find the right value on [fonts.google.com](https://fonts.google.com). `*_fallback` is the system font stack shown during load or if Google Fonts is unavailable; update it if you switch font categories (e.g. swapping `display` to a sans-serif means `Georgia, serif` is the wrong fallback).
+
+---
+
+## Adding content
+
+```bash
+# Long-form post
+hugo new content writings/your-slug.md
+
+# Useful thing (external link + description, shown as a modal card)
+hugo new content things/your-slug.md
+
+# Short note
+hugo new content notes/your-slug.md
+```
+
+New content is created as `draft: true`. Remove the `draft` line or set it to `false` to publish.
+
+### Useful Things front matter
+
+Things are designed as a curated links page. Cards with a `link:` open a modal; cards without navigate to their own page.
+
+```yaml
+---
+title: "Tool or resource name"
+date: 2026-01-01
+tagline: "One sentence description shown on the card."
+link: "https://example.com"        # omit for an internal detail page instead
+image: "/img/things/screenshot.jpg" # optional 16:9 card image
+---
+Longer description shown in the modal or on the detail page.
+```
+
+---
+
 ## Math
 
-Set `math: true` in a post's front matter. Then use:
+Set `math: true` in front matter. Then use:
 
 - Inline: `$E = mc^2$` or `\(E = mc^2\)`
 - Block: `$$...$$` or `\[...\]`
 
-The Goldmark passthrough extension (configured in `hugo.toml`) keeps these delimiters intact; KaTeX renders them in the browser.
+KaTeX renders in the browser. The Goldmark passthrough extension (in `hugo.toml`) keeps delimiters intact through Markdown processing.
 
-## Shortcodes (in-post components)
+---
+
+## Shortcodes
 
 ```
-{{</* side-by-side left="..." right="..." */>}}
+{{</* figure src="/img/photo.jpg" alt="..." caption="Caption." credit="Source" crediturl="https://..." */>}}
+
+{{</* video src="https://www.youtube.com/embed/VIDEO_ID" title="..." caption="Optional caption." */>}}
+
+{{</* side-by-side left="**Left** column." right="**Right** column." */>}}
 
 {{</* evidence */>}}
-A foregrounded claim or finding.
+A foregrounded claim or key finding.
 {{</* /evidence */>}}
 
 {{</* breaker */>}}
-
-{{</* video src="https://www.youtube.com/embed/VIDEO_ID" title="..." */>}}
 
 {{</* twitter-card user="handle" id="tweet-id" */>}}
 
 {{</* gist user="..." id="..." */>}}
 ```
 
-See `content/writings/component-showcase.md` (draft) for a live example of every shortcode.
+See `exampleSite/content/writings/component-showcase.md` (draft) for a live example of every shortcode.
+
+---
 
 ## Comments (giscus)
 
-1. Create a **public** GitHub repo, e.g. `<yourname>-comments`.
-2. Settings → Features → Discussions: enable. Create category "General".
-3. Install the giscus app on that repo: https://github.com/apps/giscus
-4. Go to https://giscus.app, configure, and copy `repoId` + `categoryId`.
-5. Paste into `hugo.toml` under `[params.comments]`, then set `enabled = true`.
+1. Create a **public** GitHub repo, e.g. `yourname-comments`.
+2. Settings → Features → Discussions: enable. Create a "General" category.
+3. Install the giscus GitHub App on that repo: https://github.com/apps/giscus
+4. Go to https://giscus.app, select the repo, copy `repoId` and `categoryId`.
+5. Fill in `hugo.toml` under `[params.comments]`, then set `enabled = true`.
 6. On any post, add `comments: true` to its front matter.
+
+---
 
 ## Code highlighting
 
-Token colors are in `assets/scss/_code.scss` (GitHub Light + GitHub Dark). To change:
+Token colors are in `assets/scss/_code.scss` — GitHub Light by default, with GitHub Dark overrides under `[data-theme="dark"]`. To use a different theme:
 
 ```bash
-hugo gen chromastyles --style=dracula > /tmp/dracula.css
-# Then copy the token blocks into _code.scss, replacing the existing ones.
+hugo gen chromastyles --style=dracula
 ```
 
-Available styles: `github`, `monokai`, `dracula`, `nord`, `solarized-dark`, `solarized-light`, etc.
+Copy the output into `_code.scss`, replacing the existing token blocks. Available themes include `github`, `monokai`, `dracula`, `nord`, `solarized-dark`, `solarized-light`.
+
+---
 
 ## Cloudflare Pages deployment
 
-1. Create a **private** GitHub repo and push this directory.
+1. Push your site repo (with the theme submodule) to a **private** GitHub repo.
 2. Cloudflare Pages → Create project → Connect to Git → select the repo.
 3. Build settings:
    - Build command: `hugo --minify`
-   - Build output directory: `public`
-4. Environment variables:
-   - `HUGO_VERSION` — set to the version from `hugo version` locally
+   - Output directory: `public`
+4. Advanced → enable **Clone submodules**.
+5. Environment variables:
+   - `HUGO_VERSION` — match the version from `hugo version` locally
    - `HUGO_ENVIRONMENT` = `production`
-5. Custom domain: Pages → Custom domains → add apex and `www`.
-   Cloudflare auto-creates the DNS records since DNS is already on Cloudflare.
-6. Web Analytics: enable in Cloudflare dashboard → paste token into `params.cloudflare_analytics_token` in `hugo.toml`.
+6. Custom domain: Pages → Custom domains → add apex and `www`. Cloudflare auto-creates DNS records.
+7. Web Analytics: enable in Cloudflare dashboard → paste the token into `params.cloudflare_analytics_token`.
 
-Preview deploys happen automatically on every non-`main` branch push.
+Branch preview deploys are created automatically for every non-`main` push.
+
+---
 
 ## Attribution
 
-Visual reference: [Pudhina Fresh](https://github.com/ritijjain/pudhina-fresh) (MIT),
-[Chalk](https://github.com/nielsenramon/chalk) (MIT) — fonts and typography approach.
+Typography and visual approach inspired by [Chalk](https://github.com/nielsenramon/chalk) (MIT) and [Pudhina Fresh](https://github.com/ritijjain/pudhina-fresh) (MIT).

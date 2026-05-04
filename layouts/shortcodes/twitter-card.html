@@ -1,5 +1,17 @@
-<blockquote class="twitter-tweet tweet-embed"
-            data-theme="{{ .Get "theme" | default "light" }}">
-  <a href="https://twitter.com/{{ .Get "user" }}/status/{{ .Get "id" }}"></a>
-</blockquote>
+{{- $user := .Get "user" -}}
+{{- $id   := .Get "id" -}}
+<div class="tweet-embed" data-tweet-id="{{ $id }}">
+  <blockquote class="twitter-tweet" data-dnt="true">
+    <a href="https://twitter.com/{{ $user }}/status/{{ $id }}"></a>
+  </blockquote>
+</div>
+<script>
+/* Set tweet theme from current site theme before widgets.js processes the blockquote. */
+(function () {
+  var wrapper = document.currentScript.previousElementSibling;
+  var t = document.documentElement.getAttribute('data-theme') || 'light';
+  var bq = wrapper.querySelector('.twitter-tweet');
+  if (bq) bq.setAttribute('data-theme', t);
+})();
+</script>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>

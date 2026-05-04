@@ -1,1 +1,4 @@
-<script src="https://gist.github.com/{{ .Get "user" }}/{{ .Get "id" }}.js"></script>
+{{- $height := .Get "height" | default "" -}}
+<div class="gist-embed"{{ with $height }} style="--gist-height: {{ . }}"{{ end }}>
+  <script src="https://gist.github.com/{{ .Get "user" }}/{{ .Get "id" }}.js"></script>
+</div>
