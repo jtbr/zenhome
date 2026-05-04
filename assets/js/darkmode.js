@@ -18,8 +18,8 @@
     document.documentElement.setAttribute('data-theme', t);
     localStorage.setItem('theme', t);
     if (icon) {
-      icon.classList.toggle('fa-moon', t === 'light');
-      icon.classList.toggle('fa-sun',  t === 'dark');
+      icon.classList.toggle('ri-moon-line', t === 'light');
+      icon.classList.toggle('ri-sun-line',  t === 'dark');
     }
     btn.title = t === 'light' ? 'dark mode' : 'light mode';
     btn.setAttribute('aria-label', t === 'light' ? 'Switch to dark mode' : 'Switch to light mode');

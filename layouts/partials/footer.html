@@ -3,10 +3,10 @@
     {{ with .Site.Params.copyright }}<small>{{ . }}</small>{{ end }}
     <ul class="socials list-unstyled d-flex m-0">
       {{ range .Site.Data.socials }}
-      <li><a href="{{ .url }}" rel="me noopener" aria-label="{{ .name }}"><span>{{ .name }}</span><i class="fab fa-{{ .icon }}" aria-hidden="true"></i></a></li>
+      <li><a href="{{ .url }}" rel="me noopener" aria-label="{{ .name }}"><span>{{ .name }}</span><i class="{{ .icon }}" aria-hidden="true"></i></a></li>
       {{ end }}
       {{ if .Site.Params.sections.writings }}
-      <li><a href="{{ "/writings/index.xml" | relURL }}" rel="noopener" aria-label="Writings RSS feed"><span>RSS</span><i class="fas fa-rss" aria-hidden="true"></i></a></li>
+      <li><a href="{{ "/writings/index.xml" | relURL }}" rel="noopener" aria-label="Writings RSS feed"><span>RSS</span><i class="ri-rss-line" aria-hidden="true"></i></a></li>
       {{ end }}
     </ul>
   </div>

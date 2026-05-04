@@ -26,8 +26,8 @@ enableGitInfo = false
 
   # Optional: override the name shown in the nav bar and on the homepage h1.
   # Both default to params.author.name when not set.
-  header_title = ""   # e.g. a short monogram
-  home_title   = ""   # e.g. "Firstname M.I. Lastname" for a longer display name
+  header_title = ""   # e.g. a short monogram (defaults to params.author.name)
+  home_title   = "TODO: title"   # e.g. "Firstname M.I. Lastname" for a longer display name
 
   # Optional copyright or other notice shown at the bottom-left of the footer.
   # When absent the social links are centered instead.
