@@ -1,11 +1,11 @@
-# homepage
+# zen home
 
-A minimal Hugo theme for a personal professional site. Landing page, writings, useful things, and notes. Dark mode, KaTeX math, giscus comments, configurable fonts, RSS.
+A minimal, text-centered Hugo theme for a personal professional site. Landing page, writings, useful things, and notes. Dark/light mode, KaTeX math, giscus comments (based on git discussions), configurable fonts, RSS, figure captions, gist, tweet and video embeds, and more.
 
 ## Repository layout
 
 ```
-homepage/                   ← theme repo (this repo)
+zenhome/                   ← theme repo (this repo)
   layouts/                  Hugo templates
   assets/scss/              SCSS (compiled via Hugo Pipes — requires extended binary)
   assets/js/                Vanilla JS (dark mode toggle)
@@ -13,7 +13,7 @@ homepage/                   ← theme repo (this repo)
   data/socials.yaml         Default social links (override in your site)
   theme.toml                Theme metadata
   exampleSite/              Complete working demo — also the development harness
-    hugo.toml               Site config (theme = "homepage", themesDir = "../..")
+    hugo.toml               Site config (theme = "zenhome", themesDir = "../..")
     content/                Sample posts, things, and notes
     static/                 Sample images
     data/socials.yaml       Overrides the theme default
@@ -34,21 +34,21 @@ hugo server --themesDir ../.. -D
 
 ```bash
 # From your site's root
-git submodule add https://github.com/yourusername/homepage themes/homepage
+git submodule add https://github.com/jtbr/zenhome themes/zenhome
 git submodule update --init
 ```
 
 ### 2. Configure hugo.toml
 
 ```toml
-theme = "homepage"
+theme = "zenhome"
 ```
 
 Everything else is the same as `exampleSite/hugo.toml` — copy it and fill in your values.
 
 ### 3. Override socials
 
-Copy `themes/homepage/data/socials.yaml` to `data/socials.yaml` in your site and edit. Your copy takes precedence. Any [Font Awesome brand icon](https://fontawesome.com/search?o=r&m=free&f=brands) works — set `icon` to the name without the `fa-` prefix (e.g. `instagram`, `snapchat`, `facebook`).
+Copy `themes/zenhome/data/socials.yaml` to `data/socials.yaml` in your site and edit. Your copy takes precedence. Any [Remix icon](https://remixicon.com/) works — set `icon` to the name including the `ri-` prefix (e.g. `ri-instagram-lines`).
 
 ### 4. Update the theme later
 
@@ -72,6 +72,7 @@ brew install hugo
 
 # Linux
 sudo snap install hugo   # snap ships extended by default
+# (or other native installer)
 
 # Or download hugo_extended_* from https://github.com/gohugoio/hugo/releases
 ```
@@ -201,7 +202,7 @@ See `exampleSite/content/writings/component-showcase.md` (draft) for a live exam
 
 ## Comments (giscus)
 
-1. Create a **public** GitHub repo, e.g. `yourname-comments`.
+1. Create a **public** GitHub repo, e.g. `yourname-comments` (it doesn't have to host your site, just needs to be public)
 2. Settings → Features → Discussions: enable. Create a "General" category.
 3. Install the giscus GitHub App on that repo: https://github.com/apps/giscus
 4. Go to https://giscus.app, select the repo, copy `repoId` and `categoryId`.
@@ -218,7 +219,7 @@ Token colors are in `assets/scss/_code.scss` — GitHub Light by default, with G
 hugo gen chromastyles --style=dracula
 ```
 
-Copy the output into `_code.scss`, replacing the existing token blocks. Available themes include `github`, `monokai`, `dracula`, `nord`, `solarized-dark`, `solarized-light`.
+Copy the output into `_code.scss`, replacing the existing token blocks. Available themes include `github`, `monokai`, `dracula`, `nord`, `solarized-dark`, `solarized-light` full list [here](https://xyproto.github.io/splash/docs/all.html)
 
 ---
 

@@ -26,47 +26,33 @@
   color: var(--code-fg);
 }
 
-/* ── Chroma token colours — GitHub Light (default) ───────────────── */
 /* Swap theme: run `hugo gen chromastyles --style=<name>` and replace below. */
+
+/* ── Chroma token colours — GitHub Light (default) ───────────────── */
 .chroma {
   /* Comments */
   .c, .ch, .cm, .c1, .cs, .cp, .cpf { color: #6a737d; font-style: italic; }
-
   /* Keywords */
   .k, .kc, .kd, .kn, .kp, .kr, .kt  { color: #d73a49; }
-
   /* Strings */
   .s, .sa, .sb, .sc, .dl, .sd, .s2,
   .se, .sh, .si, .sx, .sr, .s1, .ss  { color: #032f62; }
-
   /* Names / built-ins / functions */
   .n, .na, .nb, .bp, .nc, .no, .nd,
   .ni, .ne, .nf, .fm, .py, .nl, .nn,
   .nt, .nx, .nv, .vc, .vg, .vi, .vm  { color: #6f42c1; }
-
   /* Numeric literals */
   .m, .mb, .mf, .mh, .mi, .il,
   .mo, .mx                            { color: #005cc5; }
-
   /* Operators */
   .o, .ow                             { color: #d73a49; }
-
   /* Punctuation */
   .p                                  { color: var(--code-fg); }
-
   /* Errors */
   .err                                { color: #b31d28; }
-
   /* Diff */
   .gd { color: #b31d28; background: #ffeef0; }
   .gi { color: #22863a; background: #f0fff4; }
-
-  /* Line numbers */
-  .ln {
-    color: var(--muted);
-    padding-right: 1rem;
-    user-select: none;
-  }
 }
 
 /* ── GitHub Dark overrides ───────────────────────────────────────── */
@@ -84,4 +70,11 @@
   .err                                { color: #ffa198; }
   .gd { color: #ffa198; background: rgba(248, 81, 73, 0.15); }
   .gi { color: #aff5b4; background: rgba(46, 160, 67, 0.15);  }
+}
+
+/* Line numbers */
+.chroma .ln {
+  color: var(--muted);
+  padding-right: 1rem;
+  user-select: none;
 }

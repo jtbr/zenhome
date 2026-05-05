@@ -4,11 +4,11 @@ baseURL = "https://example.com/"  # TODO: update to your domain
 # Safe for Cloudflare Pages deployments at an apex/subdomain root.
 relativeURLs = true
 
-# Theme — "homepage" must match the directory name of the cloned theme repo.
+# Theme — "zenhome" must match the directory name of the cloned theme repo.
 # To develop the theme locally, run from this directory:
 #   hugo server --themesDir ../..
-theme    = "homepage"
-themesDir = "../.."
+theme    = "zenhome"
+#themesDir = "../.."
 languageCode = "en-us"
 title = "TODO Your Name"
 enableRobotsTXT = true
@@ -86,7 +86,8 @@ enableGitInfo = false
 
   [markup.highlight]
     noClasses = false   # use CSS classes; colors live in assets/scss/_code.scss
-    lineNos   = false
+    lineNos   = false   # global default; override per-block via shortcode
+    lineNumbersInTable = false  # if you do enable them, use inline mode so .ln style applies
     codeFences = true
 
 [outputs]

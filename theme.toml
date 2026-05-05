@@ -1,11 +1,11 @@
-name        = "homepage"
+name        = "zenhome"
 description = "A minimal personal site theme: landing page, writings, useful things, and notes. Dark mode, KaTeX math, giscus comments, configurable fonts."
 license     = "MIT"
-licenselink = "https://github.com/yourusername/homepage/blob/main/LICENSE"
-homepage    = "https://github.com/yourusername/homepage"
+licenselink = "https://github.com/jtbr/zenhomee/blob/main/LICENSE"
+homepage    = "https://github.com/jtbr/zenhome"
 tags        = ["personal", "blog", "minimal", "dark-mode", "math"]
 min_version = "0.123.0"
 
 [author]
-  name    = ""
-  homepage = ""
+  name    = "Justin Briggs"
+  homepage = "https://justinbriggs.net"
