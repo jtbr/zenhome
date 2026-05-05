@@ -4,13 +4,13 @@
 /* ── Custom properties ────────────────────────────────────────────── */
 /* Must come BEFORE _dark.scss so [data-theme="dark"] can override. */
 :root {
-  --bg:       #ffffff;
+  --bg:       #faf8f5;
   --fg:       #1a1a1a;
   --muted:    #6c757d;
   --subtle:   #525c65;
   --rule:     #e5e7eb;
-  --card-bg:  #ffffff;
-  --code-bg:  #f6f8fa;
+  --card-bg:  #fefdf9; /* #fdfbf8 */
+  --code-bg:  #fefdf9;
   --code-fg:  #24292e;
   --shadow:        0 2px 10px rgba(0, 0, 0, 0.14);
   --selection-bg:  rgba(26, 26, 26, 0.12);
