@@ -34,8 +34,15 @@ def greet(name: str) -> str:
 print(greet("world"))
 ```
 
-```bash
+```bash {lineNos=true}
+# This example includes line numbers
 hugo server -D --disableFastRender
+```
+
+If you don't specify the language, there's no code box specifically:
+
+```
+Just some monspaced, formatted text, not styled as code
 ```
 
 ## Side-by-side

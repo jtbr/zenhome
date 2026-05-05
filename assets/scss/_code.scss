@@ -7,6 +7,7 @@
  * pre.chroma so it doesn't double-apply background/shadow.
  */
 .highlight {
+  position: relative;
   background: var(--code-bg);
   border-radius: 7px;
   /* Slight indent from body text on both sides. */
@@ -14,6 +15,25 @@
   box-shadow: var(--shadow);
   overflow: hidden;   /* keep rounded corners on scroll */
 }
+
+.copy-btn {
+  position: absolute;
+  top: 0.45rem;
+  right: 0.5rem;
+  padding: 0.2rem 0.35rem;
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  opacity: 0;
+  transition: opacity 0.15s, color 0.15s;
+
+  &:hover { color: var(--fg); }
+}
+
+.highlight:hover .copy-btn { opacity: 1; }
 
 .highlight pre.chroma {
   background: transparent;
@@ -72,9 +92,34 @@
   .gi { color: #aff5b4; background: rgba(46, 160, 67, 0.15);  }
 }
 
-/* Line numbers */
-.chroma .ln {
+/* Line numbers via ::before counter — pseudo content is excluded from clipboard
+ * in all browsers, unlike user-select:none on an inline span.
+ *
+ * Chroma emits .cl wrappers on every line regardless of lineNos, so we gate
+ * everything on :has(.ln) (inline mode) or .lntable presence (table mode) to
+ * avoid showing counters on blocks where numbers weren't requested. */
+
+/* inline mode */
+pre.chroma:has(.ln)           { counter-reset: line; }
+.chroma:has(.ln) .ln          { display: none; }
+.chroma:has(.ln) .cl          { display: block; }
+
+/* table mode */
+.lntable                      { display: block; }
+.lntd                         { display: block; }
+.lntd:first-child             { display: none; }
+.lntable pre.chroma           { counter-reset: line; }
+.lntable .cl                  { display: block; }
+
+/* shared number style */
+.chroma:has(.ln) .cl::before,
+.lntable .cl::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  min-width: 2ch;
+  margin-right: 1.25rem;
   color: var(--muted);
-  padding-right: 1rem;
-  user-select: none;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
 }
