@@ -32,10 +32,12 @@
 {{ $css := resources.Get "scss/main.scss" | toCSS (dict "outputStyle" "compressed") | fingerprint }}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
 
-{{- if .OutputFormats.Get "RSS" }}
-<link rel="alternate" type="application/rss+xml" title="{{ .Title }} — {{ .Site.Title }}" href="{{ (.OutputFormats.Get "RSS").Permalink }}">
+{{- if .IsHome }}
+<link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{ "/index.xml" | absURL }}">
+{{- else if .OutputFormats.Get "RSS" }}
+<link rel="alternate" type="application/rss+xml" title="{{ .CurrentSection.Title }} — {{ .Site.Title }}" href="{{ (.OutputFormats.Get "RSS").Permalink }}">
 {{- else if .Section }}
-<link rel="alternate" type="application/rss+xml" title="{{ .CurrentSection.Title }} — {{ .Site.Title }}" href="{{ (printf "/%s/index.xml" .Section) | absURL }}">
+<link rel="alternate" type="application/rss+xml" title="{{ .CurrentSection.Title }} — {{ .Site.Title }}" href="{{ printf "/%s/index.xml" .Section | absURL }}">
 {{- end }}
 
 <script>

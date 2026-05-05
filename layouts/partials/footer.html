@@ -6,15 +6,23 @@
       <li><a href="{{ .url }}" rel="me noopener" aria-label="{{ .name }}"><span>{{ .name }}</span><i class="{{ .icon }}" aria-hidden="true"></i></a></li>
       {{ end }}
       {{- $rssURL := "" -}}
-      {{- if .OutputFormats.Get "RSS" -}}
+      {{- $rssDL := "" -}}
+      {{- $feedName := "" -}}
+      {{- if .IsHome -}}
+        {{- $rssURL = "/index.xml" | absURL -}}
+        {{- $rssDL = "all.rss" -}}
+        {{- $feedName = .Site.Title -}}
+      {{- else if .OutputFormats.Get "RSS" -}}
         {{- $rssURL = (.OutputFormats.Get "RSS").Permalink -}}
+        {{- $rssDL = printf "%s.rss" .Section -}}
+        {{- $feedName = .CurrentSection.Title -}}
       {{- else if .Section -}}
         {{- $rssURL = printf "/%s/index.xml" .Section | absURL -}}
-      {{- else if .Site.Params.sections.writings -}}
-        {{- $rssURL = "/writings/index.xml" | relURL -}}
+        {{- $rssDL = printf "%s.rss" .Section -}}
+        {{- $feedName = .CurrentSection.Title -}}
       {{- end -}}
       {{ if $rssURL }}
-      <li><a href="{{ $rssURL }}" rel="noopener" aria-label="RSS feed"><span>RSS</span><i class="ri-rss-line" aria-hidden="true"></i></a></li>
+      <li><a href="{{ $rssURL }}" download="{{ $rssDL }}" rel="noopener" title="{{ $feedName }} RSS feed" aria-label="{{ $feedName }} RSS feed"><span>RSS</span><i class="ri-rss-line" aria-hidden="true"></i></a></li>
       {{ end }}
     </ul>
   </div>
