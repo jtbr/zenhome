@@ -4,6 +4,8 @@ date: 2026-04-30
 draft: true
 math: true
 comments: false
+image: "img/things/ab.jpg"
+tags: ["ml", "practice"]
 description: "Exercises every shortcode and feature. Visible only with hugo server -D."
 ---
 
