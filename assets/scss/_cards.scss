@@ -62,7 +62,7 @@
   }
 
   .card-excerpt {
-    color: var(--muted);
+    color: var(--subtle);
     font-size: 0.93rem;
     line-height: 1.55;
     flex: 1;
@@ -159,15 +159,37 @@
   transition: color 0.15s, border-color 0.15s;
 
   &:hover {
-    /*color: var(--fg);*/
     border-color: var(--fg);
     text-decoration: none;
   }
 }
-/* Extra spacing between the date and the first tag (all contexts) */
+
+/* Notes-specific: tags appear inline in running metadata, no box needed */
+.notes-list .tag,
+.note .tag {
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  text-decoration: none;
+  border-bottom: none;
+  font-size: 0.75em;
+  line-height: 1;
+
+  &:hover { color: var(--fg); }
+}
+/* Extra spacing between the date and the first tag where no explicit separator is used */
 .card-meta time + .tag,
-.post-meta span + .tag {
+.post-meta span:not(.meta-sep) + .tag {
   margin-left: 1.5em;
+}
+
+/* Diamond separator used between metadata items */
+.meta-sep {
+  padding: 0 1.2em;
+  color: var(--muted);
+  font-size: 0.8em;
+  line-height: 1;
+  user-select: none;
 }
 
 /* ── Notes list (simple, no cards) ──────────────────────────────── */
@@ -175,14 +197,45 @@
   margin-top: 1.5rem;
 
   li {
-    border-bottom: 1px solid var(--rule);
-    padding: 1rem 0;
+    padding: 1.5rem 0;
 
-    &:first-child { padding-top: 0.25rem; }
+    &:not(:last-child) { border-bottom: 1px dashed var(--rule); }
+    &:first-child { padding-top: 0; }
   }
 
   h3 {
     font-size: 1.25rem;
-    margin: 0 0 0.2rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+
+    a {
+      border-bottom: none;
+      text-decoration: none;
+
+      &:hover {
+        text-shadow: 0.2px 0 0 currentColor;
+      }
+    }
+
+    a:hover .notes-title-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .notes-title-arrow {
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    display: inline-block;
+    margin-left: 0.35rem;
+    font-size: 1rem;
+    vertical-align: 0.03em;
+  }
+
+  .note-subtitle {
+    color: var(--subtle);
+    font-size: 0.93rem;
+    margin: 0 0 0.35rem;
   }
 }

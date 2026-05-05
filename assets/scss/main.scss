@@ -7,6 +7,7 @@
   --bg:       #ffffff;
   --fg:       #1a1a1a;
   --muted:    #6c757d;
+  --subtle:   #525c65;
   --rule:     #e5e7eb;
   --card-bg:  #ffffff;
   --code-bg:  #f6f8fa;
@@ -149,7 +150,7 @@ a.btn { border-bottom: none; }
 
 /* ── Main container ───────────────────────────────────────────────── */
 main.container {
-  max-width: 740px;
+  max-width: 815px;
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
 }

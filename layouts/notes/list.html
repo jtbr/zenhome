@@ -11,12 +11,13 @@
   <ul class="notes-list list-unstyled">
     {{ range $pages }}
     <li>
-      <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+      <h3><a href="{{ .RelPermalink }}">{{ .Title }}<i class="ri-arrow-right-long-line notes-title-arrow" aria-hidden="true"></i></a></h3>
+      {{ with .Description }}<p class="note-subtitle">{{ . }}</p>{{ end }}
       <p class="post-meta">
-        <span><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time></span>
-        {{ with .GetTerms "tags" }}{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+        {{ if gt .ReadingTime 0 }}<span class="meta-sep">&#11049;</span><span>{{ .ReadingTime }} min read</span>{{ end }}
+        {{ with .GetTerms "tags" }}<span class="meta-sep">&#11049;</span>{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
       </p>
-      {{ with .Description }}<p>{{ . }}</p>{{ end }}
     </li>
     {{ end }}
   </ul>
