@@ -2,7 +2,25 @@
 {{- $kind := .kind | default "" -}}
 {{- $isModal := and (eq $kind "thing") $item.Params.link -}}
 
-{{ if $isModal }}
+{{ if eq $kind "post" }}
+<div class="card post-row{{ if not $item.Params.image }} no-image{{ end }}">
+  <div class="card-body">
+    <div class="card-title"><a class="card-link" href="{{ $item.RelPermalink }}">{{ $item.Title }}</a></div>
+    <div class="card-excerpt">
+      {{- or $item.Params.tagline ($item.Summary | plainify | truncate 280) -}}
+    </div>
+    {{ if or (not $item.Date.IsZero) ($item.GetTerms "tags") }}
+    <div class="card-meta">
+      {{ if not $item.Date.IsZero }}<time datetime="{{ $item.Date.Format "2006-01-02" }}">{{ $item.Date.Format "Jan 2, 2006" }}</time>{{ end }}
+      {{ with $item.GetTerms "tags" }}{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
+    </div>
+    {{ end }}
+  </div>
+  {{ if $item.Params.image }}
+  <div class="card-image" style="background-image: url('{{ $item.Params.image | relURL }}');"></div>
+  {{ end }}
+</div>
+{{ else if $isModal }}
 <div class="card{{ if not $item.Params.image }} no-image{{ end }}"
      role="button" tabindex="0"
      data-modal-title="{{ $item.Title }}"
@@ -17,40 +35,43 @@
     <div class="card-excerpt">
       {{- or $item.Params.tagline ($item.Summary | plainify | truncate 240) -}}
     </div>
-    {{ if not $item.Date.IsZero }}
+    {{ if or (not $item.Date.IsZero) ($item.GetTerms "tags") }}
     <div class="card-meta">
-      <time datetime="{{ $item.Date.Format "2006-01-02" }}">{{ $item.Date.Format "Jan 2, 2006" }}</time>
+      {{ if not $item.Date.IsZero }}<time datetime="{{ $item.Date.Format "2006-01-02" }}">{{ $item.Date.Format "Jan 2, 2006" }}</time>{{ end }}
+      {{ with $item.GetTerms "tags" }}{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
     </div>
     {{ end }}
   </div>
 </div>
 {{ else if $item.Params.image }}
-<a class="card" href="{{ $item.RelPermalink }}">
+<div class="card">
   <div class="card-image" style="background-image: url('{{ $item.Params.image | relURL }}');"></div>
   <div class="card-body">
-    <div class="card-title">{{ $item.Title }}</div>
+    <div class="card-title"><a class="card-link" href="{{ $item.RelPermalink }}">{{ $item.Title }}</a></div>
     <div class="card-excerpt">
       {{- or $item.Params.tagline ($item.Summary | plainify | truncate 180) -}}
     </div>
-    {{ if not $item.Date.IsZero }}
+    {{ if or (not $item.Date.IsZero) ($item.GetTerms "tags") }}
     <div class="card-meta">
-      <time datetime="{{ $item.Date.Format "2006-01-02" }}">{{ $item.Date.Format "Jan 2, 2006" }}</time>
+      {{ if not $item.Date.IsZero }}<time datetime="{{ $item.Date.Format "2006-01-02" }}">{{ $item.Date.Format "Jan 2, 2006" }}</time>{{ end }}
+      {{ with $item.GetTerms "tags" }}{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
     </div>
     {{ end }}
   </div>
-</a>
+</div>
 {{ else }}
-<a class="card no-image" href="{{ $item.RelPermalink }}">
+<div class="card no-image">
   <div class="card-body">
-    <div class="card-title">{{ $item.Title }}</div>
+    <div class="card-title"><a class="card-link" href="{{ $item.RelPermalink }}">{{ $item.Title }}</a></div>
     <div class="card-excerpt">
       {{- or $item.Params.tagline ($item.Summary | plainify | truncate 240) -}}
     </div>
-    {{ if not $item.Date.IsZero }}
+    {{ if or (not $item.Date.IsZero) ($item.GetTerms "tags") }}
     <div class="card-meta">
-      <time datetime="{{ $item.Date.Format "2006-01-02" }}">{{ $item.Date.Format "Jan 2, 2006" }}</time>
+      {{ if not $item.Date.IsZero }}<time datetime="{{ $item.Date.Format "2006-01-02" }}">{{ $item.Date.Format "Jan 2, 2006" }}</time>{{ end }}
+      {{ with $item.GetTerms "tags" }}{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
     </div>
     {{ end }}
   </div>
-</a>
+</div>
 {{ end }}

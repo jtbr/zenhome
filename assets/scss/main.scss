@@ -52,8 +52,7 @@ a:hover { border-bottom-style: solid; }
 a.brand,
 .nav-links a,
 .socials a,
-a.card,
-.card a,
+.card a:not(.tag),
 a.btn { border-bottom: none; }
 
 /* Modal-trigger cards (div[role=button]) need explicit pointer cursor. */
@@ -109,7 +108,7 @@ a.btn { border-bottom: none; }
 
 /* ── Footer ───────────────────────────────────────────────────────── */
 .site-footer {
-  border-top: 1px solid var(--rule);
+  border-top: 0px solid var(--rule);
   color: var(--muted);
   margin-top: 2rem;
   font-size: 0.88rem;

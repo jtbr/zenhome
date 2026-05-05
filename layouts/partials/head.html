@@ -33,9 +33,9 @@
 <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
 
 {{- if .OutputFormats.Get "RSS" }}
-<link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{ (.OutputFormats.Get "RSS").Permalink }}">
-{{- else if eq .Section "writings" }}
-<link rel="alternate" type="application/rss+xml" title="Writings — {{ .Site.Title }}" href="{{ "/writings/index.xml" | absURL }}">
+<link rel="alternate" type="application/rss+xml" title="{{ .Title }} — {{ .Site.Title }}" href="{{ (.OutputFormats.Get "RSS").Permalink }}">
+{{- else if .Section }}
+<link rel="alternate" type="application/rss+xml" title="{{ .CurrentSection.Title }} — {{ .Site.Title }}" href="{{ (printf "/%s/index.xml" .Section) | absURL }}">
 {{- end }}
 
 <script>

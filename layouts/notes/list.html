@@ -13,7 +13,8 @@
     <li>
       <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
       <p class="post-meta">
-        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+        <span><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time></span>
+        {{ with .GetTerms "tags" }}{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
       </p>
       {{ with .Description }}<p>{{ . }}</p>{{ end }}
     </li>

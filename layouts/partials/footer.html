@@ -5,8 +5,16 @@
       {{ range .Site.Data.socials }}
       <li><a href="{{ .url }}" rel="me noopener" aria-label="{{ .name }}"><span>{{ .name }}</span><i class="{{ .icon }}" aria-hidden="true"></i></a></li>
       {{ end }}
-      {{ if .Site.Params.sections.writings }}
-      <li><a href="{{ "/writings/index.xml" | relURL }}" rel="noopener" aria-label="Writings RSS feed"><span>RSS</span><i class="ri-rss-line" aria-hidden="true"></i></a></li>
+      {{- $rssURL := "" -}}
+      {{- if .OutputFormats.Get "RSS" -}}
+        {{- $rssURL = (.OutputFormats.Get "RSS").Permalink -}}
+      {{- else if .Section -}}
+        {{- $rssURL = printf "/%s/index.xml" .Section | absURL -}}
+      {{- else if .Site.Params.sections.writings -}}
+        {{- $rssURL = "/writings/index.xml" | relURL -}}
+      {{- end -}}
+      {{ if $rssURL }}
+      <li><a href="{{ $rssURL }}" rel="noopener" aria-label="RSS feed"><span>RSS</span><i class="ri-rss-line" aria-hidden="true"></i></a></li>
       {{ end }}
     </ul>
   </div>

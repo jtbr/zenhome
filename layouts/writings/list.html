@@ -8,7 +8,7 @@
 {{ if eq (len $pages) 0 }}
   <p class="post-meta">Long-form posts will appear here. Coming soon.</p>
 {{ else }}
-  <div class="card-grid">
+  <div class="post-list">
     {{ range $pages }}
       {{ partial "card.html" (dict "item" . "kind" "post") }}
     {{ end }}
