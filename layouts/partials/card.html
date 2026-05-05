@@ -5,7 +5,7 @@
 {{ if eq $kind "post" }}
 <div class="card post-row{{ if not $item.Params.image }} no-image{{ end }}">
   <div class="card-body">
-    <div class="card-title"><a class="card-link" href="{{ $item.RelPermalink }}">{{ $item.Title }}</a></div>
+    <div class="card-title"><a class="card-link" href="{{ $item.RelPermalink }}">{{ $item.Title }}</a><i class="ri-arrow-right-long-line card-title-arrow" aria-hidden="true"></i></div>
     <div class="card-excerpt">
       {{- or $item.Params.tagline ($item.Summary | plainify | truncate 280) -}}
     </div>
