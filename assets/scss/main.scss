@@ -60,7 +60,8 @@ a.brand,
 .nav-links a,
 .socials a,
 .card a:not(.tag),
-a.btn { border-bottom: none; }
+a.btn,
+a.anchor-link { border-bottom: none; }
 
 /* Modal-trigger cards (div[role=button]) need explicit pointer cursor. */
 .card[data-modal-title] { cursor: pointer; }

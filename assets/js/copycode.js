@@ -14,24 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
         ? [...lines].map(l => l.textContent).join('')
         : (block.querySelector('code') ?? block.querySelector('pre')).textContent;
 
-      const reset = () => {
-        setTimeout(() => { btn.innerHTML = '<i class="ri-file-copy-line"></i>'; }, 1500);
-      };
-
-      try {
-        await navigator.clipboard.writeText(text);
-      } catch {
-        const ta = Object.assign(document.createElement('textarea'), {
-          value: text,
-          style: 'position:fixed;opacity:0',
-        });
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
-      }
+      await copyToClipboard(text);
       btn.innerHTML = '<i class="ri-check-line"></i>';
-      reset();
+      setTimeout(() => { btn.innerHTML = '<i class="ri-file-copy-line"></i>'; }, 1500);
     });
   });
 });

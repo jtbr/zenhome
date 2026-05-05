@@ -60,6 +60,12 @@ article.thing {
     }
   }
 
+  /* ── Anchor links on h2/h3 ──────────────────────────────────────── */
+  h2, h3 {
+    position: relative;
+    &:hover .anchor-link { opacity: 1; }
+  }
+
   /* Inline code — not inside a fenced block. */
   code:not(pre code) {
     background: var(--code-bg);
@@ -122,6 +128,22 @@ article.thing {
       text-align: center;
     }
   }
+}
+
+a.anchor-link {
+  position: absolute;
+  right: 100%;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  padding-right: 0.35rem;
+  color: var(--muted);
+  opacity: 0;
+  transition: opacity 0.15s;
+  font-size: 0.6em;
+
+  &:hover { color: var(--fg); }
 }
 
 /* ── Post header ─────────────────────────────────────────────────── */
