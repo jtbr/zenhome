@@ -1,5 +1,8 @@
 # Default social links — override by providing data/socials.yaml in your site.
 # icon: full Remixicon class name, e.g. ri-github-line.
+- name: E-mail
+  icon: ri-mail-send-line
+  url: "mailto:email@domain.com"
 - name: GitHub
   icon: ri-github-line
   url:  "https://github.com/yourusername"

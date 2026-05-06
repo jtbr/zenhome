@@ -1,6 +1,6 @@
 {{- $user := .Get "user" -}}
 {{- $id   := .Get "id" -}}
-<div class="tweet-embed" data-tweet-id="{{ $id }}">
+<div class="tweet-embed d-flex justify-content-center" data-tweet-id="{{ $id }}">
   <blockquote class="twitter-tweet" data-dnt="true">
     <a href="https://twitter.com/{{ $user }}/status/{{ $id }}"></a>
   </blockquote>

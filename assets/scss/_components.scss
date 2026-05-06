@@ -77,11 +77,10 @@
 /* ── Twitter / X embed ───────────────────────────────────────────── */
 .tweet-embed,
 .bluesky-embed-wrapper,
-.mastodon-embed-wrapper {
-  display: flex;
-  justify-content: center;
-  margin: 1.75rem 0;
-}
+.mastodon-embed-wrapper { margin: 1.75rem 0; }
+
+/* oEmbed strips width/height attrs; give the iframe a responsive width. */
+.mastodon-embed-wrapper .mastodon-embed { width: #{"min(600px, 100%);"} }
 
 /* ── GitHub Gist embed ───────────────────────────────────────────── */
 .gist-embed {

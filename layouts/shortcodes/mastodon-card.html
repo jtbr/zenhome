@@ -7,6 +7,7 @@
     {{- warnf "mastodon-card: could not fetch oEmbed for %q: %s" $url . -}}
     <a href="{{ $url }}">View post on Mastodon</a>
   {{- else -}}
-    <div class="mastodon-embed-wrapper">{{ (. | transform.Unmarshal).html | safeHTML }}</div>
+    {{- $html := (. | transform.Unmarshal).html | replaceRE ` width="\d+"` "" -}}
+    <div class="mastodon-embed-wrapper d-flex justify-content-center">{{ $html | safeHTML }}</div>
   {{- end -}}
 {{- end -}}

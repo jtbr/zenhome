@@ -10,7 +10,7 @@ relativeURLs = true
 theme    = "zenhome"
 #themesDir = "../.."
 languageCode = "en-us"
-title = "TODO Your Name"
+title = "TODO Site title"
 enableRobotsTXT = true
 enableGitInfo = false
 
@@ -31,6 +31,8 @@ enableGitInfo = false
   # Optional copyright or other notice shown at the bottom-left of the footer.
   # When absent the social links are centered instead.
   copyright = ""  # e.g. "© 2026 Your Name"
+  socials_prefix = ""  # e.g. "Find me via:"
+
 
   [params.author]
     name         = "TODO Your Name"

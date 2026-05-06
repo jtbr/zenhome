@@ -9,7 +9,7 @@
     {{- $did = (. | transform.Unmarshal).did -}}
   {{- end -}}
 {{- end -}}
-<div class="bluesky-embed-wrapper">
+<div class="bluesky-embed-wrapper d-flex justify-content-center">
   {{- if $did }}
   <blockquote class="bluesky-embed"
       data-bluesky-uri="at://{{ $did }}/app.bsky.feed.post/{{ $id }}">
