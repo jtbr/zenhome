@@ -109,7 +109,7 @@
     }
 
     .card-image {
-      width: 180px;
+      width: 208px; /* ratio 4:3 */
       aspect-ratio: unset;
       flex-shrink: 0;
       border-radius: 4px;
@@ -164,9 +164,11 @@
   }
 }
 
-/* Notes-specific: tags appear inline in running metadata, no box needed */
+/* Tags in running metadata: no box, just text */
 .notes-list .tag,
-.note .tag {
+.note .tag,
+.card-meta .tag,
+.post-meta .tag {
   padding: 0;
   border: none;
   border-radius: 0;
@@ -174,6 +176,10 @@
   border-bottom: none;
   font-size: 0.75em;
   line-height: 1;
+
+  &:not(:last-child) {
+    padding-right: 0.5em;
+  }
 
   &:hover { color: var(--fg); }
 }

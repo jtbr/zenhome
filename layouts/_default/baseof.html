@@ -13,7 +13,7 @@
 
   {{ $dm := resources.Get "js/darkmode.js" | minify | fingerprint }}
   <script src="{{ $dm.RelPermalink }}" integrity="{{ $dm.Data.Integrity }}" defer></script>
-  {{ $bundle := slice (resources.Get "js/_clipboard.js") (resources.Get "js/copycode.js") (resources.Get "js/anchorlinks.js") | resources.Concat "js/bundle.js" | minify | fingerprint }}
+  {{ $bundle := slice (resources.Get "js/_clipboard.js") (resources.Get "js/copycode.js") (resources.Get "js/anchorlinks.js") (resources.Get "js/share.js") | resources.Concat "js/bundle.js" | minify | fingerprint }}
   <script src="{{ $bundle.RelPermalink }}" integrity="{{ $bundle.Data.Integrity }}" defer></script>
 
   {{ if .Params.math }}{{ partial "math.html" . }}{{ end }}

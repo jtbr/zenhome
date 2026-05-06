@@ -5,14 +5,15 @@
 {{ if eq $kind "post" }}
 <div class="card post-row{{ if not $item.Params.image }} no-image{{ end }}">
   <div class="card-body">
-    <div class="card-title"><a class="card-link" href="{{ $item.RelPermalink }}">{{ $item.Title }}</a><i class="ri-arrow-right-long-line card-title-arrow" aria-hidden="true"></i></div>
+    <div class="card-title"><a class="card-link" href="{{ $item.RelPermalink }}">{{ $item.Title }}<i class="ri-arrow-right-long-line card-title-arrow" aria-hidden="true"></i></a></div>
     <div class="card-excerpt">
       {{- or $item.Params.tagline ($item.Summary | plainify | truncate 280) -}}
     </div>
     {{ if or (not $item.Date.IsZero) ($item.GetTerms "tags") }}
     <div class="card-meta">
       {{ if not $item.Date.IsZero }}<time datetime="{{ $item.Date.Format "2006-01-02" }}">{{ $item.Date.Format "Jan 2, 2006" }}</time>{{ end }}
-      {{ with $item.GetTerms "tags" }}{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
+      {{ if gt $item.ReadingTime 0 }}<span class="meta-sep">&#11049;</span><span>{{ $item.ReadingTime }} min read</span>{{ end }}
+      {{ with $item.GetTerms "tags" }}<span class="meta-sep">&#11049;</span>{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
     </div>
     {{ end }}
   </div>
@@ -38,7 +39,7 @@
     {{ if or (not $item.Date.IsZero) ($item.GetTerms "tags") }}
     <div class="card-meta">
       {{ if not $item.Date.IsZero }}<time datetime="{{ $item.Date.Format "2006-01-02" }}">{{ $item.Date.Format "Jan 2, 2006" }}</time>{{ end }}
-      {{ with $item.GetTerms "tags" }}{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
+      {{ with $item.GetTerms "tags" }}{{ if not $item.Date.IsZero }}<span class="meta-sep">&#11049;</span>{{ end }}{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
     </div>
     {{ end }}
   </div>
@@ -54,7 +55,7 @@
     {{ if or (not $item.Date.IsZero) ($item.GetTerms "tags") }}
     <div class="card-meta">
       {{ if not $item.Date.IsZero }}<time datetime="{{ $item.Date.Format "2006-01-02" }}">{{ $item.Date.Format "Jan 2, 2006" }}</time>{{ end }}
-      {{ with $item.GetTerms "tags" }}{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
+      {{ with $item.GetTerms "tags" }}{{ if not $item.Date.IsZero }}<span class="meta-sep">&#11049;</span>{{ end }}{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
     </div>
     {{ end }}
   </div>
@@ -69,7 +70,7 @@
     {{ if or (not $item.Date.IsZero) ($item.GetTerms "tags") }}
     <div class="card-meta">
       {{ if not $item.Date.IsZero }}<time datetime="{{ $item.Date.Format "2006-01-02" }}">{{ $item.Date.Format "Jan 2, 2006" }}</time>{{ end }}
-      {{ with $item.GetTerms "tags" }}{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
+      {{ with $item.GetTerms "tags" }}{{ if not $item.Date.IsZero }}<span class="meta-sep">&#11049;</span>{{ end }}{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
     </div>
     {{ end }}
   </div>

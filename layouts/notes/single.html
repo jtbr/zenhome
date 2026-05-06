@@ -6,6 +6,7 @@
       <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
       {{ if gt .ReadingTime 0 }}<span class="meta-sep">&#11049;</span><span>{{ .ReadingTime }} min read</span>{{ end }}
       {{ with .GetTerms "tags" }}<span class="meta-sep">&#11049;</span>{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
+      <button class="share-btn" aria-label="Share this page"><i class="ri-share-2-line" aria-hidden="true"></i></button>
     </p>
   </header>
 
