@@ -41,9 +41,10 @@ enableGitInfo = false
 
   # Flip a section to true to show it in navigation and enable its listing page.
   [params.sections]
-    writings = true
-    things   = true
-    notes    = true
+    writings      = true
+    things        = true
+    notes         = true
+    # things_layout = "masonry" # Uncomment to use column-wise grid (items are then ordered top to bottom and then column by column)
 
   # giscus comments. Set enabled = true and fill in IDs from https://giscus.app
   [params.comments]

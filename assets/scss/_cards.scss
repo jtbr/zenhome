@@ -8,6 +8,17 @@
   padding: 0;
 }
 
+.card-grid--masonry {
+  display: block;
+  columns: 2 270px;
+  column-gap: 1.5rem;
+
+  > .card {
+    break-inside: avoid;
+    margin-bottom: 1.5rem;
+  }
+}
+
 /* ── Card ────────────────────────────────────────────────────────── */
 .card {
   position: relative;

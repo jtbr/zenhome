@@ -146,20 +146,21 @@ hugo new content notes/your-slug.md
 
 New content is created as `draft: true`. Remove the `draft` line or set it to `false` to publish.
 
+
 ### Useful Things front matter
 
-Things are designed as a curated links page. Cards with a `link:` open a modal; cards without navigate to their own page.
+Things are designed as a curated links page; clicking opens a modal for more details and link(s).
 
-```yaml
----
-title: "Tool or resource name"
-date: 2026-01-01
-tagline: "One sentence description shown on the card."
-link: "https://example.com"        # omit for an internal detail page instead
-image: "/img/things/screenshot.jpg" # optional 16:9 card image
----
-Longer description shown in the modal or on the detail page.
-```
+| Field | Effect |
+|-------|--------|
+| `weight` | Sort order on the listing page — lower appears first. Falls back to date then title. |
+| `tagline` | Short blurb shown on the card and the detail page header. |
+| `description` | Longer text shown in the modal (falls back to `tagline` if absent). |
+| `image` | Path relative to `static/` (e.g. `img/things/foo.jpg`). Shown on card and larger in modal. |
+| `links` | Array of `{label, url}` — up to two buttons shown in the modal. |
+| `link` | Legacy single URL; treated as one "Visit" button. Use `links` instead. |
+
+A details page is generated for every thing. A **Details →** button appears in the modal only when the markdown body is non-empty (`WordCount > 0`); the card's noscript fallback link also points there in that case, or to the first link otherwise.Cards with a `link:` open a modal; cards without navigate to their own page.
 
 ---
 

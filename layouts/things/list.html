@@ -8,7 +8,8 @@
 {{ if eq (len $pages) 0 }}
   <p class="post-meta">Useful things will appear here. Coming soon.</p>
 {{ else }}
-  <div class="card-grid">
+  {{- $masonry := eq .Site.Params.sections.things_layout "masonry" -}}
+  <div class="card-grid{{ if $masonry }} card-grid--masonry{{ end }}">
     {{ range $pages }}
       {{ partial "card.html" (dict "item" . "kind" "thing") }}
     {{ end }}
