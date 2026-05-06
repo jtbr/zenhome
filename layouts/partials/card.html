@@ -1,6 +1,5 @@
 {{- $item := .item -}}
 {{- $kind := .kind | default "" -}}
-{{- $isModal := and (eq $kind "thing") $item.Params.link -}}
 
 {{ if eq $kind "post" }}
 <div class="card post-row{{ if not $item.Params.image }} no-image{{ end }}">
@@ -21,18 +20,38 @@
   <div class="card-image" style="background-image: url('{{ $item.Params.image | relURL }}');"></div>
   {{ end }}
 </div>
-{{ else if $isModal }}
+
+{{ else if eq $kind "thing" }}
+{{- $links := slice -}}
+{{- with $item.Params.links -}}
+  {{- $links = . -}}
+{{- else -}}
+  {{- with $item.Params.link -}}
+    {{- $links = slice (dict "url" . "label" "Visit") -}}
+  {{- end -}}
+{{- end -}}
+{{- $hasDetails := gt $item.WordCount 0 -}}
+{{- $fallback := "" -}}
+{{- if $hasDetails -}}
+  {{- $fallback = $item.RelPermalink -}}
+{{- else if gt (len $links) 0 -}}
+  {{- $fallback = (index $links 0).url -}}
+{{- end -}}
+{{- $modalBody := or $item.Params.description $item.Params.tagline ($item.Summary | plainify | truncate 400) -}}
+
 <div class="card{{ if not $item.Params.image }} no-image{{ end }}"
-     role="button" tabindex="0"
      data-modal-title="{{ $item.Title }}"
-     data-modal-body="{{ or $item.Params.tagline ($item.Summary | plainify | truncate 400) }}"
-     data-modal-link="{{ $item.Params.link }}"
-     {{ with $item.Params.image }}data-modal-image="{{ . | absURL }}"{{ end }}>
+     data-modal-body="{{ $modalBody }}"
+     {{ with $item.Params.image }}data-modal-image="{{ . | absURL }}"{{ end }}
+     data-modal-links="{{ $links | jsonify }}"
+     {{ if $hasDetails }}data-modal-details="{{ $item.RelPermalink }}"{{ end }}>
   {{ if $item.Params.image }}
   <div class="card-image" style="background-image: url('{{ $item.Params.image | relURL }}');"></div>
   {{ end }}
   <div class="card-body">
-    <div class="card-title">{{ $item.Title }}</div>
+    <div class="card-title">
+      {{- if $fallback -}}<a class="card-link" href="{{ $fallback }}">{{ $item.Title }}</a>{{- else -}}{{ $item.Title }}{{- end -}}
+    </div>
     <div class="card-excerpt">
       {{- or $item.Params.tagline ($item.Summary | plainify | truncate 240) -}}
     </div>
@@ -44,6 +63,7 @@
     {{ end }}
   </div>
 </div>
+
 {{ else if $item.Params.image }}
 <div class="card">
   <div class="card-image" style="background-image: url('{{ $item.Params.image | relURL }}');"></div>
@@ -60,6 +80,7 @@
     {{ end }}
   </div>
 </div>
+
 {{ else }}
 <div class="card no-image">
   <div class="card-body">

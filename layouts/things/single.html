@@ -3,14 +3,28 @@
   <header class="post-header">
     <h1>{{ .Title }}</h1>
     {{ with .Params.tagline }}<p class="lead">{{ . }}</p>{{ end }}
-    {{ with .Params.link }}
-      <p><a href="{{ . }}" class="btn btn-sm btn-outline-secondary" rel="noopener">View →</a></p>
-    {{ end }}
+    <p class="post-meta">
+      {{ if not .Date.IsZero }}
+        <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format "January 2, 2006" }}</time>
+      {{ end }}
+      {{ with .GetTerms "tags" }}
+        {{ if not $.Date.IsZero }}<span class="meta-sep">&#11049;</span>{{ end }}
+        {{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}
+      {{ end }}
+      {{ with .Params.links }}
+        {{ if or (not $.Date.IsZero) ($.GetTerms "tags") }}<span class="meta-sep">&#11049;</span>{{ end }}
+        {{ range . }}
+          <a href="{{ .url }}" class="btn btn-sm btn-outline-secondary" rel="noopener">{{ .label | default "View" }} →</a>
+        {{ end }}
+      {{ else }}
+        {{ with $.Params.link }}
+          {{ if or (not $.Date.IsZero) ($.GetTerms "tags") }}<span class="meta-sep">&#11049;</span>{{ end }}
+          <a href="{{ . }}" class="btn btn-sm btn-outline-secondary" rel="noopener">View →</a>
+        {{ end }}
+      {{ end }}
+      <button class="share-btn" aria-label="Share this page"><i class="ri-share-2-line" aria-hidden="true"></i></button>
+    </p>
   </header>
-
-  <p class="post-meta">
-    <button class="share-btn" aria-label="Share this page"><i class="ri-share-2-line" aria-hidden="true"></i></button>
-  </p>
 
   {{ .Content }}
 </article>

@@ -1,8 +1,9 @@
 ---
 title: "Another Thing No Image"
-link: "https://example.com"
 tagline: "A thing without an image, to show the no-image card variant."
+description: "A slightly more expansive description shown in the modal. This one has no image and only a single link, demonstrating that both are optional. No details page link, since no content is provided."
+links:
+  - label: "Visit"
+    url: "https://example.com"
 tags: ["ml"]
 ---
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.

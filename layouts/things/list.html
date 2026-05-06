@@ -23,30 +23,52 @@
     <img class="modal-image" src="" alt="" hidden>
     <h2 class="modal-title" id="modal-title"></h2>
     <p class="modal-body"></p>
-    <a class="modal-link btn btn-outline-secondary" href="" target="_blank" rel="noopener">Visit →</a>
+    <div class="modal-actions"></div>
   </div>
 </div>
 
 <script>
 (function () {
-  var overlay = document.getElementById('things-modal');
+  var overlay  = document.getElementById('things-modal');
   if (!overlay) return;
-  var titleEl  = overlay.querySelector('.modal-title');
-  var bodyEl   = overlay.querySelector('.modal-body');
-  var linkEl   = overlay.querySelector('.modal-link');
-  var imgEl    = overlay.querySelector('.modal-image');
-  var closeBtn = overlay.querySelector('.modal-close');
+  var titleEl   = overlay.querySelector('.modal-title');
+  var bodyEl    = overlay.querySelector('.modal-body');
+  var imgEl     = overlay.querySelector('.modal-image');
+  var actionsEl = overlay.querySelector('.modal-actions');
+  var closeBtn  = overlay.querySelector('.modal-close');
 
   function open(card) {
     titleEl.textContent = card.dataset.modalTitle || '';
     bodyEl.textContent  = card.dataset.modalBody  || '';
-    linkEl.href         = card.dataset.modalLink  || '#';
+    imgEl.alt           = card.dataset.modalTitle || '';
+
     if (card.dataset.modalImage) {
-      imgEl.src    = card.dataset.modalImage;
-      imgEl.hidden = false;
+      imgEl.src = card.dataset.modalImage;
+      imgEl.style.display = '';
     } else {
-      imgEl.hidden = true;
+      imgEl.style.display = 'none';
     }
+
+    actionsEl.innerHTML = '';
+    var links = [];
+    try { links = JSON.parse(card.dataset.modalLinks || '[]'); } catch (e) {}
+    links.slice(0, 2).forEach(function (lnk) {
+      var a = document.createElement('a');
+      a.className = 'btn btn-outline-secondary';
+      a.href = lnk.url || '#';
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.textContent = (lnk.label || 'Visit') + ' →';
+      actionsEl.appendChild(a);
+    });
+    if (card.dataset.modalDetails) {
+      var a = document.createElement('a');
+      a.className = 'btn btn-outline-secondary';
+      a.href = card.dataset.modalDetails;
+      a.textContent = 'Details →';
+      actionsEl.appendChild(a);
+    }
+
     overlay.setAttribute('aria-hidden', 'false');
     closeBtn.focus();
   }
@@ -56,7 +78,20 @@
   }
 
   document.querySelectorAll('.card[data-modal-title]').forEach(function (card) {
-    card.addEventListener('click', function () { open(card); });
+    /* Progressive enhancement: suppress the noscript fallback link */
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    var fallback = card.querySelector('.card-link');
+    if (fallback) {
+      fallback.setAttribute('tabindex', '-1');
+      fallback.setAttribute('aria-hidden', 'true');
+    }
+
+    card.addEventListener('click', function (e) {
+      if (e.target.closest('.tag')) return;
+      e.preventDefault();
+      open(card);
+    });
     card.addEventListener('keydown', function (e) {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(card); }
     });
