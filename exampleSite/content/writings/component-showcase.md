@@ -75,11 +75,24 @@ Figure with caption only (no credit):
 
 ## Video
 
-{{< video src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Example video" caption="Rick Astley — *Never Gonna Give You Up* (1987). A reliable embed test." >}}
+should work with any video provider, using their embed-style link
+
+{{< video src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ" title="Example video" caption="Rick Astley — *Never Gonna Give You Up* (1987). A reliable embed test." >}}
+
+{{< video src="https://player.vimeo.com/video/1138248349?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"  title="A bear remmbers" caption="Zhang + Knight *A bear remembers* (2025). A vimeo-based video." >}}
+
 
 ## Twitter / X
 
 {{< twitter-card user="jack" id="20" >}}
+
+## Bluesky
+
+{{< bluesky-card handle="daveyfwright.bsky.social" id="3ml5eibsmws2l" >}}
+
+## Mastodon
+
+{{< mastodon-card url="https://mastodon.social/@bagder/116526581698174258" >}}
 
 ## Gist
 

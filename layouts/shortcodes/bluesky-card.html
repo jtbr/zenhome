@@ -1,0 +1,31 @@
+{{- $handle := .Get "handle" -}}
+{{- $id     := .Get "id" -}}
+{{- $did := "" -}}
+{{- $resolveURL := printf "https://bsky.social/xrpc/com.atproto.identity.resolveHandle?handle=%s" $handle -}}
+{{- with resources.GetRemote $resolveURL -}}
+  {{- with .Err -}}
+    {{- warnf "bluesky-card: could not resolve handle %q: %s" $handle . -}}
+  {{- else -}}
+    {{- $did = (. | transform.Unmarshal).did -}}
+  {{- end -}}
+{{- end -}}
+<div class="bluesky-embed-wrapper">
+  {{- if $did }}
+  <blockquote class="bluesky-embed"
+      data-bluesky-uri="at://{{ $did }}/app.bsky.feed.post/{{ $id }}">
+  {{- else }}
+  <blockquote>
+  {{- end }}
+    <a href="https://bsky.app/profile/{{ $handle }}/post/{{ $id }}">View post on Bluesky</a>
+  </blockquote>
+</div>
+<script>
+/* Set embed color mode from current site theme before embed.js processes the blockquote. */
+(function () {
+  var wrapper = document.currentScript.previousElementSibling;
+  var t = document.documentElement.getAttribute('data-theme') || 'light';
+  var bq = wrapper.querySelector('.bluesky-embed');
+  if (bq) bq.setAttribute('data-bluesky-embed-color-mode', t);
+})();
+</script>
+<script async src="https://embed.bsky.app/static/embed.js" charset="utf-8"></script>

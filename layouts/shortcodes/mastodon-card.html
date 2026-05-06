@@ -1,0 +1,12 @@
+<!-- although mastadon internally supports dark/light modes, it's currently not possible to set from outside. https://github.com/mastodon/mastodon/issues/32134 -->
+{{- $url    := .Get "url" -}}
+{{- $host   := (urls.Parse $url).Host -}}
+{{- $oembedURL := printf "https://%s/api/oembed?url=%s" $host (urlquery $url) -}}
+{{- with resources.GetRemote $oembedURL -}}
+  {{- with .Err -}}
+    {{- warnf "mastodon-card: could not fetch oEmbed for %q: %s" $url . -}}
+    <a href="{{ $url }}">View post on Mastodon</a>
+  {{- else -}}
+    {{ (. | transform.Unmarshal).html | safeHTML }}
+  {{- end -}}
+{{- end -}}

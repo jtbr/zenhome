@@ -14,6 +14,16 @@
     });
   }
 
+  function rerenderBluesky(theme) {
+    document.querySelectorAll('.bluesky-embed-wrapper iframe').forEach(function (iframe) {
+      try {
+        var url = new URL(iframe.src);
+        url.searchParams.set('colorMode', theme);
+        iframe.src = url.toString();
+      } catch (e) {}
+    });
+  }
+
   function apply(t) {
     document.documentElement.setAttribute('data-theme', t);
     localStorage.setItem('theme', t);
@@ -24,6 +34,7 @@
     btn.title = t === 'light' ? 'dark mode' : 'light mode';
     btn.setAttribute('aria-label', t === 'light' ? 'Switch to dark mode' : 'Switch to light mode');
     rerenderTweets(t);
+    rerenderBluesky(t);
   }
 
   apply(document.documentElement.getAttribute('data-theme') || 'light');

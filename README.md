@@ -191,6 +191,10 @@ A foregrounded claim or key finding.
 
 {{</* twitter-card user="handle" id="tweet-id" */>}}
 
+{{</* bluesky-card handle="user.bsky.social" id="post-id" */>}}
+
+{{</* mastodon-card url="https://instance.social/@user/POST_ID" */>}}
+
 {{</* gist user="..." id="..." */>}}
 ```
 
