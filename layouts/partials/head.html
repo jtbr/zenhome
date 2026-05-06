@@ -2,6 +2,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} — {{ .Site.Title }}{{ end }}</title>
 
+{{- with .Site.Params.favicon -}}
+  {{- $mime := index (dict ".svg" "image/svg+xml" ".png" "image/png" ".ico" "image/x-icon") (path.Ext .) | default "image/x-icon" -}}
+  <link rel="icon" type="{{ $mime }}" href="{{ . | relURL }}">
+{{- end }}
+
 {{ partial "seo.html" . }}
 
 {{- $df := .Site.Params.fonts.display | default "Cormorant Garamond" -}}
@@ -48,3 +53,8 @@
     document.documentElement.setAttribute('data-theme', t);
   })();
 </script>
+<noscript>
+  <style>
+    #theme-toggle, .share-btn { display: none; }
+  </style>
+</noscript>

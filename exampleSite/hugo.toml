@@ -58,7 +58,11 @@ enableGitInfo = false
     input_position   = "bottom"
     theme            = "preferred_color_scheme"
 
-# Font families loaded from Google Fonts. Change the name AND update the
+  # favicon = "/icon.svg"  # Path relative to static/. Use SVG for modern browsers. (.png and .ico are also supported)
+                           # Also place favicon.ico (32×32) in static for legacy browsers/RSS readers (auto-discovered, no config needed).
+                           # Optional: apple-touch-icon.png (180×180) in static/ for iOS home screen shortcuts.
+
+  # Font families loaded from Google Fonts. Change the name AND update the
   # corresponding *_weights value to match what that font supports on Google Fonts.
   # See: https://fonts.google.com — use the "CSS2 API" weight spec shown there.
   [params.fonts]
@@ -71,7 +75,6 @@ enableGitInfo = false
     mono             = "JetBrains Mono"
     mono_weights     = "wght@400;600"
     mono_fallback    = "'SF Mono', Menlo, Consolas, monospace"
-
 
 [markup]
   [markup.goldmark.renderer]
