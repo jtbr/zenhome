@@ -115,9 +115,9 @@ a.anchor-link { border-bottom: none; }
 
 /* ── Footer ───────────────────────────────────────────────────────── */
 .site-footer {
-  border-top: 0px solid var(--rule);
+  /*border-top: 1px solid var(--rule);*/
   color: var(--muted);
-  margin-top: 2rem;
+  margin-top: 1.0rem;
   font-size: 0.88rem;
 
   .socials {
@@ -151,7 +151,7 @@ a.anchor-link { border-bottom: none; }
 /* ── Main container ───────────────────────────────────────────────── */
 main.container {
   padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
+  /*padding-bottom: 2.5rem;*/
 }
 
 /* ── Landing page ─────────────────────────────────────────────────── */
