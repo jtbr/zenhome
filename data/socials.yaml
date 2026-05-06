@@ -9,10 +9,10 @@
 - name: Twitter
   icon: ri-twitter-x-line
   url:  "https://twitter.com/yourusername"
-- name: Reddit
-  icon: ri-reddit-line
-  url:  "https://www.reddit.com/user/yourusername"
 # Uncomment as needed:
+# - name: Reddit
+#   icon: ri-reddit-line
+#   url:  "https://www.reddit.com/user/yourusername"
 # - { name: Bluesky,   icon: ri-bluesky-line,          url: "https://bsky.app/profile/yourusername" }
 # - { name: Mastodon,  icon: ri-mastodon-line,          url: "https://mastodon.social/@yourusername" }
 # - { name: Instagram, icon: ri-instagram-line,         url: "https://instagram.com/yourusername" }
