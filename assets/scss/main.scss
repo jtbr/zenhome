@@ -163,7 +163,7 @@ main.container {
   &-name {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: clamp(3rem, 8vw, 5rem);
+    font-size: clamp(3rem, 8vw, 4rem);
     line-height: 1;
     letter-spacing: -0.02em;
     margin: 0 0 0.4rem;
@@ -176,19 +176,25 @@ main.container {
     margin: 0 0 2rem;
   }
 
-  &-bio,
-  &-background {
-    font-size: 1.05rem;
-    line-height: 1.7;
-    margin-bottom: 0.85rem;
-
-    p { margin: 0 0 0.85rem; }
-  }
-
-  &-availability {
+  &-body {
     margin-top: 1.75rem;
-    font-size: 1.05rem;
-  }
 
-  &-contact { font-size: 1.05rem; }
+    p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 0.85rem;
+    }
+
+    /* Section labels — use ## in _index.md */
+    h2 {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--muted);
+      margin: 2.5rem 0 0.75rem;
+      line-height: 1;
+    }
+  }
 }

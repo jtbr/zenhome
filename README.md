@@ -95,11 +95,9 @@ All settings live in `hugo.toml`. Minimum to fill in before launch:
 | `title` | Your name |
 | `params.tagline` | One-line professional tagline |
 | `params.description` | 1–2 sentences for SEO / OG tags |
-| `params.author.name` | Displayed on landing page and header |
-| `params.author.email` | Contact address |
-| `params.author.bio` | 2–3 sentence synopsis |
-| `params.author.background` | 1–2 sentence background |
-| `params.author.availability` | Short availability statement |
+| `params.author.name` | Displayed in nav, homepage `<h1>`, and schema.org markup |
+| `params.author.email` | Used in schema.org markup; include in `content/_index.md` if you want it on the page |
+| Landing page body | Written as markdown in `content/_index.md`; use `##` for section labels (Background, Availability, etc.) |
 
 ### Enabling sections
 
@@ -223,7 +221,7 @@ Copy the output into `_code.scss`, replacing the existing token blocks. Availabl
 
 ---
 
-## Cloudflare Pages deployment
+## Cloudflare Pages deployment (recommended)
 
 1. Push your site repo (with the theme submodule) to a **private** GitHub repo.
 2. Cloudflare Pages → Create project → Connect to Git → select the repo.
@@ -238,6 +236,98 @@ Copy the output into `_code.scss`, replacing the existing token blocks. Availabl
 7. Web Analytics: enable in Cloudflare dashboard → paste the token into `params.cloudflare_analytics_token`.
 
 Branch preview deploys are created automatically for every non-`main` push.
+
+---
+
+## GitHub Pages deployment
+
+Hugo requires the extended binary, which GitHub Actions can install directly.
+
+### 1. Enable GitHub Pages
+
+In your site repo: **Settings → Pages → Source** → select **GitHub Actions**.
+
+### 2. Add the workflow
+
+A custom deployment will be necessary. Create `.github/workflows/deploy.yml`:
+
+```yaml
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      HUGO_VERSION: 0.145.0   # keep in sync with your local version
+    steps:
+      - name: Install Hugo (extended)
+        run: |
+          wget -O ${{ runner.temp }}/hugo.deb \
+            https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb
+          sudo dpkg -i ${{ runner.temp }}/hugo.deb
+
+      - name: Checkout (with submodules)
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Configure Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Build
+        run: hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./public
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
+```
+
+The `configure-pages` action automatically sets the correct `baseURL` — for a user/org site (`username.github.io`) that is `https://username.github.io/`, for a project site (`username.github.io/repo`) it includes the path prefix.
+
+### 3. Disable relativeURLs
+
+The example `hugo.toml` has `relativeURLs = true`, which breaks project sites (where the site lives at a sub-path). Remove or comment it out:
+
+```toml
+# relativeURLs = true   # remove this for GitHub Pages
+```
+
+### 4. Custom domain (optional)
+
+Add a `CNAME` file to your site's `static/` directory containing just your domain:
+
+```
+yourdomain.com
+```
+
+Then in **Settings → Pages → Custom domain**, enter the same domain. GitHub creates the DNS verification record; point your domain's DNS to GitHub's servers per [their docs](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site).
 
 ---
 

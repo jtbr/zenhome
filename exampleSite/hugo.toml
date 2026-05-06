@@ -20,32 +20,17 @@ enableGitInfo = false
   notes    = "/notes/:slug/"
 
 [params]
-  tagline     = "TODO: short tagline (e.g., ML/AI Consultant)"
-  description = "TODO: 1-2 sentence professional description for SEO and OG tags."
-  cloudflare_analytics_token = ""  # paste token from Cloudflare Web Analytics dashboard
-
   # Optional: override the name shown in the nav bar and on the homepage h1.
-  # Both default to params.author.name when not set.
   header_title = ""   # e.g. a short monogram (defaults to params.author.name)
   home_title   = "TODO: title"   # e.g. "Firstname M.I. Lastname" for a longer display name
+
+  tagline     = "TODO: short tagline (e.g., Space Explorer)"
+  description = "TODO: 1-2 sentence professional description for SEO and OG tags."
+  cloudflare_analytics_token = ""  # paste token from Cloudflare Web Analytics dashboard
 
   # Optional copyright or other notice shown at the bottom-left of the footer.
   # When absent the social links are centered instead.
   copyright = ""  # e.g. "© 2026 Your Name"
-
-  # Font families loaded from Google Fonts. Change the name AND update the
-  # corresponding *_weights value to match what that font supports on Google Fonts.
-  # See: https://fonts.google.com — use the "CSS2 API" weight spec shown there.
-  [params.fonts]
-    display          = "Cormorant Garamond"
-    display_weights  = "ital,wght@0,500;0,700;1,500"
-    display_fallback = "Georgia, 'Times New Roman', serif"
-    body             = "Raleway"
-    body_weights     = "wght@300;400;600;700"
-    body_fallback    = "-apple-system, system-ui, sans-serif"
-    mono             = "JetBrains Mono"
-    mono_weights     = "wght@400;600"
-    mono_fallback    = "'SF Mono', Menlo, Consolas, monospace"
 
   [params.author]
     name         = "TODO Your Name"
@@ -72,6 +57,21 @@ enableGitInfo = false
     emit_metadata    = "0"
     input_position   = "bottom"
     theme            = "preferred_color_scheme"
+
+# Font families loaded from Google Fonts. Change the name AND update the
+  # corresponding *_weights value to match what that font supports on Google Fonts.
+  # See: https://fonts.google.com — use the "CSS2 API" weight spec shown there.
+  [params.fonts]
+    display          = "Cormorant Garamond"
+    display_weights  = "ital,wght@0,500;0,700;1,500"
+    display_fallback = "Georgia, 'Times New Roman', serif"
+    body             = "Raleway"
+    body_weights     = "wght@300;400;600;700"
+    body_fallback    = "-apple-system, system-ui, sans-serif"
+    mono             = "JetBrains Mono"
+    mono_weights     = "wght@400;600"
+    mono_fallback    = "'SF Mono', Menlo, Consolas, monospace"
+
 
 [markup]
   [markup.goldmark.renderer]

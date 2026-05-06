@@ -1,23 +1,10 @@
 {{ define "main" }}
 <section class="landing">
-  <h1 class="landing-name">{{ .Site.Params.home_title }}</h1>
-  <p class="landing-tagline">{{ .Site.Params.tagline }}</p>
+  <h1 class="landing-name">{{ .Site.Params.home_title | default .Site.Params.author.name | default .Site.Title }}</h1>
+  {{ with .Site.Params.tagline }}<p class="landing-tagline">{{ . }}</p>{{ end }}
 
-  <div class="landing-bio">
-    {{ .Site.Params.author.bio | markdownify }}
-  </div>
-
-  {{ with .Site.Params.author.background }}
-  <div class="landing-background">
-    {{ . | markdownify }}
-  </div>
+  {{ with .Content }}
+  <div class="landing-body">{{ . }}</div>
   {{ end }}
-
-  <p class="landing-availability"><strong>{{ .Site.Params.author.availability }}</strong></p>
-  <p class="landing-contact">
-    Reach me at <a href="mailto:{{ .Site.Params.author.email }}">{{ .Site.Params.author.email }}</a>.
-  </p>
-
-  {{ .Content }}
 </section>
 {{ end }}
