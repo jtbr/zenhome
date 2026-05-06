@@ -3,6 +3,9 @@
 
 {{ if eq $kind "post" }}
 <div class="card post-row{{ if not $item.Params.image }} no-image{{ end }}">
+  {{ if $item.Params.image }}
+  <div class="card-image" style="background-image: url('{{ $item.Params.image | relURL }}');"></div>
+  {{ end }}
   <div class="card-body">
     <div class="card-title"><a class="card-link" href="{{ $item.RelPermalink }}">{{ $item.Title }}<i class="ri-arrow-right-long-line card-title-arrow" aria-hidden="true"></i></a></div>
     <div class="card-excerpt">
@@ -16,9 +19,6 @@
     </div>
     {{ end }}
   </div>
-  {{ if $item.Params.image }}
-  <div class="card-image" style="background-image: url('{{ $item.Params.image | relURL }}');"></div>
-  {{ end }}
 </div>
 
 {{ else if eq $kind "thing" }}

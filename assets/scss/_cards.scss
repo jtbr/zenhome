@@ -120,7 +120,8 @@
     }
 
     .card-image {
-      width: 208px; /* ratio 4:3 */
+      order: 1; /* image is first in DOM for float; order moves it right in flex */
+      width: 208px;
       aspect-ratio: unset;
       flex-shrink: 0;
       border-radius: 4px;
@@ -146,6 +147,29 @@
     .card-meta {
       margin-top: auto;
       padding-top: 0.75rem;
+    }
+
+    @media (max-width: 850px) {
+      display: flow-root; /* switch to block, containing the image float */
+      padding: 1.1rem 1.25rem;
+
+      .card-image {
+        float: right;
+        width: 33%;
+        aspect-ratio: 4 / 3;
+        margin: 0 0 0.5rem 1rem;
+      }
+
+      .card-body { display: block; padding: 0; }
+
+      .card-meta {
+        clear: both; /* always below the image regardless of content height */
+        padding-top: 0.5rem;
+      }
+
+      @media (max-width: 620px) {
+        .card-image { aspect-ratio: 1; }
+      }
     }
   }
 }

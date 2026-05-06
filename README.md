@@ -16,7 +16,6 @@ zenhome/                   ← theme repo (this repo)
     hugo.toml               Site config (theme = "zenhome", themesDir = "../..")
     content/                Sample posts, things, and notes
     static/                 Sample images
-    data/socials.yaml       Overrides the theme default
 ```
 
 The theme and the demo site are developed together in one repo. To preview the demo:
