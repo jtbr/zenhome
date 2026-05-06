@@ -2,8 +2,7 @@
 /* Replaces Bootstrap 5 CDN for the ~8 classes actually used. */
 
 .container {
-  width: 100%;
-  max-width: 815px;
+  width: #{"clamp(min(640px + 3em, 100%), calc(100% - 9rem), 820px)"};
   margin-right: auto;
   margin-left: auto;
   padding-right: 1.5rem;

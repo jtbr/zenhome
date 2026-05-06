@@ -7,12 +7,16 @@ document.addEventListener('DOMContentLoaded', () => {
     block.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      /* Collect from .cl spans to naturally skip hidden .ln number spans.
+      /* Gist embeds use .js-file-line table cells.
+       * Hugo highlights use .cl spans to naturally skip hidden .ln number spans.
        * Fall back to <code> text for blocks rendered without line wrappers. */
-      const lines = block.querySelectorAll('.cl');
-      const text = lines.length
-        ? [...lines].map(l => l.textContent).join('')
-        : (block.querySelector('code') ?? block.querySelector('pre')).textContent;
+      const gistLines = block.querySelectorAll('.js-file-line');
+      const clLines   = block.querySelectorAll('.cl');
+      const text = gistLines.length
+        ? [...gistLines].map(l => l.textContent).join('\n')
+        : clLines.length
+          ? [...clLines].map(l => l.textContent).join('')
+          : (block.querySelector('code') ?? block.querySelector('pre')).textContent;
 
       await copyToClipboard(text);
       btn.innerHTML = '<i class="ri-check-line"></i>';

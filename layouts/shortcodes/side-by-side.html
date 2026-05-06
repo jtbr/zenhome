@@ -1,4 +1,5 @@
+{{- $parts := split .Inner "|||" -}}
 <div class="side-by-side">
-  <div>{{ .Get "left" | markdownify }}</div>
-  <div>{{ .Get "right" | markdownify }}</div>
+  <div>{{ if gt (len $parts) 1 }}{{ index $parts 0 | markdownify }}{{ else }}{{ .Get "left" | markdownify }}{{ end }}</div>
+  <div>{{ if gt (len $parts) 1 }}{{ index $parts 1 | markdownify }}{{ else }}{{ .Get "right" | markdownify }}{{ end }}</div>
 </div>

@@ -29,6 +29,8 @@ $$
 
 ## Code block
 
+Code blocks and gists support a "copy all" feature using the button that appears on hover.
+
 ```python
 def greet(name: str) -> str:
     return f"Hello, {name}"
@@ -47,14 +49,41 @@ If you don't specify the language, there's no code box specifically:
 Just some monspaced, formatted text, not styled as code
 ```
 
+## Inline code
+
+You can reference `variable_names`, `function_calls()`, and `Class.attributes` inline.
+
+## Gist
+
+To choose a specific file in a multi-file gist, use the `file` parameter, or otherwise it will show them all. The height may be limited using the height parameter and any css unit (px, em, rem, vh, etc).
+
+{{< gist user="octocat" id="6cad326836d38bd3a7ae" >}}
+
+
 ## Side-by-side
 
-{{< side-by-side left="**Left column** with some markdown and `inline code`." right="**Right column** also markdown. Can include [links](#)." >}}
+You can also display two columns side by side. Here's a short form:
+
+{{< side-by-side left="**Left column** with some markdown in short form." right="**Right column** also **markdown**" />}}
+
+And here is the form suitable for longer segments:
+
+{{< side-by-side  >}}
+**Left column** markdown with an image ![Bayesian A/B calculator](/img/things/ab.jpg)
+
+|||
+
+**Right column** is also markdown. Can include most any styling you might want, including:
+ - [links](#), and
+ - `inline code`, among other things
+{{< /side-by-side  >}}
 
 ## Evidence
 
 {{< evidence >}}
 A claim worth foregrounding. Something you want to stand out from surrounding prose — a key finding, a striking quote, or a result worth pausing on.
+
+Did you notice that headers provide an anchor link directly to that section?
 {{< /evidence >}}
 
 ## Breaker
@@ -64,6 +93,20 @@ Text above the breaker.
 {{< breaker >}}
 
 Text below the breaker.
+
+## Blockquote (Markdown)
+
+> A standard Markdown blockquote, rendered with the post's serif typography and a left rule.
+
+
+## Table
+
+| Model       | Params | Context | Notes          |
+|-------------|--------|---------|----------------|
+| GPT-4o      | —      | 128k    | Multimodal     |
+| Claude 3.5  | —      | 200k    | Strong at code |
+| Llama 3.1   | 405B   | 128k    | Open weights   |
+
 
 ## Figure (image with caption / credit)
 
@@ -77,7 +120,7 @@ Figure with caption only (no credit):
 
 should work with any video provider, using their embed-style link
 
-{{< video src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ" title="Example video" caption="Rick Astley — *Never Gonna Give You Up* (1987). A reliable embed test." >}}
+{{< video src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ" title="Example video" caption="Rick Astley — *Never Gonna Give You Up* (1987). A youtube embedded video" >}}
 
 {{< video src="https://player.vimeo.com/video/1138248349?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"  title="A bear remmbers" caption="Zhang + Knight *A bear remembers* (2025). A vimeo-based video." >}}
 
@@ -93,23 +136,3 @@ should work with any video provider, using their embed-style link
 ## Mastodon
 
 {{< mastodon-card url="https://mastodon.social/@bagder/116526581698174258" >}}
-
-## Gist
-
-{{< gist user="octocat" id="6cad326836d38bd3a7ae" >}}
-
-## Table
-
-| Model       | Params | Context | Notes          |
-|-------------|--------|---------|----------------|
-| GPT-4o      | —      | 128k    | Multimodal     |
-| Claude 3.5  | —      | 200k    | Strong at code |
-| Llama 3.1   | 405B   | 128k    | Open weights   |
-
-## Blockquote (Markdown)
-
-> A standard Markdown blockquote, rendered with the post's serif typography and a left rule.
-
-## Inline code
-
-You can reference `variable_names`, `function_calls()`, and `Class.attributes` inline.

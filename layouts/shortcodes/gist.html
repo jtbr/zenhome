@@ -1,5 +1,7 @@
 {{- $height := .Get "height" | default "" -}}
+{{- $file   := .Get "file" | default "" -}}
+{{- $src    := printf "https://gist.github.com/%s/%s.js%s" (.Get "user") (.Get "id") (cond (ne $file "") (printf "?file=%s" $file) "") -}}
 <div class="gist-embed"{{ with $height }} style="--gist-height: {{ . }}"{{ end }}>
-  <script src="https://gist.github.com/{{ .Get "user" }}/{{ .Get "id" }}.js"></script>
+  <script src="{{ $src }}"></script>
   <noscript><a href="https://gist.github.com/{{ .Get "user" }}/{{ .Get "id" }}">View this gist on GitHub</a></noscript>
 </div>
