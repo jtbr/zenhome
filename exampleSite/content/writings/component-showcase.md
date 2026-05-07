@@ -110,11 +110,24 @@ Text below the breaker.
 
 ## Figure (image with caption / credit)
 
-{{< figure src="/img/things/ab.jpg" alt="Bayesian A/B calculator output" caption="Posterior distribution after 10 000 exposures per arm." credit="Example credit" crediturl="https://example.com" >}}
+{{< figure src="/img/things/ab.jpg" alt="What an amazing picture" caption="What an amazing picture" credit="Example credit" crediturl="https://example.com" >}}
 
 Figure with caption only (no credit):
 
-{{< figure src="/img/things/csvpeek.jpg" alt="csvpeek terminal output" caption="Column profile for a 2 GB CSV — one pass, no memory pressure." >}}
+{{< figure src="/img/things/csvpeek.jpg" alt="terminal output" caption="sample terminal output" >}}
+
+## Collapsible sections
+
+Details sections work out of the box
+
+<details>
+<summary>Click to expand</summary>
+
+### a subsection
+
+**Markdown** works inside the details, but not inside the summary. To style that, use html tags, or add styling or classes to the summary tag itself
+
+</details>
 
 ## Video
 

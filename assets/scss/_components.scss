@@ -216,6 +216,41 @@
   border-top: 1px solid var(--rule);
 }
 
+/* ── Collapsible details ─────────────────────────────────────────── */
+details {
+  /* border: 1px solid var(--rule); */
+  border-radius: 6px;
+  background: var(--code-bg);
+  padding: 0.75rem 1rem;
+  /* margin: 1.5rem 0; */
+
+  summary {
+    cursor: pointer;
+    list-style: none;
+    font-weight: 600;
+    color: var(--fg);
+    user-select: none;
+
+    &::before {
+      content: "❯"; /* ▶ */
+      display: inline-block;
+      margin-right: 0.5rem;
+      font-size: 0.65rem;
+      transition: transform 0.15s ease;
+      color: var(--muted);
+    }
+
+    &::-webkit-details-marker { display: none; }
+  }
+
+  &[open] > summary::before {
+    transform: rotate(90deg);
+  }
+
+  > *:not(summary):first-of-type { margin-top: 0.75rem; }
+  > *:last-child { margin-bottom: 0; }
+}
+
 /* ── 404 error page ──────────────────────────────────────────────── */
 .page-error {
   padding-top: 1rem;
