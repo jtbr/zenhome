@@ -7,7 +7,7 @@
 <ul class="notes-list list-unstyled">
   {{ range .Pages.ByDate.Reverse }}
   <li>
-    <h3><a href="{{ .RelPermalink }}">{{ .Title }}<i class="ri-arrow-right-long-line notes-title-arrow" aria-hidden="true"></i></a></h3>
+    <h3><a href="{{ .RelPermalink }}">{{ .Title }}<i class="ri-arrow-right-long-fill notes-title-arrow" aria-hidden="true"></i></a></h3>
     {{ with or .Params.tagline .Description (.Summary | plainify | truncate 200) }}
     <p class="note-subtitle">{{ . }}</p>
     {{ end }}

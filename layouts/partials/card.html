@@ -7,7 +7,7 @@
   <div class="card-image" style="background-image: url('{{ $item.Params.image | relURL }}');"></div>
   {{ end }}
   <div class="card-body">
-    <div class="card-title"><a class="card-link" href="{{ $item.RelPermalink }}">{{ $item.Title }}<i class="ri-arrow-right-long-line card-title-arrow" aria-hidden="true"></i></a></div>
+    <div class="card-title"><a class="card-link" href="{{ $item.RelPermalink }}">{{ $item.Title }}<i class="ri-arrow-right-long-fill card-title-arrow" aria-hidden="true"></i></a></div>
     <div class="card-excerpt">
       {{- or $item.Params.tagline ($item.Summary | plainify | truncate 280) -}}
     </div>

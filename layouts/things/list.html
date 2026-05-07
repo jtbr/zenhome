@@ -59,14 +59,14 @@
       a.href = lnk.url || '#';
       a.target = '_blank';
       a.rel = 'noopener';
-      a.textContent = (lnk.label || 'Visit') + ' →';
+      a.innerHTML =  (lnk.label || 'Visit') + '&nbsp;&nbsp;<i class="ri-arrow-right-long-fill"></i>';
       actionsEl.appendChild(a);
     });
     if (card.dataset.modalDetails) {
       var a = document.createElement('a');
       a.className = 'btn btn-outline-secondary';
       a.href = card.dataset.modalDetails;
-      a.textContent = 'Details →';
+      a.innerHTML = 'Details&nbsp;&nbsp;<i class="ri-arrow-right-long-fill"></i>';
       actionsEl.appendChild(a);
     }
 

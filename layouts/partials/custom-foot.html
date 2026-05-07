@@ -1,2 +1,3 @@
 {{- /* Override in your site's layouts/partials/custom-foot.html to inject custom scripts or HTML before </body>.
-e,g: include <script>something here</script> below this line. */ -}}
+For homepage-specific code, wrap it in: {{ if .IsHome }}...{{ end }}
+e.g: include <script>something here</script> below this line. */ -}}

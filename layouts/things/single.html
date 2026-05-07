@@ -14,12 +14,12 @@
       {{ with .Params.links }}
         {{ if or (not $.Date.IsZero) ($.GetTerms "tags") }}<span class="meta-sep">&#11049;</span>{{ end }}
         {{ range . }}
-          <a href="{{ .url }}" class="btn btn-sm btn-outline-secondary" rel="noopener">{{ .label | default "View" }} →</a>
+          <a href="{{ .url }}" class="btn btn-sm btn-outline-secondary" rel="noopener">{{ .label | default "View" }}&nbsp;&nbsp;<i class="ri-arrow-right-long-fill"></i></a>
         {{ end }}
       {{ else }}
         {{ with $.Params.link }}
           {{ if or (not $.Date.IsZero) ($.GetTerms "tags") }}<span class="meta-sep">&#11049;</span>{{ end }}
-          <a href="{{ . }}" class="btn btn-sm btn-outline-secondary" rel="noopener">View →</a>
+          <a href="{{ . }}" class="btn btn-sm btn-outline-secondary" rel="noopener">View&nbsp;&nbsp;<i class="ri-arrow-right-long-fill"></i></a>
         {{ end }}
       {{ end }}
       <button class="share-btn" aria-label="Share this page"><i class="ri-share-2-line" aria-hidden="true"></i></button>
