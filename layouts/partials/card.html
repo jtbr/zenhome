@@ -39,14 +39,16 @@
 {{- end -}}
 {{- $modalBody := or $item.Params.description $item.Params.tagline ($item.Summary | plainify | truncate 400) -}}
 
+{{- $imageFit := $item.Params.image_fit | default "cover" -}}
 <div class="card{{ if not $item.Params.image }} no-image{{ end }}"
      data-modal-title="{{ $item.Title }}"
      data-modal-body="{{ $modalBody }}"
      {{ with $item.Params.image }}data-modal-image="{{ . | absURL }}"{{ end }}
+     {{ if ne $imageFit "cover" }}data-modal-image-fit="{{ $imageFit }}"{{ end }}
      data-modal-links="{{ $links | jsonify }}"
      {{ if $hasDetails }}data-modal-details="{{ $item.RelPermalink }}"{{ end }}>
   {{ if $item.Params.image }}
-  <div class="card-image" style="background-image: url('{{ $item.Params.image | relURL }}');"></div>
+  <div class="card-image{{ if eq $imageFit "contain" }} card-image--contain{{ end }}" style="background-image: url('{{ $item.Params.image | relURL }}');"></div>
   {{ end }}
   <div class="card-body">
     <div class="card-title">

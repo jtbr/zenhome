@@ -54,6 +54,11 @@
     background-size: cover;
     background-position: center;
     background-color: var(--code-bg);
+
+    &.card-image--contain {
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
   }
 
   .card-body {

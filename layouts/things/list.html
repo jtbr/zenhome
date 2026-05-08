@@ -45,6 +45,7 @@
 
     if (card.dataset.modalImage) {
       imgEl.src = card.dataset.modalImage;
+      imgEl.classList.toggle('modal-image--contain', card.dataset.modalImageFit === 'contain');
       imgEl.style.display = '';
     } else {
       imgEl.style.display = 'none';
