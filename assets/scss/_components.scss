@@ -271,12 +271,43 @@ details {
 
   &[aria-hidden="true"] { display: none; }
 
+  // Stage is the clipping boundary — overflow:hidden here clips at the inner
+  // padded area, not at the viewport edge, so zoom mode respects the same
+  // bounds as fill mode.
+  .lightbox-stage {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   img {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
     display: block;
-    cursor: zoom-out;
+    user-select: none;
+
+    &.can-zoom { cursor: zoom-in; }
+    &:not(.can-zoom) { cursor: zoom-out; }
+  }
+
+  // Zoom/pan mode: image at natural size, pannable within the stage bounds.
+  &.is-zoomed {
+    .lightbox-stage { touch-action: none; }
+
+    img {
+      max-width: none;
+      max-height: none;
+      width: auto;
+      height: auto;
+      flex-shrink: 0; // prevent flex from shrinking the image to the stage size
+      cursor: grab;
+
+      &.is-grabbing { cursor: grabbing; }
+    }
   }
 }
 
