@@ -6,7 +6,7 @@
  * We style the outer .highlight for the visual box and reset the inner
  * pre.chroma so it doesn't double-apply background/shadow.
  */
-.highlight {
+div.highlight {
   position: relative;
   background: var(--code-bg);
   border-radius: 7px;
@@ -14,6 +14,26 @@
   margin: 1.75rem 0.6rem;
   box-shadow: var(--shadow);
   overflow: hidden;   /* keep rounded corners on scroll */
+}
+
+/* preformatted text, not highlighted */
+:not(.highlight) pre {
+  background: var(--code-bg);
+  color: var(--code-fg);
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  padding: 0.35rem 0.25rem;
+  border-radius: 3px;
+}
+
+/* Inline code — not inside a styled, fenced block. */
+code:not(pre code) {
+  background: var(--code-bg);
+  color: var(--code-fg);
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  padding: 0.05rem 0.25rem;
+  border-radius: 3px;
 }
 
 .copy-btn {

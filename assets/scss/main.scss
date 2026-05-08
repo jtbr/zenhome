@@ -184,15 +184,18 @@ main.container {
     }
 
     /* Section labels — use ## in _index.md */
-    h2 {
+    h2,
+    .detail-h2 {
       font-family: var(--font-body);
       font-size: 0.78rem;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.09em;
       color: var(--muted);
-      margin: 2.5rem 0 0.75rem;
       line-height: 1;
+    }
+    h2 {
+      margin: 2.5rem 0 0.75rem;
     }
   }
 }

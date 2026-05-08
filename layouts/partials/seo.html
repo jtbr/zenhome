@@ -36,4 +36,17 @@
   "author": { "@id": "{{ $personID }}" }
 }
 </script>
+{{ else if and .IsPage (eq .Section "things") }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "{{ .Title }}",
+  "description": "{{ .Params.description | default .Params.tagline | default (.Summary | plainify) }}",
+  "url": "{{ .Permalink }}"{{ with .Params.image }},
+  "image": "{{ . | absURL }}"{{ end }}{{ if not .Date.IsZero }},
+  "datePublished": "{{ .Date.Format "2006-01-02" }}"{{ end }},
+  "author": { "@id": "{{ $personID }}" }
+}
+</script>
 {{ end }}

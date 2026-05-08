@@ -46,7 +46,13 @@ hugo server -D --disableFastRender
 If you don't specify the language, there's no code box specifically:
 
 ```
-Just some monspaced, formatted text, not styled as code
+Just some monospaced, formatted text, not styled as code,
+but which may span multiple lines.
+  ...,,,.
+   _   _
+ [ o   o ]
+     >
+   \___/
 ```
 
 ## Inline code

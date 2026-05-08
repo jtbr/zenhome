@@ -24,9 +24,9 @@
 <link rel="stylesheet" href="{{ $gfontsUrl }}">
 <style>
   :root {
-    --font-display: "{{ $df }}", {{ $dfall }};
-    --font-body:    "{{ $bf }}", {{ $bfall }};
-    --font-mono:    "{{ $mf }}", {{ $mfall }};
+    --font-display: {{ printf `"%s", %s` $df $dfall | safeCSS }};
+    --font-body:    {{ printf `"%s", %s` $bf $bfall | safeCSS }};
+    --font-mono:    {{ printf `"%s", %s` $mf $mfall | safeCSS }};
   }
 </style>
 
