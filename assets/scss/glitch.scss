@@ -53,32 +53,42 @@ $px2: 0;
 
 @keyframes glitch {
 
-  0%, 29% { text-shadow: none; }
+  0%, 13% { text-shadow: none; }               /* 1.4s quiet */
 
-  @include mini-glitch($r, $g, 0.7, 30, 40);
+  @include mini-glitch($r, $g, 0.7, 14, 18);
+  @include big-glitch($b, $g, 50, 19, 20);
 
-  @include big-glitch($b, $g, 50, 41, 42);
-  43%, 45% { text-shadow: none; }
-  @include mini-glitch($r, $g, 0.5, 46, 50);
-  @include mini-glitch($r, $b, 1, 51, 55);
+  21%, 24% { text-shadow: none; }
 
-  56%, 60% { text-shadow: none; }
+  @include mini-glitch($r, $g, 0.5, 25, 27);
+  @include mini-glitch($r, $b, 1, 28, 30);
 
-  @include big-glitch($r, $g, 30, 61, 62);
+  31%, 39% { text-shadow: none; }               /* 0.9s quiet */
 
-  @include mini-glitch($r, $b, 0.5, 63, 70);
+  @include big-glitch($r, $g, 30, 40, 41);
+  @include mini-glitch($r, $b, 0.5, 42, 46);
 
-  71%, 80% { text-shadow: none; }
+  47%, 55% { text-shadow: none; }               /* 0.9s quiet */
 
-  @include mini-glitch($g, $b, 0.5, 81, 84);
-  @include mini-glitch($b, $r, 0.5, 85, 90);
+  @include mini-glitch($g, $b, 0.5, 56, 58);
+  @include big-glitch($b, $r, 60, 59, 60);      /* large new glitch + immediate reversal */
+  @include big-glitch($r, $b, 25, 61, 62);
 
-  91%, 100% { text-shadow: none; }
+  @include mini-glitch($g, $r, 0.6, 63, 65);
+  @include mini-glitch($b, $g, 0.8, 66, 68);
+
+  69%, 81% { text-shadow: none; }               /* 1.3s quiet — longest gap */
+
+  @include mini-glitch($g, $b, 0.5, 82, 84);
+  @include big-glitch($r, $b, 20, 85, 86);
+  @include mini-glitch($b, $r, 0.5, 87, 89);
+
+  90%, 100% { text-shadow: none; }              /* 1.1s quiet */
 }
 
 .glitch {
   position: relative;
-  animation: glitch 5s steps(100) infinite;
+  animation: glitch 10s steps(100) infinite;
 
   @media (prefers-reduced-motion: reduce) {
     animation: none;
