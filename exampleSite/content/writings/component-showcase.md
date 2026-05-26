@@ -155,3 +155,10 @@ should work with any video provider, using their embed-style link
 ## Mastodon
 
 {{< mastodon-card url="https://mastodon.social/@bagder/116526581698174258" >}}
+
+## Emojis
+
+Using [github emojis](https://gist.github.com/rxaviers/7360908):
+:brain: :heart: :smile:
+
+You can also use plain unicode: ❤️ 💬 🚀

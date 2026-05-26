@@ -1,7 +1,13 @@
+{{ define "head-extra" }}
+  {{ $glitch := resources.Get "scss/glitch.scss" | toCSS | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $glitch.RelPermalink }}" integrity="{{ $glitch.Data.Integrity }}">
+{{ end }}
+
 {{ define "main" }}
 <section class="page-error">
   <h1>404</h1>
-  <p class="tagline">This page has gone missing.</p>
+  <h3 class="tagline">Minor Malfunction. This page has gone missing.</h2>
   <p><a href="{{ "/" | relURL }}"><i class="ri-arrow-left-long-fill"></i> Back home</a></p>
 </section>
+<script> document.getElementsByTagName('body')[0].classList.add('glitch'); </script>
 {{ end }}

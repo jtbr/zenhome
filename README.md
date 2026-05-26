@@ -1,6 +1,6 @@
 # zen home
 
-A minimal, text-centered Hugo theme for a personal professional site. Landing page, writings, useful things, and notes. Dark/light mode, KaTeX math, giscus comments (based on git discussions), configurable fonts, RSS, figure captions, gist, tweet and video embeds, and more.
+A minimal, text-centered Hugo theme for a personal professional site. Landing page, writings, useful things (cards mostly linking elsewhere), and notes (short writings). Dark/light mode, KaTeX math, giscus comments (based on git discussions), configurable fonts, sitemap, RSS, figure captions, gist, tweet/X, mastadon, bluesky, and video embeds, emojis, and more. Uses icons from https://remixicon.com/.
 
 ## Repository layout
 
@@ -337,4 +337,4 @@ Then in **Settings → Pages → Custom domain**, enter the same domain. GitHub 
 
 ## Attribution
 
-Typography and visual approach inspired by [Chalk](https://github.com/nielsenramon/chalk) (MIT) and [Pudhina Fresh](https://github.com/ritijjain/pudhina-fresh) (MIT).
+Typography and visual approach inspired by [Chalk](https://github.com/nielsenramon/chalk) (MIT) and [Pudhina Fresh](https://github.com/ritijjain/pudhina-fresh) (MIT) Jekyll templates.

@@ -181,6 +181,10 @@ main.container {
       font-size: 1.05rem;
       line-height: 1.7;
       margin-bottom: 0.85rem;
+
+      & strong {
+        font-weight: 500;
+      }
     }
 
     /* Section labels — use ## in _index.md */
