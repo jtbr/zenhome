@@ -52,21 +52,45 @@
   {{- $hue = mod (add (mul $h0 256) (add (mul $h1 16) $h2)) 360 -}}
 {{- end -}}
 {{- with $item.Params.image_text_hue }}{{ $hue = . }}{{ end -}}
-{{- $bg := $item.Params.image_text_bg | default "" -}}
+{{- $bgRaw := $item.Params.image_text_bg | default "" -}}
+{{- $bgMode := "plain" -}}
+{{- $bgValue := "" -}}
+{{- if and $bgRaw (ne $bgRaw "plain") -}}
+  {{- if eq $bgRaw "textured" -}}
+    {{- $bgMode = "textured" -}}
+  {{- else -}}
+    {{- $low := lower $bgRaw -}}
+    {{- $isPath := false -}}
+    {{- range slice ".jpg" ".jpeg" ".png" ".webp" ".avif" ".gif" ".svg" -}}
+      {{- if strings.HasSuffix $low . -}}{{- $isPath = true -}}{{- end -}}
+    {{- end -}}
+    {{- if or (strings.Contains $bgRaw "(") (strings.Contains $bgRaw ";") -}}
+      {{- $isPath = false -}}
+    {{- end -}}
+    {{- if $isPath -}}
+      {{- $bgMode = "image" -}}
+      {{- $bgValue = printf "url('%s') center/cover no-repeat" ($bgRaw | relURL) -}}
+    {{- else -}}
+      {{- $bgMode = "css" -}}
+      {{- $bgValue = $bgRaw -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
 {{- $hasGraphic := or $item.Params.image $text -}}
 <div class="card{{ if not $hasGraphic }} no-image{{ end }}"
      data-modal-title="{{ $item.Title }}"
      data-modal-body="{{ $modalBody }}"
      {{ with $item.Params.image }}data-modal-image="{{ . | absURL }}"{{ end }}
      {{ if ne $imageFit "cover" }}data-modal-image-fit="{{ $imageFit }}"{{ end }}
-     {{ with $text }}data-modal-graphic-text="{{ . }}" data-modal-graphic-hue="{{ $hue }}"{{ end }}
-     {{ with $bg }}data-modal-graphic-bg="{{ . }}"{{ end }}
+     {{ with $text }}data-modal-graphic-text="{{ . }}" data-modal-graphic-hue="{{ $hue }}" data-modal-graphic-bg-mode="{{ $bgMode }}"{{ end }}
+     {{ if and $text (or (eq $bgMode "image") (eq $bgMode "css")) }}data-modal-graphic-bg="{{ $bgValue }}"{{ end }}
      data-modal-links="{{ $links | jsonify }}"
      {{ if $hasDetails }}data-modal-details="{{ $item.RelPermalink }}"{{ end }}>
   {{ if $item.Params.image }}
   <div class="card-image{{ if eq $imageFit "contain" }} card-image--contain{{ end }}" style="background-image: url('{{ $item.Params.image | relURL }}');"></div>
   {{ else if $text }}
-  <div class="card-image card-image--generated" style="--card-hue: {{ $hue }};{{ with $bg }}background: {{ . | safeCSS }};{{ end }}">
+  <div class="card-image card-image--generated{{ if eq $bgMode "textured" }} card-image--textured{{ end }}"
+       style="--card-hue: {{ $hue }};{{ with $bgValue }}background: {{ . | safeCSS }};{{ end }}">
     <span class="card-image-text">{{ $text }}</span>
   </div>
   {{ end }}

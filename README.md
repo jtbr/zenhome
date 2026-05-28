@@ -162,7 +162,7 @@ Things are designed as a curated links page; clicking opens a modal for more det
 | `image` | Path relative to `static/` (e.g. `img/things/foo.jpg`). Shown on card and in the modal. |
 | `image_text` | Short phrase rendered as large text over a gradient, used as a generated graphic when no `image` is set. Shown on the card and in the modal. |
 | `image_text_hue` | Override the auto-derived hue (0–360) for the `image_text` gradient while keeping the theme's lightness/saturation constraints. |
-| `image_text_bg` | Raw CSS `background` value (e.g. `"linear-gradient(120deg, #e0c3fc, #8ec5fc)"`). Overrides the theme gradient entirely — you manage contrast and dark-mode behaviour. |
+| `image_text_bg` | Controls the background of the generated graphic. See modes below. |
 | `links` | Array of `{label, url}` — up to two buttons shown in the modal. |
 | `link` | Legacy single URL; treated as one "Visit" button. Use `links` instead. |
 
@@ -172,20 +172,37 @@ A details page is generated for every thing. A **Details →** button appears in
 
 When a thing has no `image`, set `image_text` to a short name or phrase and the theme generates a 16:9 graphic with large display text over a soft gradient. The gradient colour is derived deterministically from the text so the same string always produces the same hue across builds.
 
+The `image_text_bg` field controls the background using one of four modes:
+
+| Value | Effect |
+|---|---|
+| absent or `"plain"` | Hash-derived color/gradient (default) |
+| `"textured"` | Bundled plastered-wall texture; auto-darkens in dark mode |
+| An image path (e.g. `"img/foo.webp"`) | Wrapped as `url(...) center/cover` automatically |
+| Anything else | Treated as raw CSS `background` |
+
 ```yaml
-# Auto colour, derived from the text
+# Default: hash-derived color gradient
 image_text: "My Tool"
 
-# Manually pick the hue (0–360); gradient lightness/saturation stay on-brand
+# Bundled texture — light in light mode, darkened in dark mode
+image_text: "My Tool"
+image_text_bg: "textured"
+
+# Your own image, auto-wrapped as a cover background
+image_text: "My Tool"
+image_text_bg: "img/things/my-texture.webp"
+
+# Manually pick the hue; gradient lightness/saturation stay on-brand
 image_text: "My Tool"
 image_text_hue: 210
 
-# Full custom background (you handle dark-mode contrast)
+# Full custom CSS background (you handle dark-mode contrast)
 image_text: "My Tool"
 image_text_bg: "linear-gradient(135deg, #1a1a2e, #16213e)"
 ```
 
-The graphic uses `--font-graphic` (see Fonts above). Dark mode automatically adjusts the generated gradient to a darker tone.
+The graphic uses `--font-graphic` (see Fonts above). The `"plain"` gradient and `"textured"` modes both adapt automatically to dark mode.
 
 ---
 

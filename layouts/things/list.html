@@ -54,14 +54,18 @@
     } else if (card.dataset.modalGraphicText) {
       genTextEl.textContent = card.dataset.modalGraphicText;
       genEl.style.setProperty('--card-hue', card.dataset.modalGraphicHue || '0');
-      if (card.dataset.modalGraphicBg) {
-        genEl.style.background = card.dataset.modalGraphicBg;
+      var bgMode = card.dataset.modalGraphicBgMode || 'plain';
+      genEl.classList.toggle('modal-image--textured', bgMode === 'textured');
+      if (bgMode === 'image' || bgMode === 'css') {
+        genEl.style.background = card.dataset.modalGraphicBg || '';
       } else {
         genEl.style.removeProperty('background');
       }
       genEl.style.display = '';
       imgEl.style.display = 'none';
     } else {
+      genEl.classList.remove('modal-image--textured');
+      genEl.style.removeProperty('background');
       imgEl.style.display = 'none';
       genEl.style.display = 'none';
     }
@@ -100,6 +104,7 @@
     card.setAttribute('tabindex', '0');
     var fallback = card.querySelector('.card-link');
     if (fallback) {
+      fallback.removeAttribute('href');
       fallback.setAttribute('tabindex', '-1');
       fallback.setAttribute('aria-hidden', 'true');
     }

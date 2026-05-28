@@ -27,6 +27,7 @@
   border: 1px solid var(--rule);
   border-left: 3px solid var(--fg);
   border-radius: 6px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   color: inherit;
@@ -74,7 +75,7 @@
 
       .card-image-text {
         font-family: var(--font-graphic);
-        font-size: clamp(1.5rem, 8cqi, 2.25rem);
+        font-size: clamp(1.5rem, 9cqi, 2.5rem);
         font-weight: 700;
         text-align: center;
         padding: 0.75rem 1rem;
@@ -219,6 +220,33 @@
   .card-image-text {
     color: #{'hsl(var(--card-hue), 20%, 85%)'};
   }
+}
+
+.card .card-image.card-image--generated.card-image--textured {
+  position: relative;
+  background: none;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url('/img/textures/plastered.webp') center/cover no-repeat;
+    z-index: 0;
+  }
+
+  .card-image-text {
+    position: relative;
+    z-index: 1;
+    color: hsl(0, 0%, 15%);
+  }
+}
+
+[data-theme="dark"] .card .card-image.card-image--generated.card-image--textured {
+  &::before {
+      /* background: url('/img/textures/dark-rough.webp') center/cover no-repeat; */
+      filter: brightness(0.4) contrast(1.5);
+  }
+  .card-image-text { color: hsl(0, 0%, 92%); }
 }
 
 /* ── Tag pills ───────────────────────────────────────────────────── */
