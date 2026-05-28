@@ -172,14 +172,18 @@ A details page is generated for every thing. A **Details →** button appears in
 
 When a thing has no `image`, set `image_text` to a short name or phrase and the theme generates a 16:9 graphic with large display text over a soft gradient. The gradient colour is derived deterministically from the text so the same string always produces the same hue across builds.
 
-The `image_text_bg` field controls the background using one of four modes:
+The `image_text_bg` field controls the background. Available modes:
 
 | Value | Effect |
 |---|---|
 | absent or `"plain"` | Hash-derived color/gradient (default) |
 | `"textured"` | Bundled plastered-wall texture; auto-darkens in dark mode |
-| An image path (e.g. `"img/foo.webp"`) | Wrapped as `url(...) center/cover` automatically |
-| Anything else | Treated as raw CSS `background` |
+| `"dark <path>"` | Image used in both modes; light font forced |
+| `"light <path>"` | Image used in both modes; dark font forced |
+| `"dark <path> light <path>"` | Dark image + light font in dark mode; light image + dark font in light mode |
+| Anything else | Treated as raw CSS `background` (you handle dark-mode contrast) |
+
+Image paths are relative to `static/` and wrapped as `url(...) center/cover` automatically.
 
 ```yaml
 # Default: hash-derived color gradient
@@ -189,9 +193,13 @@ image_text: "My Tool"
 image_text: "My Tool"
 image_text_bg: "textured"
 
-# Your own image, auto-wrapped as a cover background
+# Single image, shown in both modes (dark image → light font)
 image_text: "My Tool"
-image_text_bg: "img/things/my-texture.webp"
+image_text_bg: "dark img/things/dark-bg.webp"
+
+# Separate images per theme
+image_text: "My Tool"
+image_text_bg: "dark img/things/dark-bg.webp light img/things/light-bg.webp"
 
 # Manually pick the hue; gradient lightness/saturation stay on-brand
 image_text: "My Tool"

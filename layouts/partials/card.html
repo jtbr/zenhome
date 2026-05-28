@@ -55,25 +55,61 @@
 {{- $bgRaw := $item.Params.image_text_bg | default "" -}}
 {{- $bgMode := "plain" -}}
 {{- $bgValue := "" -}}
+{{- $bgValueLight := "" -}}
+{{- $bgValueDark := "" -}}
+{{- $textColorLight := "" -}}
+{{- $textColorDark := "" -}}
 {{- if and $bgRaw (ne $bgRaw "plain") -}}
   {{- if eq $bgRaw "textured" -}}
     {{- $bgMode = "textured" -}}
-  {{- else -}}
-    {{- $low := lower $bgRaw -}}
-    {{- $isPath := false -}}
-    {{- range slice ".jpg" ".jpeg" ".png" ".webp" ".avif" ".gif" ".svg" -}}
-      {{- if strings.HasSuffix $low . -}}{{- $isPath = true -}}{{- end -}}
-    {{- end -}}
-    {{- if or (strings.Contains $bgRaw "(") (strings.Contains $bgRaw ";") -}}
-      {{- $isPath = false -}}
-    {{- end -}}
-    {{- if $isPath -}}
-      {{- $bgMode = "image" -}}
-      {{- $bgValue = printf "url('%s') center/cover no-repeat" ($bgRaw | relURL) -}}
+  {{- else if or (strings.HasPrefix $bgRaw "dark ") (strings.HasPrefix $bgRaw "light ") -}}
+    {{- $bgMode = "image-themed" -}}
+    {{- $firstKind := "" -}}
+    {{- $remainder := "" -}}
+    {{- if strings.HasPrefix $bgRaw "dark " -}}
+      {{- $firstKind = "dark" -}}
+      {{- $remainder = strings.TrimPrefix "dark " $bgRaw -}}
     {{- else -}}
-      {{- $bgMode = "css" -}}
-      {{- $bgValue = $bgRaw -}}
+      {{- $firstKind = "light" -}}
+      {{- $remainder = strings.TrimPrefix "light " $bgRaw -}}
     {{- end -}}
+    {{- $path1 := $remainder -}}
+    {{- $path2 := "" -}}
+    {{- if strings.Contains $remainder " light " -}}
+      {{- $parts := split $remainder " light " -}}
+      {{- $path1 = index $parts 0 -}}
+      {{- $path2 = index $parts 1 -}}
+    {{- else if strings.Contains $remainder " dark " -}}
+      {{- $parts := split $remainder " dark " -}}
+      {{- $path1 = index $parts 0 -}}
+      {{- $path2 = index $parts 1 -}}
+    {{- end -}}
+    {{- $url1 := printf "url('%s') center/cover no-repeat" ($path1 | relURL) -}}
+    {{- if $path2 -}}
+      {{- $url2 := printf "url('%s') center/cover no-repeat" ($path2 | relURL) -}}
+      {{- if eq $firstKind "dark" -}}
+        {{- $bgValueDark = $url1 -}}
+        {{- $bgValueLight = $url2 -}}
+      {{- else -}}
+        {{- $bgValueLight = $url1 -}}
+        {{- $bgValueDark = $url2 -}}
+      {{- end -}}
+      {{- $textColorLight = "hsl(0,0%,15%)" -}}
+      {{- $textColorDark = "hsl(0,0%,92%)" -}}
+    {{- else -}}
+      {{- $bgValueLight = $url1 -}}
+      {{- $bgValueDark = $url1 -}}
+      {{- if eq $firstKind "dark" -}}
+        {{- $textColorLight = "hsl(0,0%,92%)" -}}
+        {{- $textColorDark = "hsl(0,0%,92%)" -}}
+      {{- else -}}
+        {{- $textColorLight = "hsl(0,0%,15%)" -}}
+        {{- $textColorDark = "hsl(0,0%,15%)" -}}
+      {{- end -}}
+    {{- end -}}
+  {{- else -}}
+    {{- $bgMode = "css" -}}
+    {{- $bgValue = $bgRaw -}}
   {{- end -}}
 {{- end -}}
 {{- $hasGraphic := or $item.Params.image $text -}}
@@ -83,14 +119,15 @@
      {{ with $item.Params.image }}data-modal-image="{{ . | absURL }}"{{ end }}
      {{ if ne $imageFit "cover" }}data-modal-image-fit="{{ $imageFit }}"{{ end }}
      {{ with $text }}data-modal-graphic-text="{{ . }}" data-modal-graphic-hue="{{ $hue }}" data-modal-graphic-bg-mode="{{ $bgMode }}"{{ end }}
-     {{ if and $text (or (eq $bgMode "image") (eq $bgMode "css")) }}data-modal-graphic-bg="{{ $bgValue }}"{{ end }}
+     {{ if and $text (eq $bgMode "css") }}data-modal-graphic-bg="{{ $bgValue }}"{{ end }}
+     {{ if and $text (eq $bgMode "image-themed") }}data-modal-graphic-bg="{{ $bgValueLight }}" data-modal-graphic-bg-dark="{{ $bgValueDark }}" data-modal-graphic-text-light="{{ $textColorLight }}" data-modal-graphic-text-dark="{{ $textColorDark }}"{{ end }}
      data-modal-links="{{ $links | jsonify }}"
      {{ if $hasDetails }}data-modal-details="{{ $item.RelPermalink }}"{{ end }}>
   {{ if $item.Params.image }}
   <div class="card-image{{ if eq $imageFit "contain" }} card-image--contain{{ end }}" style="background-image: url('{{ $item.Params.image | relURL }}');"></div>
   {{ else if $text }}
-  <div class="card-image card-image--generated{{ if eq $bgMode "textured" }} card-image--textured{{ end }}"
-       style="--card-hue: {{ $hue }};{{ with $bgValue }}background: {{ . | safeCSS }};{{ end }}">
+  <div class="card-image card-image--generated{{ if eq $bgMode "textured" }} card-image--textured{{ end }}{{ if eq $bgMode "image-themed" }} card-image--image-themed{{ end }}"
+       style="--card-hue: {{ $hue }};{{ if eq $bgMode "image-themed" }}--themed-bg-light: {{ $bgValueLight | safeCSS }}; --themed-bg-dark: {{ $bgValueDark | safeCSS }}; --themed-text-light: {{ $textColorLight }}; --themed-text-dark: {{ $textColorDark }};{{ else }}{{ with $bgValue }}background: {{ . | safeCSS }};{{ end }}{{ end }}">
     <span class="card-image-text">{{ $text }}</span>
   </div>
   {{ end }}

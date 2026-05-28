@@ -56,10 +56,25 @@
       genEl.style.setProperty('--card-hue', card.dataset.modalGraphicHue || '0');
       var bgMode = card.dataset.modalGraphicBgMode || 'plain';
       genEl.classList.toggle('modal-image--textured', bgMode === 'textured');
-      if (bgMode === 'image' || bgMode === 'css') {
+      genEl.classList.toggle('modal-image--image-themed', bgMode === 'image-themed');
+      if (bgMode === 'css') {
         genEl.style.background = card.dataset.modalGraphicBg || '';
+        genEl.style.removeProperty('--themed-bg-light');
+        genEl.style.removeProperty('--themed-bg-dark');
+        genEl.style.removeProperty('--themed-text-light');
+        genEl.style.removeProperty('--themed-text-dark');
+      } else if (bgMode === 'image-themed') {
+        genEl.style.removeProperty('background');
+        genEl.style.setProperty('--themed-bg-light', card.dataset.modalGraphicBg || '');
+        genEl.style.setProperty('--themed-bg-dark', card.dataset.modalGraphicBgDark || card.dataset.modalGraphicBg || '');
+        genEl.style.setProperty('--themed-text-light', card.dataset.modalGraphicTextLight || 'hsl(0,0%,15%)');
+        genEl.style.setProperty('--themed-text-dark', card.dataset.modalGraphicTextDark || 'hsl(0,0%,92%)');
       } else {
         genEl.style.removeProperty('background');
+        genEl.style.removeProperty('--themed-bg-light');
+        genEl.style.removeProperty('--themed-bg-dark');
+        genEl.style.removeProperty('--themed-text-light');
+        genEl.style.removeProperty('--themed-text-dark');
       }
       genEl.style.display = '';
       imgEl.style.display = 'none';

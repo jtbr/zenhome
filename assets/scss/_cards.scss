@@ -210,6 +210,16 @@
 
 /* .card.no-image inherits the base left rule; no additional styles needed. */
 
+.card .card-image.card-image--generated.card-image--image-themed {
+  background: var(--themed-bg-light);
+  .card-image-text { color: var(--themed-text-light); }
+}
+
+[data-theme="dark"] .card .card-image.card-image--generated.card-image--image-themed {
+  background: var(--themed-bg-dark);
+  .card-image-text { color: var(--themed-text-dark); }
+}
+
 [data-theme="dark"] .card .card-image.card-image--generated {
   background: linear-gradient(
     135deg,
@@ -243,7 +253,7 @@
 
 [data-theme="dark"] .card .card-image.card-image--generated.card-image--textured {
   &::before {
-      /* background: url('/img/textures/dark-rough.webp') center/cover no-repeat; */
+      /* background: url('/img/textures/dark-foliage.webp') center/cover no-repeat; */
       filter: brightness(0.4) contrast(1.5);
   }
   .card-image-text { color: hsl(0, 0%, 92%); }
