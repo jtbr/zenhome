@@ -9,7 +9,7 @@
   <div class="card-body">
     <div class="card-title"><a class="card-link" href="{{ $item.RelPermalink }}">{{ $item.Title }}<i class="ri-arrow-right-long-fill card-title-arrow" aria-hidden="true"></i></a></div>
     <div class="card-excerpt">
-      {{- or $item.Params.tagline ($item.Summary | plainify | truncate 280) -}}
+      {{- or $item.Params.tagline ($item.Summary | plainify | htmlUnescape | truncate 280) -}}
     </div>
     {{ if or (not $item.Date.IsZero) ($item.GetTerms "tags") }}
     <div class="card-meta">
@@ -37,7 +37,7 @@
 {{- else if gt (len $links) 0 -}}
   {{- $fallback = (index $links 0).url -}}
 {{- end -}}
-{{- $modalBody := or $item.Params.description $item.Params.tagline ($item.Summary | plainify | truncate 400) -}}
+{{- $modalBody := or $item.Params.description $item.Params.tagline ($item.Summary | plainify | htmlUnescape | truncate 400) -}}
 
 {{- $imageFit := $item.Params.image_fit | default "cover" -}}
 {{- $text := $item.Params.image_text | default "" -}}
@@ -136,7 +136,7 @@
       {{- if $fallback -}}<a class="card-link" href="{{ $fallback }}">{{ $item.Title }}</a>{{- else -}}{{ $item.Title }}{{- end -}}
     </div>
     <div class="card-excerpt">
-      {{- or $item.Params.tagline ($item.Summary | plainify | truncate 240) -}}
+      {{- or $item.Params.tagline ($item.Summary | plainify | htmlUnescape | truncate 240) -}}
     </div>
     {{ if or (not $item.Date.IsZero) ($item.GetTerms "tags") }}
     <div class="card-meta">
@@ -153,7 +153,7 @@
   <div class="card-body">
     <div class="card-title"><a class="card-link" href="{{ $item.RelPermalink }}">{{ $item.Title }}</a></div>
     <div class="card-excerpt">
-      {{- or $item.Params.tagline ($item.Summary | plainify | truncate 180) -}}
+      {{- or $item.Params.tagline ($item.Summary | plainify | htmlUnescape | truncate 180) -}}
     </div>
     {{ if or (not $item.Date.IsZero) ($item.GetTerms "tags") }}
     <div class="card-meta">
@@ -169,7 +169,7 @@
   <div class="card-body">
     <div class="card-title"><a class="card-link" href="{{ $item.RelPermalink }}">{{ $item.Title }}</a></div>
     <div class="card-excerpt">
-      {{- or $item.Params.tagline ($item.Summary | plainify | truncate 240) -}}
+      {{- or $item.Params.tagline ($item.Summary | plainify | htmlUnescape | truncate 240) -}}
     </div>
     {{ if or (not $item.Date.IsZero) ($item.GetTerms "tags") }}
     <div class="card-meta">
