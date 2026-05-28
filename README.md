@@ -124,6 +124,10 @@ Change the Google Fonts loaded and used sitewide:
   mono             = "JetBrains Mono"               # code blocks
   mono_weights     = "wght@400;600"
   mono_fallback    = "'SF Mono', Menlo, Consolas, monospace"
+  # Optional: distinct font for image_text card graphics (falls back to display font)
+  # graphic         = "Bebas Neue"
+  # graphic_weights = "wght@400"
+  # graphic_fallback = "Impact, sans-serif"
 ```
 
 `*_weights` is the Google Fonts CSS2 API weight spec — find the right value on [fonts.google.com](https://fonts.google.com). `*_fallback` is the system font stack shown during load or if Google Fonts is unavailable; update it if you switch font categories (e.g. swapping `display` to a sans-serif means `Georgia, serif` is the wrong fallback).
@@ -155,11 +159,33 @@ Things are designed as a curated links page; clicking opens a modal for more det
 | `weight` | Sort order on the listing page — lower appears first. Falls back to date then title. |
 | `tagline` | Short blurb shown on the card and the detail page header. |
 | `description` | Longer text shown in the modal (falls back to `tagline` if absent). |
-| `image` | Path relative to `static/` (e.g. `img/things/foo.jpg`). Shown on card and larger in modal. |
+| `image` | Path relative to `static/` (e.g. `img/things/foo.jpg`). Shown on card and in the modal. |
+| `image_text` | Short phrase rendered as large text over a gradient, used as a generated graphic when no `image` is set. Shown on the card and in the modal. |
+| `image_text_hue` | Override the auto-derived hue (0–360) for the `image_text` gradient while keeping the theme's lightness/saturation constraints. |
+| `image_text_bg` | Raw CSS `background` value (e.g. `"linear-gradient(120deg, #e0c3fc, #8ec5fc)"`). Overrides the theme gradient entirely — you manage contrast and dark-mode behaviour. |
 | `links` | Array of `{label, url}` — up to two buttons shown in the modal. |
 | `link` | Legacy single URL; treated as one "Visit" button. Use `links` instead. |
 
-A details page is generated for every thing. A **Details →** button appears in the modal only when the markdown body is non-empty (`WordCount > 0`); the card's noscript fallback link also points there in that case, or to the first link otherwise.Cards with a `link:` open a modal; cards without navigate to their own page.
+A details page is generated for every thing. A **Details →** button appears in the modal only when the markdown body is non-empty (`WordCount > 0`); the card's noscript fallback link also points there in that case, or to the first link otherwise.
+
+#### Generated graphics (`image_text`)
+
+When a thing has no `image`, set `image_text` to a short name or phrase and the theme generates a 16:9 graphic with large display text over a soft gradient. The gradient colour is derived deterministically from the text so the same string always produces the same hue across builds.
+
+```yaml
+# Auto colour, derived from the text
+image_text: "My Tool"
+
+# Manually pick the hue (0–360); gradient lightness/saturation stay on-brand
+image_text: "My Tool"
+image_text_hue: 210
+
+# Full custom background (you handle dark-mode contrast)
+image_text: "My Tool"
+image_text_bg: "linear-gradient(135deg, #1a1a2e, #16213e)"
+```
+
+The graphic uses `--font-graphic` (see Fonts above). Dark mode automatically adjusts the generated gradient to a darker tone.
 
 ---
 

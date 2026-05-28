@@ -159,6 +159,7 @@
   width: 100%;
   padding: 1.75rem;
   position: relative;
+  container-type: inline-size;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
 
   .modal-close {
@@ -187,6 +188,35 @@
     &.modal-image--contain {
       aspect-ratio: auto;  // let the image's natural proportions determine height
       object-fit: contain;
+    }
+  }
+
+  .modal-image--generated {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(
+      135deg,
+      #{'hsl(var(--card-hue), 28%, 88%)'},
+      #{'hsl(calc(var(--card-hue) + 30), 35%, 80%)'}
+    );
+    overflow: hidden;
+    border-radius: 4px;
+    margin-bottom: 1.25rem;
+
+    .modal-image-text {
+      font-family: var(--font-graphic);
+      font-size: clamp(1.5rem, 7cqi, 2.5rem);
+      font-weight: 700;
+      text-align: center;
+      padding: 1rem 1.5rem;
+      line-height: 1.2;
+      color: #{'hsl(var(--card-hue), 25%, 22%)'};
+      word-break: break-word;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      overflow: hidden;
     }
   }
 
@@ -258,6 +288,9 @@ details {
 /* ── Lightbox ────────────────────────────────────────────────────── */
 .zoomable { cursor: zoom-in; }
 
+// Cursor for the close-by-clicking area (backdrop padding + stage empty space).
+$cursor-close: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='20'%20height='20'%3E%3Cline%20x1='4'%20y1='4'%20x2='16'%20y2='16'%20stroke='white'%20stroke-width='2'%20stroke-linecap='round'/%3E%3Cline%20x1='16'%20y1='4'%20x2='4'%20y2='16'%20stroke='white'%20stroke-width='2'%20stroke-linecap='round'/%3E%3C/svg%3E") 10 10, pointer;
+
 #lightbox {
   position: fixed;
   inset: 0;
@@ -266,7 +299,7 @@ details {
   align-items: center;
   justify-content: center;
   z-index: 2000;
-  cursor: zoom-out;
+  cursor: $cursor-close;
   padding: 1.5rem;
 
   &[aria-hidden="true"] { display: none; }
@@ -327,5 +360,17 @@ details {
     font-size: 1.2rem;
     color: var(--muted);
     margin: 0 0 1.5rem;
+  }
+}
+
+[data-theme="dark"] .modal-box .modal-image--generated {
+  background: linear-gradient(
+    135deg,
+    #{'hsl(var(--card-hue), 22%, 22%)'},
+    #{'hsl(calc(var(--card-hue) + 30), 28%, 18%)'}
+  );
+
+  .modal-image-text {
+    color: #{'hsl(var(--card-hue), 20%, 85%)'};
   }
 }

@@ -34,6 +34,9 @@ enableEmoji = true
   copyright = ""  # e.g. "© 2026 Your Name"
   socials_prefix = ""  # e.g. "Find me via:"
 
+  # favicon = "/icon.svg"  # Path relative to static/. Use SVG for modern browsers. (.png and .ico are also supported)
+                           # Also place favicon.ico (32×32) in static for legacy browsers/RSS readers (auto-discovered, no config needed).
+                           # Optional: apple-touch-icon.png (180×180) in static/ for iOS home screen shortcuts.
 
   [params.author]
     name         = "TODO Your Name"
@@ -62,10 +65,6 @@ enableEmoji = true
     input_position   = "bottom"
     theme            = "preferred_color_scheme"
 
-  # favicon = "/icon.svg"  # Path relative to static/. Use SVG for modern browsers. (.png and .ico are also supported)
-                           # Also place favicon.ico (32×32) in static for legacy browsers/RSS readers (auto-discovered, no config needed).
-                           # Optional: apple-touch-icon.png (180×180) in static/ for iOS home screen shortcuts.
-
   # Font families loaded from Google Fonts. Change the name AND update the
   # corresponding *_weights value to match what that font supports on Google Fonts.
   # See: https://fonts.google.com — use the "CSS2 API" weight spec shown there.
@@ -79,6 +78,11 @@ enableEmoji = true
     mono             = "Roboto Mono"
     mono_weights     = "wght@400;600"
     mono_fallback    = "'DejaVu Sans Mono', Menlo, Consolas, monospace"
+    # Optional: a distinct font for image_text card graphics. Falls back to
+    # the display font when unset. Add graphic_weights and graphic_fallback too.
+    # graphic        = "Bebas Neue"
+    # graphic_weights = "wght@400"
+    # graphic_fallback = "Impact, sans-serif"
 
 [markup]
   [markup.goldmark.renderer]

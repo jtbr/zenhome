@@ -22,6 +22,7 @@
 /* ── Card ────────────────────────────────────────────────────────── */
 .card {
   position: relative;
+  container-type: inline-size;
   background: var(--card-bg);
   border: 1px solid var(--rule);
   border-left: 3px solid var(--fg);
@@ -58,6 +59,33 @@
     &.card-image--contain {
       background-size: contain;
       background-repeat: no-repeat;
+    }
+
+    &.card-image--generated {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(
+        135deg,
+        #{'hsl(var(--card-hue), 28%, 88%)'},
+        #{'hsl(calc(var(--card-hue) + 30), 35%, 80%)'}
+      );
+      overflow: hidden;
+
+      .card-image-text {
+        font-family: var(--font-graphic);
+        font-size: clamp(1.5rem, 8cqi, 2.25rem);
+        font-weight: 700;
+        text-align: center;
+        padding: 0.75rem 1rem;
+        line-height: 1.2;
+        color: #{'hsl(var(--card-hue), 25%, 22%)'};
+        word-break: break-word;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+      }
     }
   }
 
@@ -180,6 +208,18 @@
 }
 
 /* .card.no-image inherits the base left rule; no additional styles needed. */
+
+[data-theme="dark"] .card .card-image.card-image--generated {
+  background: linear-gradient(
+    135deg,
+    #{'hsl(var(--card-hue), 22%, 22%)'},
+    #{'hsl(calc(var(--card-hue) + 30), 28%, 18%)'}
+  );
+
+  .card-image-text {
+    color: #{'hsl(var(--card-hue), 20%, 85%)'};
+  }
+}
 
 /* ── Tag pills ───────────────────────────────────────────────────── */
 .tag {

@@ -22,6 +22,7 @@
   <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <button class="modal-close" aria-label="Close">&times;</button>
     <img class="modal-image" src="" alt="" hidden>
+    <div class="modal-image modal-image--generated" style="display:none"><span class="modal-image-text"></span></div>
     <h2 class="modal-title" id="modal-title"></h2>
     <p class="modal-body"></p>
     <div class="modal-actions"></div>
@@ -37,6 +38,8 @@
   var imgEl     = overlay.querySelector('.modal-image');
   var actionsEl = overlay.querySelector('.modal-actions');
   var closeBtn  = overlay.querySelector('.modal-close');
+  var genEl     = overlay.querySelector('.modal-image--generated');
+  var genTextEl = genEl.querySelector('.modal-image-text');
 
   function open(card) {
     titleEl.textContent = card.dataset.modalTitle || '';
@@ -47,8 +50,20 @@
       imgEl.src = card.dataset.modalImage;
       imgEl.classList.toggle('modal-image--contain', card.dataset.modalImageFit === 'contain');
       imgEl.style.display = '';
+      genEl.style.display = 'none';
+    } else if (card.dataset.modalGraphicText) {
+      genTextEl.textContent = card.dataset.modalGraphicText;
+      genEl.style.setProperty('--card-hue', card.dataset.modalGraphicHue || '0');
+      if (card.dataset.modalGraphicBg) {
+        genEl.style.background = card.dataset.modalGraphicBg;
+      } else {
+        genEl.style.removeProperty('background');
+      }
+      genEl.style.display = '';
+      imgEl.style.display = 'none';
     } else {
       imgEl.style.display = 'none';
+      genEl.style.display = 'none';
     }
 
     actionsEl.innerHTML = '';

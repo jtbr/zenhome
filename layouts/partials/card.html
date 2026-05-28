@@ -40,15 +40,35 @@
 {{- $modalBody := or $item.Params.description $item.Params.tagline ($item.Summary | plainify | truncate 400) -}}
 
 {{- $imageFit := $item.Params.image_fit | default "cover" -}}
-<div class="card{{ if not $item.Params.image }} no-image{{ end }}"
+{{- $text := $item.Params.image_text | default "" -}}
+{{- $hue := 0 -}}
+{{- if $text -}}
+  {{- $hexMap := dict "0" 0 "1" 1 "2" 2 "3" 3 "4" 4 "5" 5 "6" 6 "7" 7 "8" 8 "9" 9 "a" 10 "b" 11 "c" 12 "d" 13 "e" 14 "f" 15 -}}
+  {{- $hash := crypto.MD5 $text -}}
+  {{- $chars := split $hash "" -}}
+  {{- $h0 := index $hexMap (index $chars 0) | default 0 -}}
+  {{- $h1 := index $hexMap (index $chars 1) | default 0 -}}
+  {{- $h2 := index $hexMap (index $chars 2) | default 0 -}}
+  {{- $hue = mod (add (mul $h0 256) (add (mul $h1 16) $h2)) 360 -}}
+{{- end -}}
+{{- with $item.Params.image_text_hue }}{{ $hue = . }}{{ end -}}
+{{- $bg := $item.Params.image_text_bg | default "" -}}
+{{- $hasGraphic := or $item.Params.image $text -}}
+<div class="card{{ if not $hasGraphic }} no-image{{ end }}"
      data-modal-title="{{ $item.Title }}"
      data-modal-body="{{ $modalBody }}"
      {{ with $item.Params.image }}data-modal-image="{{ . | absURL }}"{{ end }}
      {{ if ne $imageFit "cover" }}data-modal-image-fit="{{ $imageFit }}"{{ end }}
+     {{ with $text }}data-modal-graphic-text="{{ . }}" data-modal-graphic-hue="{{ $hue }}"{{ end }}
+     {{ with $bg }}data-modal-graphic-bg="{{ . }}"{{ end }}
      data-modal-links="{{ $links | jsonify }}"
      {{ if $hasDetails }}data-modal-details="{{ $item.RelPermalink }}"{{ end }}>
   {{ if $item.Params.image }}
   <div class="card-image{{ if eq $imageFit "contain" }} card-image--contain{{ end }}" style="background-image: url('{{ $item.Params.image | relURL }}');"></div>
+  {{ else if $text }}
+  <div class="card-image card-image--generated" style="--card-hue: {{ $hue }};{{ with $bg }}background: {{ . | safeCSS }};{{ end }}">
+    <span class="card-image-text">{{ $text }}</span>
+  </div>
   {{ end }}
   <div class="card-body">
     <div class="card-title">

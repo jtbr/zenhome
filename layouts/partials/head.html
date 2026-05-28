@@ -18,7 +18,12 @@
 {{- $mf := .Site.Params.fonts.mono | default "JetBrains Mono" -}}
 {{- $mw := .Site.Params.fonts.mono_weights | default "wght@400;600" -}}
 {{- $mfall := .Site.Params.fonts.mono_fallback | default "'SF Mono', Menlo, Consolas, monospace" -}}
-{{- $gfontsUrl := printf "https://fonts.googleapis.com/css2?family=%s:%s&family=%s:%s&family=%s:%s&display=swap" ($df | replaceRE " " "+") $dw ($bf | replaceRE " " "+") $bw ($mf | replaceRE " " "+") $mw | safeURL -}}
+{{- $gfontsRaw := printf "https://fonts.googleapis.com/css2?family=%s:%s&family=%s:%s&family=%s:%s" ($df | replaceRE " " "+") $dw ($bf | replaceRE " " "+") $bw ($mf | replaceRE " " "+") $mw -}}
+{{- $gf := .Site.Params.fonts.graphic -}}
+{{- $gw := .Site.Params.fonts.graphic_weights | default "wght@400;700" -}}
+{{- $gfall := .Site.Params.fonts.graphic_fallback | default "" -}}
+{{- with $gf -}}{{- $gfontsRaw = printf "%s&family=%s:%s" $gfontsRaw (. | replaceRE " " "+") $gw -}}{{- end -}}
+{{- $gfontsUrl := printf "%s&display=swap" $gfontsRaw | safeURL -}}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="{{ $gfontsUrl }}">
@@ -27,6 +32,7 @@
     --font-display: {{ printf `"%s", %s` $df $dfall | safeCSS }};
     --font-body:    {{ printf `"%s", %s` $bf $bfall | safeCSS }};
     --font-mono:    {{ printf `"%s", %s` $mf $mfall | safeCSS }};
+    {{ if $gf }}--font-graphic: {{ printf `"%s", %s` $gf (or $gfall $dfall) | safeCSS }};{{ else }}--font-graphic: var(--font-display);{{ end }}
   }
 </style>
 
