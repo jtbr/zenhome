@@ -280,8 +280,10 @@ Copy the output into `_code.scss`, replacing the existing token blocks. Availabl
 2. Cloudflare Workers & Pages → Create application → Looking to deploy Pages? Get Started → Import Existing Repository → Connect to GitHub → authenticate & select the repo
 3. Build settings:
    - Framework preset: Hugo
-   - Build command: `hugo --minify`
+   - Build command: `hugo`
    - Output directory: `public`
+
+   > **Do not add `--minify`** — CSS and JS are already minified by the asset pipeline, and Hugo's post-build minification pass produces slightly different bytes than those that were fingerprinted, breaking Subresource Integrity (SRI) checks in the browser.
 4. Environment Variables:
    - `HUGO_VERSION` — match the version from `hugo version` locally
    - `HUGO_ENVIRONMENT` = `production`
@@ -343,7 +345,10 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Build
-        run: hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
+        # Do not add --minify: assets are already minified by the pipeline,
+        # and Hugo's post-build pass produces different bytes than were fingerprinted,
+        # breaking SRI hash checks in the browser.
+        run: hugo --baseURL "${{ steps.pages.outputs.base_url }}/"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

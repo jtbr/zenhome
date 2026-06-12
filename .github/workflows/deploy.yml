@@ -35,7 +35,7 @@ jobs:
 
       - name: Build
         working-directory: exampleSite
-        run: hugo --minify --themesDir ../.. --baseURL "${{ steps.pages.outputs.base_url }}/"
+        run: hugo --themesDir ../.. --baseURL "${{ steps.pages.outputs.base_url }}/"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
