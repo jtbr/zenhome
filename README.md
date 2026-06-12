@@ -370,15 +370,7 @@ jobs:
 
 The `configure-pages` action automatically sets the correct `baseURL` — for a user/org site (`username.github.io`) that is `https://username.github.io/`, for a project site (`username.github.io/repo`) it includes the path prefix.
 
-### 3. Disable relativeURLs
-
-The example `hugo.toml` has `relativeURLs = true`, which breaks project sites (where the site lives at a sub-path). Remove or comment it out:
-
-```toml
-# relativeURLs = true   # remove this for GitHub Pages
-```
-
-### 4. Custom domain (optional)
+### 3. Custom domain (optional)
 
 Add a `CNAME` file to your site's `static/` directory containing just your domain:
 

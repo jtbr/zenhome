@@ -4,7 +4,7 @@
 {{ if eq $kind "post" }}
 <div class="card post-row{{ if not $item.Params.image }} no-image{{ end }}">
   {{ if $item.Params.image }}
-  <div class="card-image" style="background-image: url('{{ $item.Params.image | relURL }}');"></div>
+  <div class="card-image" style="background-image: url('{{ absURL (strings.TrimPrefix "/" $item.Params.image) }}');"></div>
   {{ end }}
   <div class="card-body">
     <div class="card-title"><a class="card-link" href="{{ $item.RelPermalink }}">{{ $item.Title }}<i class="ri-arrow-right-long-fill card-title-arrow" aria-hidden="true"></i></a></div>
@@ -84,9 +84,9 @@
       {{- $path1 = index $parts 0 -}}
       {{- $path2 = index $parts 1 -}}
     {{- end -}}
-    {{- $url1 := printf "url('%s') center/cover no-repeat" ($path1 | relURL) -}}
+    {{- $url1 := printf "url('%s') center/cover no-repeat" (absURL (strings.TrimPrefix "/" $path1)) -}}
     {{- if $path2 -}}
-      {{- $url2 := printf "url('%s') center/cover no-repeat" ($path2 | relURL) -}}
+      {{- $url2 := printf "url('%s') center/cover no-repeat" (absURL (strings.TrimPrefix "/" $path2)) -}}
       {{- if eq $firstKind "dark" -}}
         {{- $bgValueDark = $url1 -}}
         {{- $bgValueLight = $url2 -}}
@@ -124,7 +124,7 @@
      data-modal-links="{{ $links | jsonify }}"
      {{ if $hasDetails }}data-modal-details="{{ $item.RelPermalink }}"{{ end }}>
   {{ if $item.Params.image }}
-  <div class="card-image{{ if eq $imageFit "contain" }} card-image--contain{{ end }}" style="background-image: url('{{ $item.Params.image | relURL }}');"></div>
+  <div class="card-image{{ if eq $imageFit "contain" }} card-image--contain{{ end }}" style="background-image: url('{{ absURL (strings.TrimPrefix "/" $item.Params.image) }}');"></div>
   {{ else if $text }}
   <div class="card-image card-image--generated{{ if eq $bgMode "textured" }} card-image--textured{{ end }}{{ if eq $bgMode "image-themed" }} card-image--image-themed{{ end }}"
        style="--card-hue: {{ $hue }};{{ if eq $bgMode "image-themed" }}--themed-bg-light: {{ $bgValueLight | safeCSS }}; --themed-bg-dark: {{ $bgValueDark | safeCSS }}; --themed-text-light: {{ $textColorLight }}; --themed-text-dark: {{ $textColorDark }};{{ else }}{{ with $bgValue }}background: {{ . | safeCSS }};{{ end }}{{ end }}">
@@ -149,7 +149,7 @@
 
 {{ else if $item.Params.image }}
 <div class="card">
-  <div class="card-image" style="background-image: url('{{ $item.Params.image | relURL }}');"></div>
+  <div class="card-image" style="background-image: url('{{ absURL (strings.TrimPrefix "/" $item.Params.image) }}');"></div>
   <div class="card-body">
     <div class="card-title"><a class="card-link" href="{{ $item.RelPermalink }}">{{ $item.Title }}</a></div>
     <div class="card-excerpt">

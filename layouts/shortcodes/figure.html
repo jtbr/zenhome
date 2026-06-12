@@ -5,7 +5,7 @@
 {{- $crediturl := .Get "crediturl" | default "" -}}
 {{- $class     := .Get "class"     | default "" -}}
 {{- /* Resolve internal paths via relURL; leave http(s) URLs untouched. */}}
-{{- $resolved  := cond (or (strings.HasPrefix $src "http://") (strings.HasPrefix $src "https://")) $src ($src | relURL) -}}
+{{- $resolved  := cond (or (strings.HasPrefix $src "http://") (strings.HasPrefix $src "https://")) $src (absURL (strings.TrimPrefix "/" $src)) -}}
 <figure{{ with $class }} class="{{ . }}"{{ end }}>
   <img src="{{ $resolved }}" alt="{{ $alt }}" loading="lazy">
   {{- if or $caption $credit }}

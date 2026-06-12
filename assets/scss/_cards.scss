@@ -240,7 +240,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: url('/img/textures/plastered.webp') center/cover no-repeat;
+    background: url('../img/textures/plastered.webp') center/cover no-repeat;
     z-index: 0;
   }
 
@@ -253,7 +253,7 @@
 
 [data-theme="dark"] .card .card-image.card-image--generated.card-image--textured {
   &::before {
-      /* background: url('/img/textures/dark-foliage.webp') center/cover no-repeat; */
+      /* background: url('../img/textures/dark-foliage.webp') center/cover no-repeat; */
       filter: brightness(0.4) contrast(1.5);
   }
   .card-image-text { color: hsl(0, 0%, 92%); }

@@ -393,7 +393,7 @@ $cursor-close: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/sv
     content: "";
     position: absolute;
     inset: 0;
-    background: url('/img/textures/plastered.webp') center/cover no-repeat;
+    background: url('../img/textures/plastered.webp') center/cover no-repeat;
     z-index: 0;
   }
 
@@ -406,7 +406,7 @@ $cursor-close: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/sv
 
 [data-theme="dark"] .modal-box .modal-image--generated.modal-image--textured {
   &::before {
-    /* background: url('/img/textures/dark-foliage.webp') center/cover no-repeat; */
+    /* background: url('../img/textures/dark-foliage.webp') center/cover no-repeat; */
     filter: brightness(0.4) contrast(1.5);
   }
   .modal-image-text { color: hsl(0, 0%, 92%); }

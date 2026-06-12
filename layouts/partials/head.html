@@ -4,7 +4,7 @@
 
 {{- with .Site.Params.favicon -}}
   {{- $mime := index (dict ".svg" "image/svg+xml" ".png" "image/png" ".ico" "image/x-icon") (path.Ext .) | default "image/x-icon" -}}
-  <link rel="icon" type="{{ $mime }}" href="{{ . | relURL }}">
+  <link rel="icon" type="{{ $mime }}" href="{{ absURL (strings.TrimPrefix "/" .) }}">
 {{- end }}
 
 {{ partial "seo.html" . }}

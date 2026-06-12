@@ -7,7 +7,7 @@
 <section class="page-error">
   <h1>404</h1>
   <h3 class="tagline">Minor Malfunction. This page has gone missing.</h2>
-  <p><a href="{{ "/" | relURL }}"><i class="ri-arrow-left-long-fill"></i> Back home</a></p>
+  <p><a href="{{ .Site.Home.RelPermalink }}"><i class="ri-arrow-left-long-fill"></i> Back home</a></p>
 </section>
 <script> document.getElementsByTagName('body')[0].classList.add('glitch'); </script>
 {{ end }}
