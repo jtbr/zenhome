@@ -1,5 +1,7 @@
 # zen home
 
+**[Live demo →](https://jtbr.github.io/zenhome/)**
+
 A minimal, text-centered Hugo theme for a personal professional site. Landing page, writings, useful things (cards mostly linking elsewhere), and notes (short writings). Dark/light mode, KaTeX math, giscus comments (based on git discussions), configurable fonts, sitemap, RSS, figure captions, gist, tweet/X, mastadon, bluesky, and video embeds, emojis, and more. Uses icons from https://remixicon.com/.
 
 ## Repository layout
@@ -54,10 +56,6 @@ Copy `themes/zenhome/data/socials.yaml` to `data/socials.yaml` in your site and 
 ```bash
 git submodule update --remote
 ```
-
-### Cloudflare Pages — submodule note
-
-In the Cloudflare Pages build settings, enable **"Clone submodules"** (under Build → Advanced). Otherwise the theme directory will be empty at build time.
 
 ---
 
@@ -279,18 +277,18 @@ Copy the output into `_code.scss`, replacing the existing token blocks. Availabl
 ## Cloudflare Pages deployment (recommended)
 
 1. Push your site repo (with the theme submodule) to a **private** GitHub repo.
-2. Cloudflare Pages → Create project → Connect to Git → select the repo.
+2. Cloudflare Workers & Pages → Create application → Looking to deploy Pages? Get Started → Import Existing Repository → Connect to GitHub → authenticate & select the repo
 3. Build settings:
+   - Framework preset: Hugo
    - Build command: `hugo --minify`
    - Output directory: `public`
-4. Advanced → enable **Clone submodules**.
-5. Environment variables:
+4. Environment Variables:
    - `HUGO_VERSION` — match the version from `hugo version` locally
    - `HUGO_ENVIRONMENT` = `production`
-6. Custom domain: Pages → Custom domains → add apex and `www`. Cloudflare auto-creates DNS records.
-7. Web Analytics: enable in Cloudflare dashboard → paste the token into `params.cloudflare_analytics_token`.
+5. Custom domain: Pages → Custom domains → add apex and `www`. Cloudflare auto-creates DNS records.
+6. Web Analytics: if desired, enable in Cloudflare dashboard → paste the token into `params.cloudflare_analytics_token`.
 
-Branch preview deploys are created automatically for every non-`main` push.
+Unless disabled, branch preview deploys are created automatically for every non-`main` push.
 
 ---
 
