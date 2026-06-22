@@ -1,5 +1,8 @@
 {{- $item := .item -}}
 {{- $kind := .kind | default "" -}}
+{{- $rawDate := "" -}}
+{{- with $item.Params.date -}}{{- $rawDate = printf "%v" . -}}{{- end -}}
+{{- $hasDate := or (not $item.Date.IsZero) (findRE `^\d{4}(-\d{2})?$` $rawDate) -}}
 
 {{ if eq $kind "post" }}
 <div class="card post-row{{ if not $item.Params.image }} no-image{{ end }}">
@@ -11,9 +14,9 @@
     <div class="card-excerpt">
       {{- or $item.Params.tagline ($item.Summary | plainify | htmlUnescape | truncate 280) -}}
     </div>
-    {{ if or (not $item.Date.IsZero) ($item.GetTerms "tags") }}
+    {{ if or $hasDate (gt $item.ReadingTime 0) ($item.GetTerms "tags") }}
     <div class="card-meta">
-      {{ if not $item.Date.IsZero }}<time datetime="{{ $item.Date.Format "2006-01-02" }}">{{ $item.Date.Format "Jan 2, 2006" }}</time>{{ end }}
+      {{ partial "date-display.html" (dict "item" $item) }}
       {{ if gt $item.ReadingTime 0 }}<span class="meta-sep">&#11049;</span><span>{{ $item.ReadingTime }} min read</span>{{ end }}
       {{ with $item.GetTerms "tags" }}<span class="meta-sep">&#11049;</span>{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
     </div>
@@ -138,10 +141,10 @@
     <div class="card-excerpt">
       {{- or $item.Params.tagline ($item.Summary | plainify | htmlUnescape | truncate 240) -}}
     </div>
-    {{ if or (not $item.Date.IsZero) ($item.GetTerms "tags") }}
+    {{ if or $hasDate ($item.GetTerms "tags") }}
     <div class="card-meta">
-      {{ if not $item.Date.IsZero }}<time datetime="{{ $item.Date.Format "2006-01-02" }}">{{ $item.Date.Format "Jan 2, 2006" }}</time>{{ end }}
-      {{ with $item.GetTerms "tags" }}{{ if not $item.Date.IsZero }}<span class="meta-sep">&#11049;</span>{{ end }}{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
+      {{ partial "date-display.html" (dict "item" $item) }}
+      {{ with $item.GetTerms "tags" }}{{ if $hasDate }}<span class="meta-sep">&#11049;</span>{{ end }}{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
     </div>
     {{ end }}
   </div>
@@ -155,10 +158,10 @@
     <div class="card-excerpt">
       {{- or $item.Params.tagline ($item.Summary | plainify | htmlUnescape | truncate 180) -}}
     </div>
-    {{ if or (not $item.Date.IsZero) ($item.GetTerms "tags") }}
+    {{ if or $hasDate ($item.GetTerms "tags") }}
     <div class="card-meta">
-      {{ if not $item.Date.IsZero }}<time datetime="{{ $item.Date.Format "2006-01-02" }}">{{ $item.Date.Format "Jan 2, 2006" }}</time>{{ end }}
-      {{ with $item.GetTerms "tags" }}{{ if not $item.Date.IsZero }}<span class="meta-sep">&#11049;</span>{{ end }}{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
+      {{ partial "date-display.html" (dict "item" $item) }}
+      {{ with $item.GetTerms "tags" }}{{ if $hasDate }}<span class="meta-sep">&#11049;</span>{{ end }}{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
     </div>
     {{ end }}
   </div>
@@ -171,10 +174,10 @@
     <div class="card-excerpt">
       {{- or $item.Params.tagline ($item.Summary | plainify | htmlUnescape | truncate 240) -}}
     </div>
-    {{ if or (not $item.Date.IsZero) ($item.GetTerms "tags") }}
+    {{ if or $hasDate ($item.GetTerms "tags") }}
     <div class="card-meta">
-      {{ if not $item.Date.IsZero }}<time datetime="{{ $item.Date.Format "2006-01-02" }}">{{ $item.Date.Format "Jan 2, 2006" }}</time>{{ end }}
-      {{ with $item.GetTerms "tags" }}{{ if not $item.Date.IsZero }}<span class="meta-sep">&#11049;</span>{{ end }}{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
+      {{ partial "date-display.html" (dict "item" $item) }}
+      {{ with $item.GetTerms "tags" }}{{ if $hasDate }}<span class="meta-sep">&#11049;</span>{{ end }}{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
     </div>
     {{ end }}
   </div>

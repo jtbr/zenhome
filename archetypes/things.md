@@ -1,6 +1,6 @@
 ---
 title: "{{ replace .File.ContentBaseName "-" " " | title }}"
-date: {{ now.Format "2006-01-02" }} # optional for things
+date: {{ now.Format "2006-01-02" }} # optional for things, "2024" or "2024-03" (with quotes) show partial date
 draft: true
 weight: 50        # sort order on listing page — lower appears first
 tagline: ""       # short blurb shown on the card and detail page header

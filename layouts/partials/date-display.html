@@ -1,0 +1,21 @@
+{{- /*
+  Renders a <time> element. Supports partial dates via the standard `date` front matter field:
+  if `date` is a string in "YYYY" or "YYYY-MM" format, only the given precision is shown.
+  Context: dict with "item" (page) and optional "long" (bool, default false for short month name).
+*/ -}}
+{{- $item := .item -}}
+{{- $long := .long | default false -}}
+{{- $rawDate := "" -}}
+{{- with $item.Params.date -}}{{- $rawDate = printf "%v" . -}}{{- end -}}
+{{- if findRE `^\d{4}$` $rawDate -}}
+  <time datetime="{{ $rawDate }}">{{ $rawDate }}</time>
+{{- else if findRE `^\d{4}-\d{2}$` $rawDate -}}
+  {{- $t := time (printf "%s-01" $rawDate) -}}
+  <time datetime="{{ $rawDate }}">{{ if $long }}{{ $t.Format "January 2006" }}{{ else }}{{ $t.Format "Jan 2006" }}{{ end }}</time>
+{{- else if not $item.Date.IsZero -}}
+  {{- if $long -}}
+    <time datetime="{{ $item.Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ $item.Date.Format "January 2, 2006" }}</time>
+  {{- else -}}
+    <time datetime="{{ $item.Date.Format "2006-01-02" }}">{{ $item.Date.Format "Jan 2, 2006" }}</time>
+  {{- end -}}
+{{- end -}}

@@ -4,21 +4,22 @@
     <h1>{{ .Title }}</h1>
     {{ with .Params.tagline }}<p class="lead">{{ . }}</p>{{ end }}
     <p class="post-meta">
-      {{ if not .Date.IsZero }}
-        <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format "January 2, 2006" }}</time>
-      {{ end }}
+      {{- $rawDate := "" -}}
+      {{- with .Params.date -}}{{- $rawDate = printf "%v" . -}}{{- end -}}
+      {{- $hasDate := or (not .Date.IsZero) (findRE `^\d{4}(-\d{2})?$` $rawDate) -}}
+      {{ partial "date-display.html" (dict "item" . "long" true) }}
       {{ with .GetTerms "tags" }}
-        {{ if not $.Date.IsZero }}<span class="meta-sep">&#11049;</span>{{ end }}
+        {{ if $hasDate }}<span class="meta-sep">&#11049;</span>{{ end }}
         {{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}
       {{ end }}
       {{ with .Params.links }}
-        {{ if or (not $.Date.IsZero) ($.GetTerms "tags") }}<span class="meta-sep">&#11049;</span>{{ end }}
+        {{ if or $hasDate ($.GetTerms "tags") }}<span class="meta-sep">&#11049;</span>{{ end }}
         {{ range . }}
           <a href="{{ .url }}" class="btn btn-sm btn-outline-secondary" rel="noopener">{{ .label | default "View" }}&nbsp;&nbsp;<i class="ri-arrow-right-long-fill"></i></a>
         {{ end }}
       {{ else }}
         {{ with $.Params.link }}
-          {{ if or (not $.Date.IsZero) ($.GetTerms "tags") }}<span class="meta-sep">&#11049;</span>{{ end }}
+          {{ if or $hasDate ($.GetTerms "tags") }}<span class="meta-sep">&#11049;</span>{{ end }}
           <a href="{{ . }}" class="btn btn-sm btn-outline-secondary" rel="noopener">View&nbsp;&nbsp;<i class="ri-arrow-right-long-fill"></i></a>
         {{ end }}
       {{ end }}

@@ -154,10 +154,12 @@ Things are designed as a curated links page; clicking opens a modal for more det
 
 | Field | Effect |
 |-------|--------|
+| `date` | Date to display, in YYYY-MM-DD format, or in quotes as "YYYY-MM" or "YYYY" to display less precise partial dates only.
 | `weight` | Sort order on the listing page — lower appears first. Falls back to date then title. |
 | `tagline` | Short blurb shown on the card and the detail page header. |
 | `description` | Longer text shown in the modal (falls back to `tagline` if absent). |
 | `image` | Path relative to `static/` (e.g. `img/things/foo.jpg`). Shown on card and in the modal. |
+| `image_fit` | `cover` (default, crops to fill) or `contain` (shows full image at natural proportions), used along with `image` |
 | `image_text` | Short phrase rendered as large text over a gradient, used as a generated graphic when no `image` is set. Shown on the card and in the modal. |
 | `image_text_hue` | Override the auto-derived hue (0–360) for the `image_text` gradient while keeping the theme's lightness/saturation constraints. |
 | `image_text_bg` | Controls the background of the generated graphic. See modes below. |
