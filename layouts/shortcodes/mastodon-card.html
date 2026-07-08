@@ -2,12 +2,15 @@
 {{- $url    := .Get "url" -}}
 {{- $host   := (urls.Parse $url).Host -}}
 {{- $oembedURL := printf "https://%s/api/oembed?url=%s" $host (urlquery $url) -}}
-{{- with resources.GetRemote $oembedURL -}}
+{{- with try (resources.GetRemote $oembedURL) -}}
   {{- with .Err -}}
     {{- warnf "mastodon-card: could not fetch oEmbed for %q: %s" $url . -}}
     <a href="{{ $url }}">View post on Mastodon</a>
-  {{- else -}}
+  {{- else with .Value -}}
     {{- $html := (. | transform.Unmarshal).html | replaceRE ` width="\d+"` "" -}}
     <div class="mastodon-embed-wrapper d-flex justify-content-center">{{ $html | safeHTML }}</div>
+  {{- else -}}
+    {{- warnf "mastodon-card: no response fetching oEmbed for %q" $url -}}
+    <a href="{{ $url }}">View post on Mastodon</a>
   {{- end -}}
 {{- end -}}

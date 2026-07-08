@@ -1,7 +1,7 @@
 {{- $item := .item -}}
 {{- $kind := .kind | default "" -}}
 {{- $rawDate := "" -}}
-{{- with $item.Params.date -}}{{- $rawDate = printf "%v" . -}}{{- end -}}
+{{- with $item.Params.partial_date -}}{{- $rawDate = printf "%v" . -}}{{- end -}}
 {{- $hasDate := or (not $item.Date.IsZero) (findRE `^\d{4}(-\d{2})?$` $rawDate) -}}
 
 {{ if eq $kind "post" }}

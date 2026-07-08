@@ -19,7 +19,7 @@
   "email": "{{ .Site.Params.author.email }}",
   "url": "{{ .Site.BaseURL | strings.TrimSuffix "/" }}",
   "jobTitle": "{{ .Site.Params.tagline }}",
-  "sameAs": [{{ range $i, $s := .Site.Data.socials }}{{ if $i }},{{ end }}"{{ $s.url }}"{{ end }}]
+  "sameAs": [{{ range $i, $s := hugo.Data.socials }}{{ if $i }},{{ end }}"{{ $s.url }}"{{ end }}]
 }
 </script>
 {{ else if and .IsPage (in (slice "writings" "notes") .Section) }}

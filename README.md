@@ -4,6 +4,8 @@
 
 A minimal, text-centered Hugo theme for a personal professional site. Landing page, writings, useful things (cards mostly linking elsewhere), and notes (short writings). Dark/light mode, KaTeX math, giscus comments (based on git discussions), configurable fonts, sitemap, RSS, figure captions, gist, tweet/X, mastadon, bluesky, and video embeds, emojis, and more. Uses icons from https://remixicon.com/.
 
+[![Fuel the code / Support this project](https://justinbriggs.net/tips-badge-large.svg)](https://justinbriggs.net/tips?ref=zenhome)
+
 ## Repository layout
 
 ```
@@ -39,6 +41,8 @@ git submodule add https://github.com/jtbr/zenhome themes/zenhome
 git submodule update --init
 ```
 
+(or simply copy or clone it to `themes/zenhome`)
+
 ### 2. Configure hugo.toml
 
 ```toml
@@ -61,7 +65,7 @@ git submodule update --remote
 
 ## Requirements
 
-Hugo **extended** is required for SCSS compilation via Hugo Pipes:
+Hugo **extended** (v0.135 or higher) is required for SCSS compilation via Hugo Pipes:
 
 ```bash
 # macOS
@@ -327,7 +331,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      HUGO_VERSION: 0.145.0   # keep in sync with your local version
+      HUGO_VERSION: 0.163.3   # keep in sync with your local version
     steps:
       - name: Install Hugo (extended)
         run: |
@@ -384,6 +388,6 @@ Then in **Settings → Pages → Custom domain**, enter the same domain. GitHub 
 
 ---
 
-## Attribution
+## Inspiration
 
 Typography and visual approach inspired by [Chalk](https://github.com/nielsenramon/chalk) (MIT) and [Pudhina Fresh](https://github.com/ritijjain/pudhina-fresh) (MIT) Jekyll templates.

@@ -2,11 +2,13 @@
 {{- $id     := .Get "id" -}}
 {{- $did := "" -}}
 {{- $resolveURL := printf "https://bsky.social/xrpc/com.atproto.identity.resolveHandle?handle=%s" $handle -}}
-{{- with resources.GetRemote $resolveURL -}}
+{{- with try (resources.GetRemote $resolveURL) -}}
   {{- with .Err -}}
     {{- warnf "bluesky-card: could not resolve handle %q: %s" $handle . -}}
-  {{- else -}}
+  {{- else with .Value -}}
     {{- $did = (. | transform.Unmarshal).did -}}
+  {{- else -}}
+    {{- warnf "bluesky-card: no response resolving handle %q" $handle -}}
   {{- end -}}
 {{- end -}}
 <div class="bluesky-embed-wrapper d-flex justify-content-center">

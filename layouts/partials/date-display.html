@@ -1,12 +1,14 @@
 {{- /*
-  Renders a <time> element. Supports partial dates via the standard `date` front matter field:
-  if `date` is a string in "YYYY" or "YYYY-MM" format, only the given precision is shown.
+  Renders a <time> element. Supports partial dates via the `partial_date` front matter field:
+  if set to a string in "YYYY" or "YYYY-MM" format, only the given precision is shown.
+  (Kept separate from the reserved `date` field because Hugo >= 0.135.0 hard-fails
+  the build if `date` isn't a fully parsable date.)
   Context: dict with "item" (page) and optional "long" (bool, default false for short month name).
 */ -}}
 {{- $item := .item -}}
 {{- $long := .long | default false -}}
 {{- $rawDate := "" -}}
-{{- with $item.Params.date -}}{{- $rawDate = printf "%v" . -}}{{- end -}}
+{{- with $item.Params.partial_date -}}{{- $rawDate = printf "%v" . -}}{{- end -}}
 {{- if findRE `^\d{4}$` $rawDate -}}
   <time datetime="{{ $rawDate }}">{{ $rawDate }}</time>
 {{- else if findRE `^\d{4}-\d{2}$` $rawDate -}}

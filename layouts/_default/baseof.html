@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ .Site.LanguageCode | default "en" }}" data-theme="light">
+<html lang="{{ .Site.Language.Locale | default "en" }}" data-theme="light">
 <head>
   {{- if eq .Kind "404" }}<base href="{{ .Site.BaseURL }}">{{ end }}
   {{ partial "head.html" . }}

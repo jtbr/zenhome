@@ -3,7 +3,7 @@
     {{ with .Site.Params.copyright }}<small>{{ . }}</small>{{ end }}
     <ul class="socials list-unstyled d-flex m-0">
       {{ with .Site.Params.socials_prefix }}<span>{{ . }}</span>{{end}}
-      {{ range .Site.Data.socials }}
+      {{ range hugo.Data.socials }}
       <li><a href="{{ .url }}" target="_blank" rel="me" aria-label="{{ .name }}"><span>{{ .name }}</span><i class="{{ .icon }}" aria-hidden="true"></i></a></li>
       {{ end }}
       {{- $rssURL := "" -}}
