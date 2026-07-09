@@ -1,11 +1,12 @@
 ---
 title: "{{ replace .File.ContentBaseName "-" " " | title }}"
-date: {{ now.Format "2006-01-02" }} # optional for things, "2024" or "2024-03" (with quotes) show partial date
+date: {{ now.Format "2006-01-02" }} # optional for things
+# partial_date: "2024" or "2024-03" # (with quotes) to instead show a partial date (year or year-month only)
 draft: true
 weight: 50        # sort order on listing page — lower appears first
 tagline: ""       # short blurb shown on the card and detail page header
 description: ""   # longer text shown in the modal (falls back to tagline)
-image: ""         # path relative to static/ e.g. img/things/foo.jpg; used for card and social media
+image: ""         # path relative to static/ e.g. img/things/foo.jpg; used for card and social media (~900 width is ideal)
 image_fit: cover  # cover (default, crops to fill) or contain (shows full image at natural proportions)
 image_text: ""    # alternative to providing an image, a graphic will be made with this as the text (see README for related options)
 links:            # up to two buttons shown in the modal

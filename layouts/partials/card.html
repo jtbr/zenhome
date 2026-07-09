@@ -17,8 +17,8 @@
     {{ if or $hasDate (gt $item.ReadingTime 0) ($item.GetTerms "tags") }}
     <div class="card-meta">
       {{ partial "date-display.html" (dict "item" $item) }}
-      {{ if gt $item.ReadingTime 0 }}<span class="meta-sep">&#11049;</span><span>{{ $item.ReadingTime }} min read</span>{{ end }}
-      {{ with $item.GetTerms "tags" }}<span class="meta-sep">&#11049;</span>{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
+      {{ if gt $item.ReadingTime 0 }}<span class="meta-sep">&#10036;</span><span>{{ $item.ReadingTime }} min read</span>{{ end }}
+      {{ with $item.GetTerms "tags" }}<span class="meta-sep">&#10036;</span>{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
     </div>
     {{ end }}
   </div>
@@ -144,7 +144,7 @@
     {{ if or $hasDate ($item.GetTerms "tags") }}
     <div class="card-meta">
       {{ partial "date-display.html" (dict "item" $item) }}
-      {{ with $item.GetTerms "tags" }}{{ if $hasDate }}<span class="meta-sep">&#11049;</span>{{ end }}{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
+      {{ with $item.GetTerms "tags" }}{{ if $hasDate }}<span class="meta-sep">&#10036;</span>{{ end }}{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
     </div>
     {{ end }}
   </div>
@@ -161,7 +161,7 @@
     {{ if or $hasDate ($item.GetTerms "tags") }}
     <div class="card-meta">
       {{ partial "date-display.html" (dict "item" $item) }}
-      {{ with $item.GetTerms "tags" }}{{ if $hasDate }}<span class="meta-sep">&#11049;</span>{{ end }}{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
+      {{ with $item.GetTerms "tags" }}{{ if $hasDate }}<span class="meta-sep">&#10036;</span>{{ end }}{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
     </div>
     {{ end }}
   </div>
@@ -177,7 +177,7 @@
     {{ if or $hasDate ($item.GetTerms "tags") }}
     <div class="card-meta">
       {{ partial "date-display.html" (dict "item" $item) }}
-      {{ with $item.GetTerms "tags" }}{{ if $hasDate }}<span class="meta-sep">&#11049;</span>{{ end }}{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
+      {{ with $item.GetTerms "tags" }}{{ if $hasDate }}<span class="meta-sep">&#10036;</span>{{ end }}{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
     </div>
     {{ end }}
   </div>

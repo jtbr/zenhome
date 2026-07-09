@@ -4,8 +4,8 @@
     <h1>{{ .Title }}</h1>
     <p class="post-meta">
       {{ partial "date-display.html" (dict "item" . "long" true) }}
-      {{ if gt .ReadingTime 0 }}<span class="meta-sep">&#11049;</span><span>{{ .ReadingTime }} min read</span>{{ end }}
-      {{ with .GetTerms "tags" }}<span class="meta-sep">&#11049;</span>{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
+      {{ if gt .ReadingTime 0 }}<span class="meta-sep">&#10036;</span><span>{{ .ReadingTime }} min read</span>{{ end }}
+      {{ with .GetTerms "tags" }}<span class="meta-sep">&#10036;</span>{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
       <button class="share-btn" aria-label="Share this page"><i class="ri-share-2-line" aria-hidden="true"></i></button>
     </p>
   </header>

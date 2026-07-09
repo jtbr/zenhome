@@ -9,17 +9,17 @@
       {{- $hasDate := or (not .Date.IsZero) (findRE `^\d{4}(-\d{2})?$` $rawDate) -}}
       {{ partial "date-display.html" (dict "item" . "long" true) }}
       {{ with .GetTerms "tags" }}
-        {{ if $hasDate }}<span class="meta-sep">&#11049;</span>{{ end }}
+        {{ if $hasDate }}<span class="meta-sep">&#10036;</span>{{ end }}
         {{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}
       {{ end }}
       {{ with .Params.links }}
-        {{ if or $hasDate ($.GetTerms "tags") }}<span class="meta-sep">&#11049;</span>{{ end }}
+        {{ if or $hasDate ($.GetTerms "tags") }}<span class="meta-sep">&#10036;</span>{{ end }}
         {{ range . }}
           <a href="{{ .url }}" class="btn btn-sm btn-outline-secondary" rel="noopener">{{ .label | default "View" }}&nbsp;&nbsp;<i class="ri-arrow-right-long-fill"></i></a>
         {{ end }}
       {{ else }}
         {{ with $.Params.link }}
-          {{ if or $hasDate ($.GetTerms "tags") }}<span class="meta-sep">&#11049;</span>{{ end }}
+          {{ if or $hasDate ($.GetTerms "tags") }}<span class="meta-sep">&#10036;</span>{{ end }}
           <a href="{{ . }}" class="btn btn-sm btn-outline-secondary" rel="noopener">View&nbsp;&nbsp;<i class="ri-arrow-right-long-fill"></i></a>
         {{ end }}
       {{ end }}

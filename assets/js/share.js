@@ -1,3 +1,13 @@
+// Desktop (fine pointer) always falls back to copy-to-clipboard, so label
+// the button accordingly there; mobile keeps the generic "Share" label
+// since it may open the native OS share sheet instead.
+if (!window.matchMedia('(pointer: coarse)').matches) {
+  document.querySelectorAll('.share-btn').forEach((btn) => {
+    btn.title = 'Copy link to page';
+    btn.setAttribute('aria-label', 'Copy link to page');
+  });
+}
+
 document.addEventListener('click', async (e) => {
   const btn = e.target.closest('.share-btn');
   if (!btn) return;

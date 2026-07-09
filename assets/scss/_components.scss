@@ -57,6 +57,15 @@
   }
 }
 
+/* ── JS-pending content ──────────────────────────────────────────── */
+/* Mark any element whose real content is only set by a script (a randomized
+   greeting, a client-computed date, etc.) with this class so the static/
+   placeholder markup never paints before the script runs — avoiding a flash
+   of stale content. The script is responsible for removing the class once
+   it has set the final value. No-JS visitors see the placeholder immediately
+   (see head.html noscript block). */
+.js-pending { visibility: hidden; }
+
 /* ── Share button ────────────────────────────────────────────────── */
 .share-btn {
   margin-left: auto;

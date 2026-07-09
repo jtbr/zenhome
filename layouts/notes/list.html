@@ -1,12 +1,16 @@
 {{ define "main" }}
+{{ $pages := where .Site.RegularPages "Section" "notes" }}
 <header class="section-header">
   <h1>Notes</h1>
-  <p class="lead">{{ .Description | default "Short notes and troubleshooting snippets." }}</p>
+  {{ if eq (len $pages) 0 }}
+    <p class="lead">&#x1F6A7;&nbsp; Under Construction &nbsp;&#x1F6A7;</p>
+  {{ else }}
+    <p class="lead">{{ .Description | default "Short notes and troubleshooting snippets." }}</p>
+  {{ end }}
 </header>
 
-{{ $pages := where .Site.RegularPages "Section" "notes" }}
 {{ if eq (len $pages) 0 }}
-  <p class="post-meta">Notes and snippets will appear here. Coming soon.</p>
+  <p class="post-meta">Notes and snippets will appear here. Coming soon!</p>
 {{ else }}
   <ul class="notes-list list-unstyled">
     {{ range $pages }}
@@ -15,8 +19,8 @@
       {{ with .Description }}<p class="note-subtitle">{{ . }}</p>{{ end }}
       <p class="post-meta">
         <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
-        {{ if gt .ReadingTime 0 }}<span class="meta-sep">&#11049;</span><span>{{ .ReadingTime }} min read</span>{{ end }}
-        {{ with .GetTerms "tags" }}<span class="meta-sep">&#11049;</span>{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
+        {{ if gt .ReadingTime 0 }}<span class="meta-sep">&#10036;</span><span>{{ .ReadingTime }} min read</span>{{ end }}
+        {{ with .GetTerms "tags" }}<span class="meta-sep">&#10036;</span>{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
       </p>
     </li>
     {{ end }}

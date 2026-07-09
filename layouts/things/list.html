@@ -1,12 +1,16 @@
 {{ define "main" }}
+{{ $pages := where .Site.RegularPages "Section" "things" }}
 <header class="section-header">
   <h1>Useful Things</h1>
-  <p class="lead">{{ .Description | default "Tools, snippets, and projects that might be useful to others." }}</p>
+  {{ if eq (len $pages) 0 }}
+    <p class="lead">&#x1F6A7;&nbsp; Under Construction &nbsp;&#x1F6A7;</p>
+  {{ else }}
+    <p class="lead">{{ .Description | default "Tools, snippets, and projects that might be useful to others." }}</p>
+  {{ end }}
 </header>
 
-{{ $pages := where .Site.RegularPages "Section" "things" }}
 {{ if eq (len $pages) 0 }}
-  <p class="post-meta">Useful things will appear here. Coming soon.</p>
+  <p class="post-meta">Useful things will appear here. Coming soon!</p>
 {{ else }}
   {{- $masonry := eq .Site.Params.sections.things_layout "masonry" -}}
   <div class="card-grid{{ if $masonry }} card-grid--masonry{{ end }}">

@@ -18,11 +18,11 @@
         {{- $sep = true -}}
       {{- end -}}
       {{- if gt .ReadingTime 0 -}}
-        {{- if $sep }}<span class="meta-sep">&#11049;</span>{{ end -}}
+        {{- if $sep }}<span class="meta-sep">&#10036;</span>{{ end -}}
         <span>{{ .ReadingTime }} min read</span>
         {{- $sep = true -}}
       {{- end -}}
-      {{- if $sep }}<span class="meta-sep">&#11049;</span>{{ end -}}
+      {{- if $sep }}<span class="meta-sep">&#10036;</span>{{ end -}}
       <span class="item-section">{{ .Section }}</span>
     </p>
   </li>

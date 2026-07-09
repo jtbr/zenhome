@@ -1,6 +1,7 @@
-# Providing this file adds a "❤ Sponsor" button for the repo
+# Providing this file adds a "Sponsor this Project" link for the repo, if enabled in the project Settings
 # These are various supported funding model platforms; we use a custom one
 # Docs: https://docs.github.com/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/displaying-a-sponsor-button-in-your-repository
 
+# exclude "https://" for improved display
 # add ?ref=PROJECT_NAME to see the referrer
-custom: ["https://justinbriggs.net/tips/?ref=zenhome"]
+custom: ["justinbriggs.net/tips/?ref=zenhome"]

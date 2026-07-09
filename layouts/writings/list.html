@@ -1,12 +1,16 @@
 {{ define "main" }}
+{{ $pages := where .Site.RegularPages "Section" "writings" }}
 <header class="section-header">
   <h1>Writings</h1>
-  <p class="lead">{{ .Description | default "Long-form posts and full articles" }}</p>
+  {{ if eq (len $pages) 0 }}
+    <p class="lead">&#x1F6A7;&nbsp; Under Construction &nbsp;&#x1F6A7;</p>
+  {{ else }}
+    <p class="lead">{{ .Description | default "Long-form posts and full articles" }}</p>
+  {{ end }}
 </header>
 
-{{ $pages := where .Site.RegularPages "Section" "writings" }}
 {{ if eq (len $pages) 0 }}
-  <p class="post-meta">Long-form posts will appear here. Coming soon.</p>
+  <p class="post-meta">Long-form posts will appear here. Coming soon!</p>
 {{ else }}
   <div class="post-list">
     {{ range $pages }}
