@@ -96,6 +96,7 @@ All settings live in `hugo.toml`. Minimum to fill in before launch:
 | `title` | Your name |
 | `params.tagline` | One-line professional tagline |
 | `params.description` | 1–2 sentences for SEO / OG tags |
+| `params.og_image` | Optional. Fallback social-share card (path under `static/`, a 1200×630 raster — SVG isn't supported by most unfurlers) used as `og:image` on the home + listing pages when a page has no own `image`. Omitted entirely if unset. |
 | `params.author.name` | Displayed in nav, homepage `<h1>`, and schema.org markup |
 | `params.author.email` | Used in schema.org markup; include in `content/_index.md` if you want it on the page |
 | Landing page body | Written as markdown in `content/_index.md`; use `##` for section labels (Background, Availability, etc.) |

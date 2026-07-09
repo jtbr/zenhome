@@ -34,6 +34,7 @@ enableEmoji = true
   copyright = ""  # e.g. "© 2026 Your Name"
   socials_prefix = ""  # e.g. "Find me via:"
 
+  # og_image = "img/og-default.png"  # Optional fallback social-share card (path relative to static/, 1200×630 raster); shown on home + listing pages. Unset = image meta tags omitted.
   # favicon = "/icon.svg"  # Path relative to static/. Use SVG for modern browsers. (.png and .ico are also supported)
                            # Also place favicon.ico (32×32) in static for legacy browsers/RSS readers (auto-discovered, no config needed).
                            # Optional: apple-touch-icon.png (180×180) in static/ for iOS home screen shortcuts.

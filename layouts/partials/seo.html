@@ -3,10 +3,18 @@
 <meta property="og:description" content="{{ .Description | default .Site.Params.description }}">
 <meta property="og:url" content="{{ .Permalink }}">
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
-{{ with .Params.image }}<meta property="og:image" content="{{ . | absURL }}">{{ end }}
-<meta name="twitter:card" content="summary{{ with .Params.image }}_large_image{{ end }}">
+{{/* Per-page image if set; else the site's fallback card (params.og_image, if configured) on home + listing pages only — never a broken link when unset. */}}
+{{- $ogImage := .Params.image -}}
+{{- if and (not $ogImage) .Site.Params.og_image (in (slice "home" "section" "taxonomy" "term") .Kind) -}}
+  {{- $ogImage = .Site.Params.og_image -}}
+{{- end -}}
+{{ with $ogImage }}
+<meta property="og:image" content="{{ . | absURL }}">
+<meta property="og:image:alt" content="{{ if $.IsHome }}{{ $.Site.Title }}{{ else }}{{ $.Title }} — {{ $.Site.Title }}{{ end }}">{{ end }}
+<meta name="twitter:card" content="summary{{ with $ogImage }}_large_image{{ end }}">
 <meta name="twitter:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ end }}">
 <meta name="twitter:description" content="{{ .Description | default .Site.Params.description }}">
+{{ with $ogImage }}<meta name="twitter:image" content="{{ . | absURL }}">{{ end }}
 
 {{- $personID := printf "%s/#person" (.Site.BaseURL | strings.TrimSuffix "/") -}}
 {{ if .IsHome }}
