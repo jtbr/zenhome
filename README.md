@@ -221,12 +221,16 @@ The graphic uses `--font-graphic` (see Fonts above). The `"plain"` gradient and 
 
 ## Math
 
-Set `math: true` in front matter. Then use:
+Just write math — no front matter flag needed:
 
 - Inline: `$E = mc^2$` or `\(E = mc^2\)`
 - Block: `$$...$$` or `\[...\]`
 
-KaTeX renders in the browser. The Goldmark passthrough extension (in `hugo.toml`) keeps delimiters intact through Markdown processing.
+Math renders at build time with Hugo's embedded KaTeX (no client-side JavaScript, works for no-JS visitors, and malformed LaTeX fails the build with a file position). The KaTeX stylesheet is loaded automatically, only on pages that contain math.
+
+Requires the Goldmark passthrough extension in the **site's** `hugo.toml` (Hugo doesn't merge a theme's `markup` config, so each site must include it — copy the `[markup.goldmark.extensions.passthrough]` block from `exampleSite/hugo.toml`).
+
+Note the single-`$` inline delimiter means a paragraph with two bare dollar amounts (e.g. "$5 … $10") is parsed as math; escape as `\$` or drop the `["$", "$"]` inline delimiter pair from the config if this bites.
 
 ---
 

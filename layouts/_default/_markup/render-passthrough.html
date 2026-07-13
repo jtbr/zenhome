@@ -1,0 +1,14 @@
+{{- /* Renders math snippets (kept intact by the Goldmark passthrough extension)
+     at build time with Hugo's embedded KaTeX. "htmlAndMathml" emits KaTeX's
+     visual HTML plus hidden MathML for accessibility; the HTML part needs the
+     KaTeX stylesheet, loaded conditionally by partials/math.html via the
+     "hasMath" store flag set below. */}}
+{{- $opts := dict "output" "htmlAndMathml" "displayMode" (eq .Type "block") }}
+{{- with try (transform.ToMath .Inner $opts) }}
+  {{- with .Err }}
+    {{- errorf "KaTeX could not render math markup: %s (see %s)" . $.Position }}
+  {{- else }}
+    {{- .Value }}
+    {{- $.Page.Store.Set "hasMath" true }}
+  {{- end }}
+{{- end -}}

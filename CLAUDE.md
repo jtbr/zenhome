@@ -14,7 +14,7 @@ This theme may sometimes be tested as a submodule of a customized site; if the c
 - **Hugo theme** — layouts in `layouts/`, SCSS in `assets/scss/`, JS in `assets/js/`
 - **No JS framework** — vanilla JS only
 - **Icons** — RemixIcon 4 CDN (`head.html`); full class name stored in `data/socials.yaml` (e.g. `ri-github-line`)
-- **Math** — KaTeX via `layouts/partials/math.html` (opt-in per page with `math: true`)
+- **Math** — rendered at build time by Hugo's embedded KaTeX (`transform.ToMath` in `layouts/_default/_markup/render-passthrough.html`); no client JS, no front-matter flag. KaTeX CSS is loaded by `layouts/partials/math.html` only on pages containing math (via the `hasMath` page store flag). Requires the Goldmark passthrough block in the **site's** `hugo.toml` — Hugo does not merge a theme's `markup` config, so consuming sites must copy it from `exampleSite/hugo.toml`.
 - **Comments** — giscus (opt-in via `params.comments.enabled`)
 
 ## CSS approach — no Bootstrap

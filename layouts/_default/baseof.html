@@ -3,6 +3,7 @@
 <head>
   {{- if eq .Kind "404" }}<base href="{{ .Site.BaseURL }}">{{ end }}
   {{ partial "head.html" . }}
+  {{ partial "math.html" . }}
   {{ block "head-extra" . }}{{ end }}
 </head>
 <body>
@@ -17,8 +18,6 @@
   <script src="{{ $dm.RelPermalink }}" integrity="{{ $dm.Data.Integrity }}" defer></script>
   {{ $bundle := slice (resources.Get "js/_clipboard.js") (resources.Get "js/copycode.js") (resources.Get "js/anchorlinks.js") (resources.Get "js/share.js") (resources.Get "js/lightbox.js") | resources.Concat "js/bundle.js" | minify | fingerprint }}
   <script src="{{ $bundle.RelPermalink }}" integrity="{{ $bundle.Data.Integrity }}" defer></script>
-
-  {{ if .Params.math }}{{ partial "math.html" . }}{{ end }}
 
   {{ with .Site.Params.cloudflare_analytics_token }}
   <script defer src="https://static.cloudflareinsights.com/beacon.min.js"

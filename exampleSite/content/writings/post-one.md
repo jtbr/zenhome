@@ -2,7 +2,6 @@
 title: "Lorem Ipsum Post One"
 date: 2026-03-14
 tags: ["ml", "production"]
-math: true
 description: "A short description of this example writing post."
 ---
 

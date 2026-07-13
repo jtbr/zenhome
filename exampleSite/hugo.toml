@@ -89,7 +89,10 @@ enableEmoji = true
   [markup.goldmark.renderer]
     unsafe = true
 
-  # Pass-through keeps $...$, $$...$$, \(...\), \[...\] intact so KaTeX can render them.
+  # Pass-through keeps $...$, $$...$$, \(...\), \[...\] intact so the theme's
+  # render hook can render them with Hugo's built-in KaTeX at build time.
+  # REQUIRED for math: Hugo does not merge a theme's [markup] config, so every
+  # site using this theme must include this block in its own hugo.toml.
   [markup.goldmark.extensions.passthrough]
     enable = true
     [markup.goldmark.extensions.passthrough.delimiters]

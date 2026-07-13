@@ -1,18 +1,15 @@
-<noscript><p style="color:var(--muted);font-size:.9em;border-left:3px solid var(--muted);padding-left:.75em">Math rendering requires JavaScript. Formulas appear as raw LaTeX below.</p></noscript>
+{{- /* Math renders server-side (see layouts/_default/_markup/render-passthrough.html);
+     only KaTeX's stylesheet is needed client-side, and only on pages that
+     actually contain math. Rendering .Content here forces the render hook to
+     run (and set "hasMath") before the check — this partial is included in
+     <head>, which is evaluated before the main content block. */}}
+{{- $noop := .Content }}
+{{- if .Store.Get "hasMath" }}
+{{- /* Keep the CSS version in sync with the KaTeX engine embedded in Hugo
+     (0.16.22 as of Hugo 0.163; check internal/warpc in the Hugo repo when
+     upgrading). */}}
 <link rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css"
+      integrity="sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP"
       crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
-        crossorigin="anonymous"></script>
-<script defer
-        src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
-        crossorigin="anonymous"
-        onload="renderMathInElement(document.body, {
-          delimiters: [
-            {left: '$$',   right: '$$',   display: true},
-            {left: '\\[',  right: '\\]',  display: true},
-            {left: '$',    right: '$',    display: false},
-            {left: '\\(',  right: '\\)',  display: false}
-          ],
-          throwOnError: false
-        });"></script>
+{{- end }}

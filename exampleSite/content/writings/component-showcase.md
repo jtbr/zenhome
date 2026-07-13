@@ -3,7 +3,6 @@ title: "Component Showcase"
 date: 2026-04-30
 # uncomment below to leave this on your site but not publish (view drafts with hugo's -D option)
 #draft: true
-math: true
 comments: false
 image: "img/things/ab.jpg"
 tags: ["ml", "practice"]
