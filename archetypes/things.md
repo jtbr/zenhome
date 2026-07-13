@@ -13,7 +13,6 @@ links:            # up to two buttons shown in the modal
   - label: ""
     url: ""
 tags: []
-math: false       # enable KaTeX rendering on details page (if generated)
 comments: false   # enable giscus comments on details page (if generated)
 ---
 

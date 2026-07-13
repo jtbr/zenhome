@@ -365,6 +365,40 @@
   }
 }
 
+/* ── Tag list (all-tags overview page) ──────────────────────────── */
+/* Combined with .notes-list to inherit the hover-arrow link treatment;
+   these overrides make it a compact single-line list in the body font.
+   Must come AFTER the .notes-list block: the selectors tie on
+   specificity, so source order decides. */
+.tag-list {
+  /* As many ~12rem columns as fit; the alphabetical list flows down each
+     column then across, like an index. */
+  columns: 12rem;
+  column-gap: 2.5rem;
+
+  li {
+    /* Bottom-only spacing keeps the first item of every column top-aligned
+       (top padding would only be stripped from the first column's first
+       item via the .notes-list li:first-child rule). */
+    padding: 0 0 0.8rem;
+    break-inside: avoid;
+    &:not(:last-child) { border-bottom: none; }
+  }
+
+  h3 {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .tag-count {
+    color: var(--muted);
+    font-size: 0.85em;
+    font-weight: 400;
+  }
+}
+
 @keyframes fade-in-up {
   from {
     opacity: 0;

@@ -1,7 +1,7 @@
 {{ define "main" }}
 <header class="section-header">
-  <h1>tagged: {{ .Title | lower }}</h1>
-  <p class="lead">{{ len .Pages }} {{ if eq (len .Pages) 1 }}item{{ else }}items{{ end }}</p>
+  <h1>tagged: {{ replace (.Title | lower) "-" " " }}</h1>
+  <p class="lead">{{ len .Pages }} {{ if eq (len .Pages) 1 }}item{{ else }}items{{ end }}<span class="meta-sep">&#10036;</span><a href="{{ .Parent.RelPermalink }}">all tags</a></p>
 </header>
 
 <ul class="notes-list list-unstyled">

@@ -1,0 +1,13 @@
+{{ define "main" }}
+<header class="section-header">
+  <h1>Tags</h1>
+</header>
+
+<ul class="notes-list tag-list list-unstyled">
+  {{ range .Pages.ByTitle }}
+  <li>
+    <h3><a href="{{ .RelPermalink }}">{{ replace (.Title | lower) "-" " " }} <span class="tag-count">({{ len .Pages }})</span><i class="ri-arrow-right-long-fill notes-title-arrow" aria-hidden="true"></i></a></h3>
+  </li>
+  {{ end }}
+</ul>
+{{ end }}

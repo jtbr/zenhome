@@ -16,6 +16,7 @@ This theme may sometimes be tested as a submodule of a customized site; if the c
 - **Icons** — RemixIcon 4 CDN (`head.html`); full class name stored in `data/socials.yaml` (e.g. `ri-github-line`)
 - **Math** — rendered at build time by Hugo's embedded KaTeX (`transform.ToMath` in `layouts/_default/_markup/render-passthrough.html`); no client JS, no front-matter flag. KaTeX CSS is loaded by `layouts/partials/math.html` only on pages containing math (via the `hasMath` page store flag). Requires the Goldmark passthrough block in the **site's** `hugo.toml` — Hugo does not merge a theme's `markup` config, so consuming sites must copy it from `exampleSite/hugo.toml`.
 - **Comments** — giscus (opt-in via `params.comments.enabled`)
+- **Tags** — `layouts/_default/term.html` renders per-tag pages (`/tags/ml/`), `terms.html` the all-tags overview (`/tags/`, multi-column via CSS `columns`). Both display tags lowercase with hyphens as spaces (`replace (.Title | lower) "-" " "`); tag chips elsewhere show front matter verbatim. The `.tag-list` styles in `_cards.scss` must stay *after* the `.notes-list` block — selectors tie on specificity, so source order decides.
 
 ## CSS approach — no Bootstrap
 
@@ -75,7 +76,6 @@ via an opacity transition.
 | `date` | Optional. Full, fully-parsable date (`2024-03-15`) for display and sort. Do NOT put a year-only or year-month value here — Hugo >= 0.135.0 hard-fails the build if `date` (or its aliases `publishdate`/`pubdate`/`published`/`lastmod`) isn't a parsable date. |
 | `partial_date` | Optional, mutually exclusive with `date`. A quoted partial string (`"2024"` or `"2024-03"`) to show only year or month/year — kept out of Hugo's reserved date fields to avoid the strict-parsing build failure above. Use `weight` for sort order when using `partial_date` or when no date is set, since these pages have no `.Date` to sort by. |
 | `links` | Array of `{label, url}` — up to two buttons shown in the modal. |
-| `link` | Legacy single URL; treated as one "Visit" button. Use `links` instead. |
 
 A details page is generated for every thing. A **Details →** button appears in the modal only when the markdown body is non-empty (`WordCount > 0`); the card's noscript fallback link also points there in that case, or to the first link otherwise.
 

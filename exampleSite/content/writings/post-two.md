@@ -2,7 +2,7 @@
 title: "Lorem Ipsum Post Two"
 date: 2026-01-22
 image: "img/things/csvpeek.jpg"
-tags: ["practice", "ml", "lorem ipsum", "revelatatory"]
+tags: ["practice", "ml", "lorem ipsum", "revelatory"]
 description: "A short description of this second example writing post."
 ---
 

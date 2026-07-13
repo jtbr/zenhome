@@ -65,7 +65,7 @@ git submodule update --remote
 
 ## Requirements
 
-Hugo **extended** (v0.135 or higher) is required for SCSS compilation via Hugo Pipes:
+Hugo **extended** (v0.141 or higher) is required — extended for SCSS compilation via Hugo Pipes, and ≥ 0.141 for the built-in KaTeX math rendering:
 
 ```bash
 # macOS
@@ -169,7 +169,6 @@ Things are designed as a curated links page; clicking opens a modal for more det
 | `image_text_hue` | Override the auto-derived hue (0–360) for the `image_text` gradient while keeping the theme's lightness/saturation constraints. |
 | `image_text_bg` | Controls the background of the generated graphic. See modes below. |
 | `links` | Array of `{label, url}` — up to two buttons shown in the modal. |
-| `link` | Legacy single URL; treated as one "Visit" button. Use `links` instead. |
 
 A details page is generated for every thing. A **Details →** button appears in the modal only when the markdown body is non-empty (`WordCount > 0`); the card's noscript fallback link also points there in that case, or to the first link otherwise.
 
@@ -216,6 +215,14 @@ image_text_bg: "linear-gradient(135deg, #1a1a2e, #16213e)"
 ```
 
 The graphic uses `--font-graphic` (see Fonts above). The `"plain"` gradient and `"textured"` modes both adapt automatically to dark mode.
+
+---
+
+## Tags
+
+Add `tags: ["like", "this"]` to any content's front matter. Tags appear as small links in card metadata and page headers, each leading to a per-tag listing page (`/tags/ml/`). An overview of all tags with item counts lives at `/tags/` (multi-column, alphabetical); each per-tag page links back to it via "all tags". Neither page is in the nav by default.
+
+Tags are displayed lowercase, with hyphens shown as spaces on the tag pages — `"balance-tool"` and `"Balance Tool"` in front matter both display as "balance tool" (but produce different URLs, so pick one spelling per tag).
 
 ---
 

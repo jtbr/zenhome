@@ -9,7 +9,7 @@ relativeURLs = true
 #   hugo server --themesDir ../..
 theme    = "zenhome"
 #themesDir = "../.."
-languageCode = "en-us"
+locale = "en-US"
 title = "TODO Site title"
 enableRobotsTXT = true
 enableGitInfo = false
@@ -42,9 +42,6 @@ enableEmoji = true
   [params.author]
     name         = "TODO Your Name"
     email        = "TODO you@example.com"
-    bio          = "TODO: 2-3 sentence synopsis of what you do."
-    background   = "TODO: 1-2 sentence background (degree, languages, experience)."
-    availability = "Available for ML/AI freelance and consulting engagements."
 
   # Flip a section to true to show it in navigation and enable its listing page.
   [params.sections]
