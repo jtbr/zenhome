@@ -34,6 +34,7 @@
   {{- $fallback = (index $links 0).url -}}
 {{- end -}}
 {{- $modalBody := or $item.Params.description $item.Params.tagline ($item.Summary | plainify | htmlUnescape | truncate 400) -}}
+{{- $slug := path.Base $item.RelPermalink -}}
 
 {{- $imageFit := $item.Params.image_fit | default "cover" -}}
 {{- $text := $item.Params.image_text | default "" -}}
@@ -110,6 +111,7 @@
 {{- end -}}
 {{- $hasGraphic := or $item.Params.image $text -}}
 <div class="card{{ if not $hasGraphic }} no-image{{ end }}"
+     id="thing-{{ $slug }}"
      data-modal-title="{{ $item.Title }}"
      data-modal-body="{{ $modalBody }}"
      {{ with $item.Params.image }}data-modal-image="{{ . | absURL }}"{{ end }}

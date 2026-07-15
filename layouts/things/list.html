@@ -145,6 +145,12 @@
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && overlay.getAttribute('aria-hidden') === 'false') close();
   });
+
+  /* Deep link: /things/#thing-<slug> opens that card's modal on arrival. */
+  if (location.hash.indexOf('#thing-') === 0) {
+    var linked = document.getElementById(location.hash.slice(1));
+    if (linked && linked.classList.contains('card')) open(linked);
+  }
 })();
 </script>
 {{ end }}

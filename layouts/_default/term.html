@@ -6,24 +6,31 @@
 
 <ul class="notes-list list-unstyled">
   {{ range .Pages.ByDate.Reverse }}
+  {{ $item := . }}
+  {{ $href := $item.RelPermalink }}
+  {{ if and (eq $item.Section "things") (eq $item.WordCount 0) }}
+    {{ with site.GetPage "/things" }}
+      {{ $href = printf "%s#thing-%s" .RelPermalink (path.Base $item.RelPermalink) }}
+    {{ end }}
+  {{ end }}
   <li>
-    <h3><a href="{{ .RelPermalink }}">{{ .Title }}<i class="ri-arrow-right-long-fill notes-title-arrow" aria-hidden="true"></i></a></h3>
-    {{ with or .Params.tagline .Description (.Summary | plainify | truncate 200) }}
+    <h3><a href="{{ $href }}">{{ $item.Title }}<i class="ri-arrow-right-long-fill notes-title-arrow" aria-hidden="true"></i></a></h3>
+    {{ with or $item.Params.tagline $item.Description ($item.Summary | plainify | truncate 200) }}
     <p class="note-subtitle">{{ . }}</p>
     {{ end }}
     <p class="post-meta">
       {{- $sep := false -}}
-      {{- if not .Date.IsZero -}}
-        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+      {{- if not $item.Date.IsZero -}}
+        <time datetime="{{ $item.Date.Format "2006-01-02" }}">{{ $item.Date.Format "2006-01-02" }}</time>
         {{- $sep = true -}}
       {{- end -}}
-      {{- if gt .ReadingTime 0 -}}
+      {{- if gt $item.ReadingTime 0 -}}
         {{- if $sep }}<span class="meta-sep"><i class="ri-shining-fill" aria-hidden="true"></i></span>{{ end -}}
-        <span>{{ .ReadingTime }} min read</span>
+        <span>{{ $item.ReadingTime }} min read</span>
         {{- $sep = true -}}
       {{- end -}}
       {{- if $sep }}<span class="meta-sep"><i class="ri-shining-fill" aria-hidden="true"></i></span>{{ end -}}
-      <span class="item-section">{{ .Section }}</span>
+      <span class="item-section">{{ $item.Section }}</span>
     </p>
   </li>
   {{ end }}
