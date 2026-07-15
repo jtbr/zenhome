@@ -115,7 +115,7 @@
 
   .card-meta {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     flex-wrap: wrap;
     gap: 0.4rem;
     font-size: 0.8rem;
@@ -307,13 +307,18 @@
   margin-left: 1.5em;
 }
 
-/* 8 pointed star separator used between metadata items */
+/* Icon separator used between metadata items */
 .meta-sep {
-  padding: 0 0.8em;
+  padding: 0 0.6em;
   color: var(--muted);
-  font-size: 0.8em;
   line-height: 1;
   user-select: none;
+
+  i {
+    font-size: 0.42em;
+    position: relative;
+    top: -0.3em;
+  }
 }
 
 /* ── Notes list (simple, no cards) ──────────────────────────────── */

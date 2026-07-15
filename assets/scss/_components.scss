@@ -29,14 +29,16 @@
 /* ── Section breaker ─────────────────────────────────────────────── */
 .breaker {
   text-align: center;
-  margin: 3.5rem 0;
+  margin: 4.5rem 0;
   user-select: none;
 
-  &::before {
-    content: "✦  ✦  ✦";
-    color: var(--muted);
-    font-size: 0.65rem;
-    letter-spacing: 0.5rem;
+  /* .breaker-mark (not just img) bumps specificity above the article.post/note/thing
+     img rule in _typography.scss, which would otherwise win on max-width. */
+  img.breaker-mark {
+    width: 340px;
+    max-width: 60%;
+    height: auto;
+    filter: grayscale(1);
   }
 }
 

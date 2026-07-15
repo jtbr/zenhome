@@ -1,7 +1,7 @@
 {{ define "main" }}
 <header class="section-header">
   <h1>tagged: {{ replace (.Title | lower) "-" " " }}</h1>
-  <p class="lead">{{ len .Pages }} {{ if eq (len .Pages) 1 }}item{{ else }}items{{ end }}<span class="meta-sep">&#10036;</span><a href="{{ .Parent.RelPermalink }}">all tags</a></p>
+  <p class="lead">{{ len .Pages }} {{ if eq (len .Pages) 1 }}item{{ else }}items{{ end }}<span class="meta-sep"><i class="ri-shining-fill" aria-hidden="true"></i></span><a href="{{ .Parent.RelPermalink }}">all tags</a></p>
 </header>
 
 <ul class="notes-list list-unstyled">
@@ -18,11 +18,11 @@
         {{- $sep = true -}}
       {{- end -}}
       {{- if gt .ReadingTime 0 -}}
-        {{- if $sep }}<span class="meta-sep">&#10036;</span>{{ end -}}
+        {{- if $sep }}<span class="meta-sep"><i class="ri-shining-fill" aria-hidden="true"></i></span>{{ end -}}
         <span>{{ .ReadingTime }} min read</span>
         {{- $sep = true -}}
       {{- end -}}
-      {{- if $sep }}<span class="meta-sep">&#10036;</span>{{ end -}}
+      {{- if $sep }}<span class="meta-sep"><i class="ri-shining-fill" aria-hidden="true"></i></span>{{ end -}}
       <span class="item-section">{{ .Section }}</span>
     </p>
   </li>
