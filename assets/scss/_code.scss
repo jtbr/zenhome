@@ -51,9 +51,14 @@ code:not(pre code) {
   transition: opacity 0.15s, color 0.15s;
 
   &:hover { color: var(--fg); }
+
+  /* Touch screens can't hover: keep the button faintly visible */
+  @media (hover: none) { opacity: 0.5; }
 }
 
-.highlight:hover .copy-btn { opacity: 1; }
+.highlight:hover .copy-btn,
+.gist-file:hover .copy-btn,
+.copy-btn:focus-visible { opacity: 1; }
 
 .highlight pre.chroma {
   background: transparent;

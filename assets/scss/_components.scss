@@ -106,6 +106,7 @@
 
 /* Border + rounded corners to match code blocks and cards. */
 .gist .gist-file {
+  position: relative;  /* anchors the copy button (copycode.js) */
   border:        1px solid var(--rule) !important;
   border-radius: 7px                   !important;
   overflow:      hidden                !important;

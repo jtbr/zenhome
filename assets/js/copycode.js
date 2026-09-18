@@ -4,7 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.className = 'copy-btn';
     btn.setAttribute('aria-label', 'Copy code');
     btn.innerHTML = '<i class="ri-file-copy-line"></i>';
-    block.appendChild(btn);
+    /* A gist's .highlight is GitHub's unpositioned <table>, which may also scroll
+     * sideways; anchor the button to the enclosing file box instead. */
+    (block.closest('.gist-file') ?? block).appendChild(btn);
 
     btn.addEventListener('click', async () => {
       /* Gist embeds use .js-file-line table cells.

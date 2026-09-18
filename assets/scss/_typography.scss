@@ -62,7 +62,8 @@ article.thing {
   /* ── Anchor links on h2/h3 ──────────────────────────────────────── */
   h2, h3 {
     position: relative;
-    &:hover .anchor-link { opacity: 1; }
+    &:hover .anchor-link,
+    .anchor-link:focus-visible { opacity: 1; }
   }
 
   img {
@@ -133,6 +134,26 @@ a.anchor-link {
   font-size: 0.6em;
 
   &:hover { color: var(--fg); }
+
+  /* Touch screens can't hover: keep the icon faintly visible */
+  @media (hover: none) { opacity: 0.5; }
+
+  /* Narrow screens have no room in the left margin (the gutter is just the
+     container padding), so sit inline after the heading text instead.
+     As in the margin, the icon is centred in a box one heading line tall
+     (1lh at the heading's font size, so the icon itself is shrunk instead);
+     that box is also the tap area. */
+  @media (max-width: 850px) {
+    position: static;
+    display: inline-flex;
+    vertical-align: top;
+    height: 1lh;
+    font-size: inherit;
+    padding: 0 0.3em;
+    margin-left: 0.1em;
+
+    i { font-size: 0.6em; }
+  }
 }
 
 /* ── Post header ─────────────────────────────────────────────────── */
