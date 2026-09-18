@@ -111,10 +111,28 @@
 
     overlay.setAttribute('aria-hidden', 'false');
     closeBtn.focus();
+    setHash('#' + card.id);
   }
 
   function close() {
     overlay.setAttribute('aria-hidden', 'true');
+    setHash('');
+  }
+
+  /* Mirror the open card in the address bar so it can be copied as a link.
+     replaceState (not location.hash =) avoids adding back-button entries and
+     doesn't fire hashchange. It can throw on file:// in some browsers. */
+  function setHash(hash) {
+    if (location.hash === hash) return;
+    try { history.replaceState(null, '', location.pathname + location.search + hash); } catch (e) {}
+  }
+
+  /* Open the card named by the URL fragment (/things/#<slug>), if any. */
+  function openFromHash() {
+    var id = decodeURIComponent(location.hash.slice(1));
+    var card = id && document.getElementById(id);
+    if (card && card.matches('.card[data-modal-title]')) open(card);
+    else if (overlay.getAttribute('aria-hidden') === 'false') close();
   }
 
   document.querySelectorAll('.card[data-modal-title]').forEach(function (card) {
@@ -146,11 +164,8 @@
     if (e.key === 'Escape' && overlay.getAttribute('aria-hidden') === 'false') close();
   });
 
-  /* Deep link: /things/#thing-<slug> opens that card's modal on arrival. */
-  if (location.hash.indexOf('#thing-') === 0) {
-    var linked = document.getElementById(location.hash.slice(1));
-    if (linked && linked.classList.contains('card')) open(linked);
-  }
+  openFromHash();
+  window.addEventListener('hashchange', openFromHash);
 })();
 </script>
 {{ end }}

@@ -111,7 +111,7 @@
 {{- end -}}
 {{- $hasGraphic := or $item.Params.image $text -}}
 <div class="card{{ if not $hasGraphic }} no-image{{ end }}"
-     id="thing-{{ $slug }}"
+     id="{{ $slug }}"
      data-modal-title="{{ $item.Title }}"
      data-modal-body="{{ $modalBody }}"
      {{ with $item.Params.image }}data-modal-image="{{ . | absURL }}"{{ end }}

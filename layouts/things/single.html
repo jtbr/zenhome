@@ -22,6 +22,10 @@
     </p>
   </header>
 
+  {{ with .Params.image }}
+  <img class="thing-image" src="{{ absURL (strings.TrimPrefix "/" .) }}" alt="{{ $.Title }}">
+  {{ end }}
+
   {{ .Content }}
 </article>
 {{ end }}

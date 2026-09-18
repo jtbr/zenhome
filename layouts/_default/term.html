@@ -10,7 +10,7 @@
   {{ $href := $item.RelPermalink }}
   {{ if and (eq $item.Section "things") (eq $item.WordCount 0) }}
     {{ with site.GetPage "/things" }}
-      {{ $href = printf "%s#thing-%s" .RelPermalink (path.Base $item.RelPermalink) }}
+      {{ $href = printf "%s#%s" .RelPermalink (path.Base $item.RelPermalink) }}
     {{ end }}
   {{ end }}
   <li>

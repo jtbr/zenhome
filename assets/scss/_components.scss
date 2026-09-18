@@ -422,3 +422,12 @@ $cursor-close: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/sv
   }
   .modal-image-text { color: hsl(0, 0%, 92%); }
 }
+
+/* Header image on a thing's details page: shown uncropped (unlike the card/modal) */
+.thing-image {
+  display: block;
+  max-width: 100%;
+  max-height: 24rem;
+  margin: 0 auto 2rem;
+  border-radius: 4px;
+}
